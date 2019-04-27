@@ -114,7 +114,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/27/凸优化-Jensen不等式-共轭函数-Fenchel不等式/gonge.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/27/凸优化-Jensen不等式-共轭函数-Fenchel不等式/sub.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/27/凸优化-Jensen不等式-共轭函数-Fenchel不等式/fan.png">
-<meta property="og:updated_time" content="2019-04-27T14:33:59.700Z">
+<meta property="og:updated_time" content="2019-04-27T14:37:55.051Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="凸优化:Jensen不等式-共轭函数-Fenchel不等式">
 <meta name="twitter:description" content="凸函数凸函数的定义：$f(\theta x+(1-\theta)y) \leq \theta f(x)+(1-\theta)f(y)$其含义就是：函数图像在直线下边。 Jensen不等式凸函数定义推广到一般形式，即可得到Jensen不等式，即$\theta_1,…\theta_k\geq0, \theta_1+…+\theta_k=1$时，$f(\theta_1x_1+…+\theta_kx_k)">
@@ -401,7 +401,7 @@
                 
               
 
-              <time title="Created: 2019-04-27 21:10:39 / Modified: 22:33:59" itemprop="dateCreated datePublished" datetime="2019-04-27T21:10:39+08:00">2019-04-27</time>
+              <time title="Created: 2019-04-27 21:10:39 / Modified: 22:37:55" itemprop="dateCreated datePublished" datetime="2019-04-27T21:10:39+08:00">2019-04-27</time>
             
 
             
@@ -990,6 +990,46 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 
