@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Hexo 创建Hexo工程  1$ hexo init blog 此处blog可以替换成你想要的名字。  新建博文  12$ cd blog$ hexo new &amp;apos;blog-name&amp;apos; 此时会在/blog/sources/_post/目录下生成’blog-name.md’文件和’blog-name’的文件夹。md文件用于编辑博文，文件夹用于存放此博文内容照片。  运行服务器">
+<meta name="keywords" content="Hexo,LaTex,MarkDown">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo填坑">
+<meta property="og:url" content="http://yoursite.com/2019/04/26/Hexo填坑/index.html">
+<meta property="og:site_name" content="Joczu">
+<meta property="og:description" content="Hexo 创建Hexo工程  1$ hexo init blog 此处blog可以替换成你想要的名字。  新建博文  12$ cd blog$ hexo new &amp;apos;blog-name&amp;apos; 此时会在/blog/sources/_post/目录下生成’blog-name.md’文件和’blog-name’的文件夹。md文件用于编辑博文，文件夹用于存放此博文内容照片。  运行服务器">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/04/26/Hexo填坑/jiantou.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/26/Hexo填坑/buchangyong.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/26/Hexo填坑/feishuxue.png">
+<meta property="og:updated_time" content="2019-04-27T10:40:52.354Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo填坑">
+<meta name="twitter:description" content="Hexo 创建Hexo工程  1$ hexo init blog 此处blog可以替换成你想要的名字。  新建博文  12$ cd blog$ hexo new &amp;apos;blog-name&amp;apos; 此时会在/blog/sources/_post/目录下生成’blog-name.md’文件和’blog-name’的文件夹。md文件用于编辑博文，文件夹用于存放此博文内容照片。  运行服务器">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/26/Hexo填坑/jiantou.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/04/26/Hexo填坑/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Hexo填坑 | Joczu</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joczu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">So let's set world on fire!</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/26/Hexo填坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joczu">
+      <meta itemprop="description" content="So let's set world on fire!">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joczu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hexo填坑
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-26 18:51:57" itemprop="dateCreated datePublished" datetime="2019-04-26T18:51:57+08:00">2019-04-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-27 18:40:52" itemprop="dateModified" datetime="2019-04-27T18:40:52+08:00">2019-04-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><ul>
+<li>创建Hexo工程</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init blog</span><br></pre></td></tr></table></figure>
+<p>此处blog可以替换成你想要的名字。</p>
+<ul>
+<li>新建博文</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd blog</span><br><span class="line">$ hexo new &apos;blog-name&apos;</span><br></pre></td></tr></table></figure>
+<p>此时会在/blog/sources/_post/目录下生成’blog-name.md’文件和’blog-name’的文件夹。md文件用于编辑博文，文件夹用于存放此博文内容照片。</p>
+<ul>
+<li>运行服务器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>本地访问<a href="http://0.0.0.0:4000/" target="_blank" rel="noopener">http://0.0.0.0:4000/</a>，查看Hexo网站。</p>
+<ul>
+<li>生成上传至GitHub</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo g -d</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装主题</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cd /blog/themes</span><br><span class="line">$ git clone https://github.com/wuchong/jacman.git ./jacman</span><br><span class="line">$ cd ./jacman</span><br><span class="line">$ git pull</span><br></pre></td></tr></table></figure>
+<p>然后修改站点配置文件/blog/config.yml，将其中的theme改成jacman</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: jacman</span><br></pre></td></tr></table></figure>
+<ul>
+<li>LaTex数学公式渲染</li>
+</ul>
+<p>先把node_modules文件夹下的渲染器删掉，再输入下面命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i hexo-renderer-kramed --save</span><br></pre></td></tr></table></figure>
+<ul>
+<li>插入图片</li>
+</ul>
+<p>将照片放在与博文同名的文件夹下面，在博文中输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](pic.png)</span><br></pre></td></tr></table></figure>
+<p>即可饮用，但是这种方法不能改变图片大小，可采用下面命令修改图片大小</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&apos;pic.png&apos; width = &apos;80%&apos; height = &apos;80%&apos; &gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>文件下载链接</li>
+</ul>
+<p>在blog/sources/files内放入上传的文件，在博文中输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[](/files/filename)</span><br></pre></td></tr></table></figure>
+<h2 id="LaTex公式编辑"><a href="#LaTex公式编辑" class="headerlink" title="LaTex公式编辑"></a>LaTex公式编辑</h2><ul>
+<li>插入数学公式</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$数学公式$ 或者 $$数学公式$$</span><br></pre></td></tr></table></figure>
+<p>前者是行内公式，后者是行间公式</p>
+<ul>
+<li>区块引用</li>
+</ul>
+<p><code>&gt;</code>后面书写引用</p>
+<ul>
+<li><p>分割线</p>
+<p><code>***</code>或者<code>---</code></p>
+</li>
+<li><p>上下标</p>
+</li>
+</ul>
+<p>使用^表示上标，表示下标</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">x^2 </span><br><span class="line">x_&#123;1,2...,n&#125;</span><br><span class="line">\sum \limits^n \limits_&#123;i=1&#125;</span><br><span class="line">\hat x              //字母上加^</span><br><span class="line">$\overline x$       //字母上加横线 </span><br><span class="line">$\widetilde x$      //字母上加波浪线</span><br><span class="line">$\dot&#123;x&#125;$           //字母上加一个点 </span><br><span class="line">$\ddot&#123;x&#125;$          //字母上加两个点</span><br></pre></td></tr></table></figure>
+<ul>
+<li>波浪线</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\sim</span><br></pre></td></tr></table></figure>
+<ul>
+<li>公式换行对齐</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;equation&#125;</span><br><span class="line">\begin&#123;split&#125;</span><br><span class="line">y &amp;= a(x + b) \\&amp;= ax+ab  </span><br><span class="line">\end&#123;split&#125;</span><br><span class="line">\end&#123;equation&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>括号</li>
+</ul>
+<p><code>()</code>和<code>[]</code>都表示它们自己，但是<code>{}</code>因为有特殊作用需要用<code>\lbrace \rbrece</code>表示。</p>
+<ul>
+<li>分数</li>
+</ul>
+<p><code>\frac{分母}{分子}</code>来表示分数</p>
+<ul>
+<li>开方</li>
+</ul>
+<p><code>\sqrt[次数][被开方数]</code>来表示开方</p>
+<ul>
+<li>求期望</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\mathbb&#123;E&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>正负无穷</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">+\infty</span><br><span class="line">-\infty</span><br></pre></td></tr></table></figure>
+<ul>
+<li>希腊字母</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">代码</th>
+<th style="text-align:center">大写</th>
+<th style="text-align:center">代码</th>
+<th style="text-align:left">小写</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>A</code></td>
+<td style="text-align:center">$A$</td>
+<td style="text-align:center"><code>\alpha</code></td>
+<td style="text-align:left">$\alpha$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>B</code></td>
+<td style="text-align:center">$B$</td>
+<td style="text-align:center"><code>\beta</code></td>
+<td style="text-align:left">$\beta$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\Gamma</code></td>
+<td style="text-align:center">$\Gamma$</td>
+<td style="text-align:center"><code>\gamma</code></td>
+<td style="text-align:left">$\gamma$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\Delta</code></td>
+<td style="text-align:center">$\Delta$</td>
+<td style="text-align:center"><code>\delta</code></td>
+<td style="text-align:left">$\delta$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>E</code></td>
+<td style="text-align:center">$E$</td>
+<td style="text-align:center"><code>\epsilon</code></td>
+<td style="text-align:left">$\epsilon$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>Z</code></td>
+<td style="text-align:center">$Z$</td>
+<td style="text-align:center"><code>\zeta</code></td>
+<td style="text-align:left">$\zeta$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>H</code></td>
+<td style="text-align:center">$H$</td>
+<td style="text-align:center"><code>\eta</code></td>
+<td style="text-align:left">$\eta$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\Theta</code></td>
+<td style="text-align:center">$\Theta$</td>
+<td style="text-align:center"><code>\theta</code></td>
+<td style="text-align:left">$\theta$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>I</code></td>
+<td style="text-align:center">$I$</td>
+<td style="text-align:center"><code>\iota</code></td>
+<td style="text-align:left">$\iota$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>K</code></td>
+<td style="text-align:center">$K$</td>
+<td style="text-align:center"><code>\kappa</code></td>
+<td style="text-align:left">$\kappa$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\Lambda</code></td>
+<td style="text-align:center">$\Lambda$</td>
+<td style="text-align:center"><code>\lambda</code></td>
+<td style="text-align:left">$\lambda$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>M</code></td>
+<td style="text-align:center">$M$</td>
+<td style="text-align:center"><code>\mu</code></td>
+<td style="text-align:left">$\mu$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>N</code></td>
+<td style="text-align:center">$N$</td>
+<td style="text-align:center"><code>\nu</code></td>
+<td style="text-align:left">$\nu$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\Xi</code></td>
+<td style="text-align:center">$\Xi$</td>
+<td style="text-align:center"><code>\xi</code></td>
+<td style="text-align:left">$\xi$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>O</code></td>
+<td style="text-align:center">$O$</td>
+<td style="text-align:center"><code>\omicron</code></td>
+<td style="text-align:left">$\omicron$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\Pi</code></td>
+<td style="text-align:center">$\Pi$</td>
+<td style="text-align:center"><code>\pi</code></td>
+<td style="text-align:left">$\pi$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>P</code></td>
+<td style="text-align:center">$P$</td>
+<td style="text-align:center"><code>\rho</code></td>
+<td style="text-align:left">$\rho$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\Sigma</code></td>
+<td style="text-align:center">$\Sigma$</td>
+<td style="text-align:center"><code>\sigma</code></td>
+<td style="text-align:left">$\sigma$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>T</code></td>
+<td style="text-align:center">$T$</td>
+<td style="text-align:center"><code>\tau</code></td>
+<td style="text-align:left">$\tau$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\Upsilon</code></td>
+<td style="text-align:center">$\Upsilon$</td>
+<td style="text-align:center"><code>\upsilon</code></td>
+<td style="text-align:left">$\upsilon$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\Phi</code></td>
+<td style="text-align:center">$\Phi$</td>
+<td style="text-align:center"><code>\phi</code></td>
+<td style="text-align:left">$\phi$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>X</code></td>
+<td style="text-align:center">$X$</td>
+<td style="text-align:center"><code>\chi</code></td>
+<td style="text-align:left">$\chi$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\Psi</code></td>
+<td style="text-align:center">$\Psi$</td>
+<td style="text-align:center"><code>\psi</code></td>
+<td style="text-align:left">$\psi$</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\Omega</code></td>
+<td style="text-align:center">$\Omega$</td>
+<td style="text-align:center"><code>\omega</code></td>
+<td style="text-align:left">$\omega$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><p>其他字符</p>
+<ul>
+<li>关系运算符</li>
+</ul>
+<p>|     符号     | 代码         |<br>| :—————: | :—————- |<br>|    $\pm$     | <code>\pm</code>        |<br>|   $\times$   | <code>\times</code>     |<br>|    $\div$    | <code>\div</code>       |<br>|    $\mid$    | <code>\mid</code>       |<br>|   $\nmid$    | <code>\nmid</code>      |<br>|   $\cdot$    | <code>\cdot</code>      |<br>|   $\circ$    | <code>\circ</code>      |<br>|    $\ast$    | <code>\ast</code>       |<br>|  $\bigodot$  | <code>\bigodot</code>   |<br>| $\bigotimes$ | <code>\bigotimes</code> |<br>| $\bigoplus$  | <code>\bigoplus</code>  |<br>|    $\leq$    | <code>\leq</code>       |<br>|    $\geq$    | <code>\geq</code>       |<br>|    $\neq$    | <code>\neq</code>       |<br>|  $\approx$   | <code>\approx</code>    |<br>|   $\equiv$   | <code>\equiv</code>     |<br>|    $\sum$    | <code>\sum</code>       |<br>|   $\prod$    | <code>\prod</code>      |<br>|  $\coprod$   | <code>\coprod</code>    |</p>
+<ul>
+<li>集合运算符</li>
+</ul>
+<p>|    符号     | 代码        |<br>| :————-: | :————— |<br>| $\emptyset$ | <code>\emptyset</code> |<br>|    $\in$    | <code>\in</code>       |<br>|  $\notin$   | <code>\notin</code>    |<br>|  $\subset$  | <code>\subset</code>   |<br>|  $\supset$  | <code>\supset</code>   |<br>| $\subseteq$ | <code>\subseteq</code> |<br>| $\supseteq$ | <code>\supseteq</code> |<br>|  $\bigcap$  | <code>\bigcap</code>   |<br>|  $\bigcup$  | <code>\bigcup</code>   |<br>|  $\bigvee$  | <code>\bigvee</code>   |<br>| $\bigwedge$ | <code>\bigwedge</code> |<br>| $\biguplus$ | <code>\biguplus</code> |<br>| $\bigsqcup$ | <code>\bigsqcup</code> |</p>
+<ul>
+<li>对数运算符</li>
+</ul>
+<p>|  符号  | 代码   |<br>| :——: | :——- |<br>| $\log$ | <code>\log</code> |<br>| $\lg$  | <code>\lg</code>  |<br>| $\ln$  | <code>\ln</code>  |</p>
+<ul>
+<li>三角运算符</li>
+</ul>
+<p>|   符号   | 代码     |<br>| :———: | :———- |<br>|  $\bot$  | <code>\bot</code>   |<br>| $\angle$ | <code>\angle</code> |<br>|  $\sin$  | <code>\sin</code>   |<br>|  $\cos$  | <code>\cos</code>   |<br>|  $\tan$  | <code>\tan</code>   |<br>|  $\cot$  | <code>\cot</code>   |<br>|  $\sec$  | <code>\sec</code>   |<br>|  $\csc$  | <code>\csc</code>   |</p>
+<ul>
+<li>微积分运算符</li>
+</ul>
+<p>|     符号     | 代码         |<br>| :—————: | :—————- |<br>|   $\prime$   | <code>\prime</code>     |<br>|    $\int$    | <code>\int</code>       |<br>|   $\iint$    | <code>\iint</code>      |<br>|   $\iiint$   | <code>\iiint</code>     |<br>|  $\iiiint$   | <code>\iiiint</code>    |<br>|   $\oint$    | <code>\oint</code>      |<br>|    $\lim$    | <code>\lim</code>       |<br>|   $\infty$   | <code>\infty</code>     |<br>|   $\nabla$   | <code>\nabla</code>     |<br>| $\mathrm{d}$ | <code>\mathrm{d}</code> |</p>
+<ul>
+<li>箭头</li>
+</ul>
+<p><img src="jiantou.png" alt></p>
+<ul>
+<li>不常用符号</li>
+</ul>
+<p><img src="buchangyong.png" alt></p>
+<ul>
+<li>非数学符号</li>
+</ul>
+<p><img src="feishuxue.png" alt></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+          
+            <a href="/tags/LaTex/" rel="tag"># LaTex</a>
+          
+            <a href="/tags/MarkDown/" rel="tag"># MarkDown</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/25/GAN初识/" rel="next" title="GAN初识">
+                <i class="fa fa-chevron-left"></i> GAN初识
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/27/Improving-GAN/" rel="prev" title="Improving GAN">
+                Improving GAN <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Joczu</p>
+              <div class="site-description motion-element" itemprop="description">So let's set world on fire!</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo"><span class="nav-text">Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LaTex公式编辑"><span class="nav-text">LaTex公式编辑</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Joczu</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="GAN的相关知识主要是跟着李宏毅老师入门的，具体内容可以访问哔哩哔哩-李宏毅深度学习2017进行学习。这篇文章主要对学习内容进行总结。 1.传统生成模型AutoEncoder AutoEncoder是前馈神经网络的一种，曾经重要用于数据的降维或者特征的抽取，而现在也被广泛用于生成模型。与其他前馈神经网络不同的是，其他前馈神经网络关注的是Output Layer和错误率，而AutoEncoder关注">
+<meta name="keywords" content="GAN,MLE,AutoEncoder">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GAN初识">
+<meta property="og:url" content="http://yoursite.com/2019/04/25/GAN初识/index.html">
+<meta property="og:site_name" content="Joczu">
+<meta property="og:description" content="GAN的相关知识主要是跟着李宏毅老师入门的，具体内容可以访问哔哩哔哩-李宏毅深度学习2017进行学习。这篇文章主要对学习内容进行总结。 1.传统生成模型AutoEncoder AutoEncoder是前馈神经网络的一种，曾经重要用于数据的降维或者特征的抽取，而现在也被广泛用于生成模型。与其他前馈神经网络不同的是，其他前馈神经网络关注的是Output Layer和错误率，而AutoEncoder关注">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/autoencoder.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/Decoder.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/generator.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/discriminator.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/MLE.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/GAN%20Distribution.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/maxv.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/D*.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/maxv%E6%8E%A8%E5%AF%BC.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/maxv%E6%8E%A8%E5%AF%BC2.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/G.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/G2.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/%E8%AE%AD%E7%BB%83.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/%E7%AE%97%E6%B3%95.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/%E7%94%9F%E6%88%90%E5%99%A8%E4%BC%98%E5%8C%96.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/%E8%BF%87%E6%8B%9F%E5%90%88.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/mode.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/mode2.png">
+<meta property="og:updated_time" content="2019-04-27T10:09:49.277Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GAN初识">
+<meta name="twitter:description" content="GAN的相关知识主要是跟着李宏毅老师入门的，具体内容可以访问哔哩哔哩-李宏毅深度学习2017进行学习。这篇文章主要对学习内容进行总结。 1.传统生成模型AutoEncoder AutoEncoder是前馈神经网络的一种，曾经重要用于数据的降维或者特征的抽取，而现在也被广泛用于生成模型。与其他前馈神经网络不同的是，其他前馈神经网络关注的是Output Layer和错误率，而AutoEncoder关注">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/25/GAN初识/autoencoder.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/04/25/GAN初识/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>GAN初识 | Joczu</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joczu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">So let's set world on fire!</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/25/GAN初识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joczu">
+      <meta itemprop="description" content="So let's set world on fire!">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joczu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">GAN初识
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-25 16:14:18" itemprop="dateCreated datePublished" datetime="2019-04-25T16:14:18+08:00">2019-04-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-27 18:09:49" itemprop="dateModified" datetime="2019-04-27T18:09:49+08:00">2019-04-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/GAN/" itemprop="url" rel="index"><span itemprop="name">GAN</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>GAN的相关知识主要是跟着李宏毅老师入门的，具体内容可以访问<a href="https://www.bilibili.com/video/av9770302/?p=15" target="_blank" rel="noopener">哔哩哔哩-李宏毅深度学习2017</a>进行学习。这篇文章主要对学习内容进行总结。</p>
+<h2 id="1-传统生成模型"><a href="#1-传统生成模型" class="headerlink" title="1.传统生成模型"></a>1.传统生成模型</h2><h3 id="AutoEncoder"><a href="#AutoEncoder" class="headerlink" title="AutoEncoder"></a>AutoEncoder</h3><blockquote>
+<p>AutoEncoder是前馈神经网络的一种，曾经重要用于数据的降维或者特征的抽取，而现在也被广泛用于生成模型。与其他前馈神经网络不同的是，其他前馈神经网络关注的是Output Layer和错误率，而AutoEncoder关注点是Hidden Layer；并且普通前馈神经网络一般比较深，而AutoEncoder通常只有一层Hidden Layer。Hidden Layer中神经元组成的向量（Code）用来表示Input</p>
+</blockquote>
+<img src="/2019/04/25/GAN初识/autoencoder.png">
+<p>如图该模型的作用是生成与原图像相似的图像。将原始图像输入神经网络，经过Encoder的压缩，表示成Code；再经过Decoder的解压生成图像；最后计算生成图像与输入图像的MSE（Mean Square Error），这样就可以对模型进行训练。</p>
+<p><img src="Decoder.png" alt></p>
+<p>若只取AutoEncoder的Decoder部分，随机生成Code向量输入网络进行解码，这样就可以生成图像。</p>
+<p>但是从上图可以看出AutoEncoder的图像生成效果非常的差，从计算loss方式分析其原因。</p>
+<p><img src="7.png" width="40%" height="40%"></p>
+<p>可以从上图中看出，两幅图像仅仅一个像素点的位置不同，但是用MSE计算loss是一样大的，这就说明MSE不能衡量图像像素点的位置信息。</p>
+<p>GAN就出场了，设计了Generator和Discriminator结构进行前馈运算，采用KL/JSD等方式，很好的解决了衡量两个图像分布之间‘difference’的问题。</p>
+<h2 id="2-GAN前馈流程图"><a href="#2-GAN前馈流程图" class="headerlink" title="2.GAN前馈流程图"></a>2.GAN前馈流程图</h2><p><img src="generator.png" width="70%" height="70%"></p>
+<p><img src="discriminator.png" width="25%" height="25%"></p>
+<p>初始化Generator和Discriminator网络参数，服从特定分布的随机变量输入Generator网络生成图像（标签为0），再和真实图像（标签为1）一块输入到Discriminator进行判断。</p>
+<p>若是Discriminator对生成图像的判分较低，则Generator参数进行梯度下降更新（此时固定Discriminator）；再将第二轮Generator生成的图像输入到Discriminator进行判断，若是Discriminator对其判分较高，则更新Discriminator参数。</p>
+<h2 id="3-GAN原理"><a href="#3-GAN原理" class="headerlink" title="3.GAN原理"></a>3.GAN原理</h2><ul>
+<li><h3 id="Maximum-Likelihood-Estimation"><a href="#Maximum-Likelihood-Estimation" class="headerlink" title="Maximum Likelihood Estimation"></a>Maximum Likelihood Estimation</h3></li>
+</ul>
+<p>给定真实数据分布$ P_{data}(x)$，此处的x代表真实图像构成的向量；设生成模型的分布$P_{G}(x;\theta)$，这个生成分布由$\theta$决定，生成图像模型的目标就是使得生成模型分布$P_{G}(x;\theta)$尽可能的接近真实数据分布$ P_{data}(x)$，也就是要计算$\theta$。</p>
+<p>这样就可以采用最大似然估计的方法来，具体方法如下：</p>
+<ol>
+<li>从真实数据分布$ P_{data}(x)$中采样得到${x^1,x^2,…,x^m}$；</li>
+<li>计算每个数据的概率$P_G(x^i;\theta)$</li>
+<li>计算似然：$L = \prod_{i=1}^mP_G(x^i;\theta)$</li>
+<li>求得$\theta$使得似然最大化</li>
+</ol>
+<p><img src="MLE.png" width="75%" height="75%"></p>
+<p>使用最大似然估计求得$\theta$的过程如上图所示，对似然求log变成log似然；真实分布中的所有x的期望等价于概率积分，所以可以转化成积分运算，因为减号之后的积分与$\theta$无关，所以添加上去之后还是等价的；经过这样拼凑之后最大似然估计可以变成求两个分布之间的KL散度，两个分布越相似，KL散度值越小。</p>
+<p>在求$\theta$之前必须要假定生成分布的类型，比如是高斯混合模型，但是在实践中这种假设的效果不太好，所以如何能设计出更加一般化的生成模型分布呢？</p>
+<p>这里采用神经网络来产生生成分布$P_{G}(x;\theta)$，$\theta$也就是神经网络的权重参数。神经网络只要有非线性激活函数，理论上可以去拟合任意函数，概率分布也可以看作是函数映射，所以可以采用神经网络去学习复杂的概率分布。</p>
+<p><img src="GAN%20Distribution.png" width="70%" height="70%"></p>
+<ul>
+<li><p>Generator G</p>
+<p>生成器G是一个函数，输入向量z，输出向量x</p>
+<p>$P_{prior}(z)$表示输入向量z的先验分布，$P_G(x)$由生成器G决定</p>
+</li>
+<li><p>Discriminator D</p>
+<p>判别器D是一个函数，输入向量x，输出标量值</p>
+<p>D用来衡量$P_G(x)$与$P_{data}(x)$之间的不同</p>
+</li>
+<li><p>GAN公式</p>
+<p>$G^*=arg\min\limits_{G}\max\limits_{D}V(G,D)$    </p>
+<p>$V=E_{x \sim P_{data}}[logD(x)]+E_{x \sim P_{G}}[log(1-D(x))]$ 衡量$P_G$与$P_{data}$的不同</p>
+<p>在G一定的情况，寻找D使得$V(G,D)$最大化，也就是对于真实分布中的x，D(x)要接近1，对于生成分布中的x，D(x)要接近于0，这样使得判别器的能力增强；<br>再固定D，寻找G使得$\max\limits_{D}V(G,D)$最小，也就是让来自于生成分布中的x的D(x)尽可能的接近1，这样使得生成器的能力增强。</p>
+</li>
+</ul>
+<p>接下来对$G^*=arg\min\limits_{G}\max\limits_{D}V(G,D)$进行求解。</p>
+<ul>
+<li><h3 id="求解-min-limits-G-max-limits-D-V-G-D"><a href="#求解-min-limits-G-max-limits-D-V-G-D" class="headerlink" title="求解$\min \limits_{G}\max \limits_{D}V(G,D)$"></a>求解$\min \limits_{G}\max \limits_{D}V(G,D)$</h3></li>
+</ul>
+<p>给定G，求得最优的$D^*$使得V最大。</p>
+<p><img src="maxv.png" width="70%" height="70%"></p>
+<p>接下来给定x，求$D^*$使得被积函数取极大值。$P_{data}(x)$和$P_{G}(x)$是已知值，只   需要对D求导即可得到极大值。</p>
+<p><img src="D*.png" width="70%" height="70%"></p>
+<p>将$D^*$代入V式进行整理。</p>
+<p><img src="maxv%E6%8E%A8%E5%AF%BC.png" width="70%" height="70%"></p>
+<p>$log2P_{data}(x)$对x积分之后得$log2$，概率积分为1。</p>
+<p><img src="maxv%E6%8E%A8%E5%AF%BC2.png" width="70%" height="70%"></p>
+<p>上图的推导主要是凑出JSD分布的形式，JS Divergence是KL散度的对称平滑版本，也是描述了两个分布之间的差异。因为JSD值域[0,log2]所以 $\max \limits_DV(G,D)$的取值范围为[-2log2,0]。</p>
+<p>接下来的问题就是如何优化G，使得$P_G(x)$尽可能接近$P_{data}(x)$</p>
+<p><img src="G.png" width="40%" height="40%"></p>
+<p>如上图，将$\max \limits_DV(G,D)$视为损失函数$L(G)$，采用梯度下降的方法进行优化</p>
+<p><img src="G2.png" width="40%" height="40%"></p>
+<h2 id="4-GAN训练"><a href="#4-GAN训练" class="headerlink" title="4.GAN训练"></a>4.GAN训练</h2><p><img src="%E8%AE%AD%E7%BB%83.png" width="65%" height="65%"></p>
+<p>如图所示，在实践训练中，我们不可能求得$P_G$和$P_{data}$的期望，所以只能从真实数据分布和生成数据分布中分别采样，代入到损失函数求的交叉熵。</p>
+<p>具体的算法流程如下</p>
+<p><img src="%E7%AE%97%E6%B3%95.png" width="65%" height="65%"></p>
+<h2 id="5-问题优化"><a href="#5-问题优化" class="headerlink" title="5.问题优化"></a>5.问题优化</h2><ul>
+<li><h3 id="训练初期缓慢"><a href="#训练初期缓慢" class="headerlink" title="训练初期缓慢"></a>训练初期缓慢</h3></li>
+</ul>
+<p><img src="%E7%94%9F%E6%88%90%E5%99%A8%E4%BC%98%E5%8C%96.png" width="25%" height="25%"></p>
+<p>在生成模型的优化过程中，生成器的loss Function是$V=E_{x\sim P_{G}}[-log(1-D(x))]$。如上图所示，当D(x)接近0的时候，梯度非常的小。这就导致在训练的初期，生成器G如果想要骗过判别器D变化是非常的缓慢的。所以就将生成器的loss修改成$V=E_{x\sim P_{G}}[-log(D(x))]$这样可以提高训练的速度。</p>
+<ul>
+<li><h3 id="Loss不变"><a href="#Loss不变" class="headerlink" title="Loss不变"></a>Loss不变</h3></li>
+</ul>
+<p>在实际训练中发现，loss一直不发生变化，即$\max \limits_DV(G,D)=0$</p>
+<p>因为JSD值域是[0,log2]，这也就是说明$P_G$和$P_{data}$没有相似之处，但是实际上两个分布是有相似之处的，出现问题的原因是我们在积分运算中国使用采样的方法，当训练过拟合的时候，D还是能把两部分的点给分开的，如下图所示。</p>
+<p><img src="%E8%BF%87%E6%8B%9F%E5%90%88.png" width="40%" height="40%"></p>
+<p>我们是不是应该让D变得弱一点，减弱它的分类能力，但是我们的初衷是让D变得更强，这就产生了矛盾。</p>
+<p>还有一种原因可能是，两个分布都是高维的，但是两个分布都十分的窄，交集相当的小，这就导致JSD比较大。</p>
+<p>解决方法：添加噪声，让两个分布变得更宽一些，这样可以增大它们之间的交集，在训练过程中，再使噪声逐渐减小。</p>
+<ul>
+<li><h3 id="Mode-Collapse"><a href="#Mode-Collapse" class="headerlink" title="Mode Collapse"></a>Mode Collapse</h3></li>
+</ul>
+<p><img src="mode.png" width="50%" height="50%"></p>
+<p>如上图所示，实际训练过程种可能出现这样的情况，真实的数据分布是双峰分布的，而生成的数据分布只拟合了其中一个峰的分布，也就是说没有学到整个分布。</p>
+<p>造成这种情况的原因是，KL散度中两个分布写反了。</p>
+<p><img src="mode2.png" width="50%" height="50%"></p>
+<p>如上图所示，若是第一KL散度的写法，为了防止出现无穷大，所有有$P_{data}$出现的地方都必须有$P_G$覆盖，这样就不回出现Mode Collapse。</p>
+<h2 id="6-代码"><a href="#6-代码" class="headerlink" title="6.代码"></a>6.代码</h2><p><a href="/files/originGAN.py">GAN代码实现</a></p>
+<h2 id="7-参考"><a href="#7-参考" class="headerlink" title="7.参考"></a>7.参考</h2><p><a href="https://www.cnblogs.com/bonelee/p/9166084.html" target="_blank" rel="noopener">https://www.cnblogs.com/bonelee/p/9166084.html</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/GAN/" rel="tag"># GAN</a>
+          
+            <a href="/tags/MLE/" rel="tag"># MLE</a>
+          
+            <a href="/tags/AutoEncoder/" rel="tag"># AutoEncoder</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/14/404/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/26/Hexo填坑/" rel="prev" title="Hexo填坑">
+                Hexo填坑 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Joczu</p>
+              <div class="site-description motion-element" itemprop="description">So let's set world on fire!</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-传统生成模型"><span class="nav-text">1.传统生成模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AutoEncoder"><span class="nav-text">AutoEncoder</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-GAN前馈流程图"><span class="nav-text">2.GAN前馈流程图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-GAN原理"><span class="nav-text">3.GAN原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Maximum-Likelihood-Estimation"><span class="nav-text">Maximum Likelihood Estimation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#求解-min-limits-G-max-limits-D-V-G-D"><span class="nav-text">求解$\min \limits_{G}\max \limits_{D}V(G,D)$</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-GAN训练"><span class="nav-text">4.GAN训练</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-问题优化"><span class="nav-text">5.问题优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#训练初期缓慢"><span class="nav-text">训练初期缓慢</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loss不变"><span class="nav-text">Loss不变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mode-Collapse"><span class="nav-text">Mode Collapse</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-代码"><span class="nav-text">6.代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-参考"><span class="nav-text">7.参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Joczu</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
