@@ -103,21 +103,22 @@
 
 
 
-  <meta name="description" content="This HuWeihuang theme created by HuWeihuang modified from the original Porter YuHsuan  Live DemoHu Weihuang Blog : www.huweihuang.com  Install HexoInstall Node.js  and Git 123#For Macbrew install nod">
-<meta name="keywords" content="Hexo">
+  <meta name="description" content="凸函数凸函数的定义：$f(\theta x+(1-\theta)y) \leq \theta f(x)+(1-\theta)f(y)$其含义就是：函数图像在直线下边。 Jensen不等式凸函数定义推广到一般形式，即可得到Jensen不等式，即$\theta_1,…\theta_k\geq0, \theta_1+…+\theta_k=1$时，$f(\theta_1x_1+…+\theta_kx_k)">
+<meta name="keywords" content="Jensen不等式,共轭函数,Fenchel不等式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[Hexo] Theme HuWeihuang">
-<meta property="og:url" content="http://yoursite.com/2017/09/18/hexo-theme-huweihuang/index.html">
+<meta property="og:title" content="凸优化:Jensen不等式-共轭函数-Fenchel不等式">
+<meta property="og:url" content="http://yoursite.com/2019/04/27/凸优化-Jensen不等式-共轭函数-Fenchel不等式/index.html">
 <meta property="og:site_name" content="Joczu">
-<meta property="og:description" content="This HuWeihuang theme created by HuWeihuang modified from the original Porter YuHsuan  Live DemoHu Weihuang Blog : www.huweihuang.com  Install HexoInstall Node.js  and Git 123#For Macbrew install nod">
+<meta property="og:description" content="凸函数凸函数的定义：$f(\theta x+(1-\theta)y) \leq \theta f(x)+(1-\theta)f(y)$其含义就是：函数图像在直线下边。 Jensen不等式凸函数定义推广到一般形式，即可得到Jensen不等式，即$\theta_1,…\theta_k\geq0, \theta_1+…+\theta_k=1$时，$f(\theta_1x_1+…+\theta_kx_k)">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://res.cloudinary.com/dqxtn0ick/image/upload/v1553666111/blog/blog.jpg">
-<meta property="og:image" content="http://yoursite.com/img/article/tag.png">
-<meta property="og:updated_time" content="2019-04-14T13:30:15.919Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/27/凸优化-Jensen不等式-共轭函数-Fenchel不等式/gonge.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/27/凸优化-Jensen不等式-共轭函数-Fenchel不等式/sub.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/27/凸优化-Jensen不等式-共轭函数-Fenchel不等式/fan.png">
+<meta property="og:updated_time" content="2019-04-27T14:33:59.700Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[Hexo] Theme HuWeihuang">
-<meta name="twitter:description" content="This HuWeihuang theme created by HuWeihuang modified from the original Porter YuHsuan  Live DemoHu Weihuang Blog : www.huweihuang.com  Install HexoInstall Node.js  and Git 123#For Macbrew install nod">
-<meta name="twitter:image" content="https://res.cloudinary.com/dqxtn0ick/image/upload/v1553666111/blog/blog.jpg">
+<meta name="twitter:title" content="凸优化:Jensen不等式-共轭函数-Fenchel不等式">
+<meta name="twitter:description" content="凸函数凸函数的定义：$f(\theta x+(1-\theta)y) \leq \theta f(x)+(1-\theta)f(y)$其含义就是：函数图像在直线下边。 Jensen不等式凸函数定义推广到一般形式，即可得到Jensen不等式，即$\theta_1,…\theta_k\geq0, \theta_1+…+\theta_k=1$时，$f(\theta_1x_1+…+\theta_kx_k)">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/27/凸优化-Jensen不等式-共轭函数-Fenchel不等式/gonge.png">
 
 
 
@@ -125,7 +126,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2017/09/18/hexo-theme-huweihuang/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/27/凸优化-Jensen不等式-共轭函数-Fenchel不等式/">
 
 
 
@@ -135,7 +136,7 @@
   };
 </script>
 
-  <title>[Hexo] Theme HuWeihuang | Joczu</title>
+  <title>凸优化:Jensen不等式-共轭函数-Fenchel不等式 | Joczu</title>
   
 
 
@@ -357,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/18/hexo-theme-huweihuang/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/27/凸优化-Jensen不等式-共轭函数-Fenchel不等式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Joczu">
@@ -374,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">[Hexo] Theme HuWeihuang
+          <h1 class="post-title" itemprop="name headline">凸优化:Jensen不等式-共轭函数-Fenchel不等式
 
               
             
@@ -400,28 +401,34 @@
                 
               
 
-              <time title="Created: 2017-09-18 10:51:24" itemprop="dateCreated datePublished" datetime="2017-09-18T10:51:24+08:00">2017-09-18</time>
+              <time title="Created: 2019-04-27 21:10:39 / Modified: 22:33:59" itemprop="dateCreated datePublished" datetime="2019-04-27T21:10:39+08:00">2019-04-27</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-04-14 21:30:15" itemprop="dateModified" datetime="2019-04-14T21:30:15+08:00">2019-04-14</time>
               
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/凸优化/" itemprop="url" rel="index"><span itemprop="name">凸优化</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -452,7 +459,7 @@
                 
                   <span class="post-meta-item-text">Symbols count in article: </span>
                 
-                <span title="Symbols count in article">2.6k</span>
+                <span title="Symbols count in article">663</span>
               
 
               
@@ -466,7 +473,7 @@
                 
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
-                <span title="Reading time">2 mins.</span>
+                <span title="Reading time">1 mins.</span>
               
             </div>
           
@@ -486,35 +493,17 @@
       
 
       
-        <blockquote>
-<p>This HuWeihuang theme created by <a href="http://www.huweihuang.com/" target="_blank" rel="noopener">HuWeihuang</a> modified from the original Porter <a href="https://github.com/YenYuHsuan/hexo-theme-beantech" target="_blank" rel="noopener">YuHsuan</a></p>
-</blockquote>
-<h1 id="Live-Demo"><a href="#Live-Demo" class="headerlink" title="Live Demo"></a>Live Demo</h1><p>Hu Weihuang Blog : <a href="http://www.huweihuang.com/" target="_blank" rel="noopener">www.huweihuang.com</a></p>
-<p><img src="https://res.cloudinary.com/dqxtn0ick/image/upload/v1553666111/blog/blog.jpg" alt="Theme HuWeihuang"></p>
-<h1 id="Install-Hexo"><a href="#Install-Hexo" class="headerlink" title="Install Hexo"></a>Install Hexo</h1><p>Install Node.js  and Git</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>For Mac</span><br><span class="line">brew install node</span><br><span class="line">brew install git</span><br></pre></td></tr></table></figure>
-<p>Install hexo</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>For more:https://hexo.io/zh-cn/index.html</span><br></pre></td></tr></table></figure>
-<h1 id="Theme-Usage"><a href="#Theme-Usage" class="headerlink" title="Theme Usage"></a>Theme Usage</h1><h2 id="Init"><a href="#Init" class="headerlink" title="Init"></a>Init</h2><hr>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/huweihuang/hexo-theme-huweihuang.git ./hexo-huweihuang</span><br><span class="line"><span class="built_in">cd</span> hexo-huweihuang</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-<h2 id="Modify"><a href="#Modify" class="headerlink" title="Modify"></a>Modify</h2><hr>
-<p>Modify <code>_config.yml</code> file with your own info.<br>Especially the section:</p>
-<h3 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h3><p>Replace to your own repo!<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span> <span class="attr">https://github.com/&lt;yourAccount&gt;/&lt;repo&gt;</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">&lt;your-branch&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="Sidebar-settings"><a href="#Sidebar-settings" class="headerlink" title="Sidebar settings"></a>Sidebar settings</h3><p>Copy your avatar image to <code>&lt;root&gt;/img/</code> and modify the <code>_config.yml</code>:<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sidebar:</span> <span class="literal">true</span>    <span class="comment"># whether or not using Sidebar.</span></span><br><span class="line"><span class="attr">sidebar-about-description:</span> <span class="string">"&lt;your description&gt;"</span></span><br><span class="line"><span class="attr">sidebar-avatar:</span> <span class="string">img/&lt;your</span> <span class="string">avatar</span> <span class="string">path&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>and activate your personal widget you like<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">widgets:</span>         <span class="comment"># here are widget you can use, you can comment out</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">featured-tags</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">short-about</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">recent-posts</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">friends-blog</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">archive</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">category</span></span><br></pre></td></tr></table></figure></p>
-<p>if you want to add sidebar widget, please add at <code>layout/_widget</code>.</p>
-<h3 id="Signature-Setup"><a href="#Signature-Setup" class="headerlink" title="Signature Setup"></a>Signature Setup</h3><p>Copy your signature image to <code>&lt;root&gt;/img/signature</code> and modify the <code>_config.yml</code>:<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">signature:</span> <span class="literal">true</span>   <span class="comment"># show signature</span></span><br><span class="line"><span class="attr">signature-img:</span> <span class="string">img/signature/&lt;your-signature-ID&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="Go-to-top-icon-Setup"><a href="#Go-to-top-icon-Setup" class="headerlink" title="Go to top icon Setup"></a>Go to top icon Setup</h3><p>My icon is using iron man, you can change to your own icon at <code>css/image</code>.</p>
-<h3 id="Post-tag"><a href="#Post-tag" class="headerlink" title="Post tag"></a>Post tag</h3><p>You can decide to show post tags or not.<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">home_posts_tag:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p><img src="/img/article/tag.png" alt="home_posts_tag-true"></p>
-<h3 id="Markdown-render"><a href="#Markdown-render" class="headerlink" title="Markdown render"></a>Markdown render</h3><p>My markdown render engine plugin is <a href="https://github.com/celsomiranda/hexo-renderer-markdown-it" target="_blank" rel="noopener">hexo-renderer-markdown-it</a>.<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Markdown-it config</span></span><br><span class="line"><span class="comment">## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki</span></span><br><span class="line"><span class="attr">markdown:</span></span><br><span class="line"><span class="attr">  render:</span></span><br><span class="line"><span class="attr">    html:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    xhtmlOut:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">    breaks:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    linkify:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    typographer:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    quotes:</span> <span class="string">'“”‘’'</span></span><br></pre></td></tr></table></figure></p>
-<p>and if you want to change the header anchor ‘ℬ’, you can go to <code>layout/post.ejs</code> to change it.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span>(<span class="string">"https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        anchors.options = &#123;</span><br><span class="line">          visible: <span class="string">'hover'</span>,</span><br><span class="line">          placement: <span class="string">'left'</span>,</span><br><span class="line">          icon: ℬ <span class="comment">// this is the header anchor "unicode" icon</span></span><br><span class="line">        &#125;;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Hexo-Basics"><a href="#Hexo-Basics" class="headerlink" title="Hexo Basics"></a>Hexo Basics</h2><hr>
-<p>Some hexo command:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo new post <span class="string">"&lt;post name&gt;"</span> <span class="comment"># you can change post to another layout if you want</span></span><br><span class="line">hexo clean &amp;&amp; hexo generate <span class="comment"># generate the static file</span></span><br><span class="line">hexo server <span class="comment"># run hexo in local environment</span></span><br><span class="line">hexo deploy <span class="comment"># hexo will push the static files automatically into the specific branch(gh-pages) of your repo!</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="Have-fun"><a href="#Have-fun" class="headerlink" title="Have fun ^_^"></a>Have fun ^_^</h1><hr>
-<!-- Place this tag in your head or just before your close body tag. -->
-<p><script async defer src="https://buttons.github.io/buttons.js"></script><br><!-- Place this tag where you want the button to render. --></p>
-<p>Please <a class="github-button" href="https://github.com/huweihuang/hexo-theme-huweihuang" data-icon="octicon-star" aria-label="Star huweihuang/hexo-theme-huweihuang on GitHub" target="_blank" rel="noopener">Star</a> this Project if you like it! <a class="github-button" href="https://github.com/huweihuang" aria-label="Follow @huweihuang on GitHub" target="_blank" rel="noopener">Follow</a> would also be appreciated!<br>Peace!</p>
+        <h2 id="凸函数"><a href="#凸函数" class="headerlink" title="凸函数"></a>凸函数</h2><p>凸函数的定义：$f(\theta x+(1-\theta)y) \leq \theta f(x)+(1-\theta)f(y)$<br>其含义就是：函数图像在直线下边。</p>
+<h2 id="Jensen不等式"><a href="#Jensen不等式" class="headerlink" title="Jensen不等式"></a>Jensen不等式</h2><p>凸函数定义推广到一般形式，即可得到Jensen不等式，即<br>$\theta_1,…\theta_k\geq0, \theta_1+…+\theta_k=1$时，<br>$f(\theta_1x_1+…+\theta_kx_k) \leq \theta_1f(x_1)+…+\theta_kf(x_k)$</p>
+<p>扩展理解：对于$\theta_1,…\theta_k\geq0, \theta_1+…+\theta_k=1$，如果把$\theta_k$看出$x_k$的概率的话，那$\theta_1x_1+…+\theta_kx_k$就表示x的期望，右边式子就表示$f(x)$的期望，于是上式就可以写成$f(E(x))\leq E(f(x))$，这就是Jensen不等式，注意函数f要满足凸函数。</p>
+<h2 id="共轭函数"><a href="#共轭函数" class="headerlink" title="共轭函数"></a>共轭函数</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>原函数$f:R^n\to R$共轭函数定义：<br><img src="gonge.png" alt><br>这个式子的意思是：求$xt-f(x)$关于x和y函数在定义域内的上界，将这个上界形成的函数定义为共轭函数。下图红色部分就是上界<br><img src="sub.png" alt></p>
+<ol>
+<li>定义式中$f(x)$不一定是凸函数</li>
+<li>共轭函数一定是凸函数（由图可知）</li>
+<li>凸函数的共轭函数的共轭函数是其本身</li>
+</ol>
+<h3 id="如何求共轭函数"><a href="#如何求共轭函数" class="headerlink" title="如何求共轭函数"></a>如何求共轭函数</h3><p><img src="fan.png" alt></p>
+<h2 id="Fenchel不等式"><a href="#Fenchel不等式" class="headerlink" title="Fenchel不等式"></a>Fenchel不等式</h2><p>由共轭函数定义可知，$f^<em>(t)\geq xt-f(x)$移项可得$f(x)+f^</em>(t)\geq xt$这就是Fenchel不等式。</p>
 
       
     </div>
@@ -544,7 +533,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+            <a href="/tags/Jensen不等式/" rel="tag"># Jensen不等式</a>
+          
+            <a href="/tags/共轭函数/" rel="tag"># 共轭函数</a>
+          
+            <a href="/tags/Fenchel不等式/" rel="tag"># Fenchel不等式</a>
           
         </div>
       
@@ -557,15 +550,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/04/27/Improving-GAN/" rel="next" title="Improving GAN">
+                <i class="fa fa-chevron-left"></i> Improving GAN
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/17/2018-08-17-CNN/" rel="prev" title="CNN 知识点">
-                CNN 知识点 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -659,7 +652,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -702,7 +697,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">13</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -764,7 +765,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Live-Demo"><span class="nav-text">Live Demo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Install-Hexo"><span class="nav-text">Install Hexo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theme-Usage"><span class="nav-text">Theme Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Init"><span class="nav-text">Init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Modify"><span class="nav-text">Modify</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Deployment"><span class="nav-text">Deployment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sidebar-settings"><span class="nav-text">Sidebar settings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Signature-Setup"><span class="nav-text">Signature Setup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Go-to-top-icon-Setup"><span class="nav-text">Go to top icon Setup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Post-tag"><span class="nav-text">Post tag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Markdown-render"><span class="nav-text">Markdown render</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo-Basics"><span class="nav-text">Hexo Basics</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Have-fun"><span class="nav-text">Have fun ^_^</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#凸函数"><span class="nav-text">凸函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jensen不等式"><span class="nav-text">Jensen不等式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共轭函数"><span class="nav-text">共轭函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何求共轭函数"><span class="nav-text">如何求共轭函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fenchel不等式"><span class="nav-text">Fenchel不等式</span></a></li></ol></div>
             
 
           </div>
@@ -797,7 +798,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">37k</span>
+    <span title="Symbols count total">36k</span>
   
 
   
@@ -806,7 +807,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">34 mins.</span>
+    <span title="Reading time total">32 mins.</span>
   
 </div>
 
