@@ -1775,7 +1775,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #8eff75;
+  background: #2fffff;
 }
 .feed-link,
 .chat {
@@ -2793,7 +2793,7 @@ ul.breadcrumb li+li:last-child {
 }
 ::selection {
   background: #00c4b6;
-  color: #f7f7f7;
+  color: #6fa8dc;
 }
 ::-moz-selection {
   background: #00c4b6;
