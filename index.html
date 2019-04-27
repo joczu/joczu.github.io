@@ -189,7 +189,7 @@
     </div>
     
       
-        <p class="site-subtitle">个人博客</p>
+        <p class="site-subtitle">So let's set world on fire!</p>
       
     
     
@@ -225,6 +225,57 @@
     
 
     <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
 
   </li>
         
@@ -397,13 +448,23 @@
       
         
           
-            <p>本文对GAN进行更加深入的探讨，主要参考</p>
-<p>视频的讲解。</p>
-<h2 id="f-divergence"><a href="#f-divergence" class="headerlink" title="f-divergence"></a>f-divergence</h2><p>这一章节是为了说明GAN中描述$P_G$和$P_{data}$两个分布差异不一定非要用JS divergence，还有其他的divergence可以替代。</p>
-<p><img src="f.png" alt></p>
-<p>其中P和Q表示两个分布，$p(x)$和$q(x)$是采样出来的x的可能性。f是一个凸函数，并且其极值是$f(1)=0$，$D_f(P||Q)$衡量PQ两个分布之间的差异。<br>如果$p(x)=q(x)$，代入等式可得$D_f(P||Q)=0$；<br>当$p(x)!=q(x)$，$D_f(P||Q) \geq f(\int \limits_xq(x) \frac {p(x)}{q(x)})=f(x)=0$<br>当P和Q两个同分布时，$D_f(P||Q)$有最小值0。</p>
+            <p>
+              本文对GAN进行更加深入的探讨，主要参考
+视频的讲解。
+f-divergence这一章节是为了说明GAN中描述$P_G$和$P_{data}$两个分布差异不一定非要用JS divergence，还有其他的divergence可以替代。
 
+其中P和Q表示两个分布，$p(x)$和$q(x)$是采样出来的
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/04/27/Improving-GAN/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -562,288 +623,28 @@
       
         
           
-            <h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><ul>
-<li>创建Hexo工程</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init blog</span><br></pre></td></tr></table></figure>
-<p>此处blog可以替换成你想要的名字。</p>
-<ul>
-<li>新建博文</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd blog</span><br><span class="line">$ hexo new &apos;blog-name&apos;</span><br></pre></td></tr></table></figure>
-<p>此时会在/blog/sources/_post/目录下生成’blog-name.md’文件和’blog-name’的文件夹。md文件用于编辑博文，文件夹用于存放此博文内容照片。</p>
-<ul>
-<li>运行服务器</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>本地访问<a href="http://0.0.0.0:4000/" target="_blank" rel="noopener">http://0.0.0.0:4000/</a>，查看Hexo网站。</p>
-<ul>
-<li>生成上传至GitHub</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo g -d</span><br></pre></td></tr></table></figure>
-<ul>
-<li>安装主题</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cd /blog/themes</span><br><span class="line">$ git clone https://github.com/wuchong/jacman.git ./jacman</span><br><span class="line">$ cd ./jacman</span><br><span class="line">$ git pull</span><br></pre></td></tr></table></figure>
-<p>然后修改站点配置文件/blog/config.yml，将其中的theme改成jacman</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: jacman</span><br></pre></td></tr></table></figure>
-<ul>
-<li>插入图片</li>
-</ul>
-<p>将照片放在与博文同名的文件夹下面，在博文中输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](pic.png)</span><br></pre></td></tr></table></figure>
-<p>即可饮用，但是这种方法不能改变图片大小，可采用下面命令修改图片大小</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&apos;pic.png&apos; width = &apos;80%&apos; height = &apos;80%&apos; &gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>文件下载链接</li>
-</ul>
-<p>在blog/sources/files内放入上传的文件，在博文中输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[](/files/filename)</span><br></pre></td></tr></table></figure>
-<h2 id="LaTex公式编辑"><a href="#LaTex公式编辑" class="headerlink" title="LaTex公式编辑"></a>LaTex公式编辑</h2><ul>
-<li>插入数学公式</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$数学公式$ 或者 $$数学公式$$</span><br></pre></td></tr></table></figure>
-<p>前者是行内公式，后者是行间公式</p>
-<ul>
-<li>区块引用</li>
-</ul>
-<p><code>&gt;</code>后面书写引用</p>
-<ul>
-<li><p>分割线</p>
-<p><code>***</code>或者<code>---</code></p>
-</li>
-<li><p>上下标</p>
-</li>
-</ul>
-<p>使用^表示上标，表示下标</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">x^2 </span><br><span class="line">x_&#123;1,2...,n&#125;</span><br><span class="line">\sum \limits^n \limits_&#123;i=1&#125;</span><br><span class="line">\hat x              //字母上加^</span><br><span class="line">$\overline x$       //字母上加横线 </span><br><span class="line">$\widetilde x$      //字母上加波浪线</span><br><span class="line">$\dot&#123;x&#125;$           //字母上加一个点 </span><br><span class="line">$\ddot&#123;x&#125;$          //字母上加两个点</span><br></pre></td></tr></table></figure>
-<ul>
-<li>波浪线</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\sim</span><br></pre></td></tr></table></figure>
-<ul>
-<li>公式换行对齐</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;equation&#125;</span><br><span class="line">\begin&#123;split&#125;</span><br><span class="line">y &amp;= a(x + b) \\&amp;= ax+ab  </span><br><span class="line">\end&#123;split&#125;</span><br><span class="line">\end&#123;equation&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>括号</li>
-</ul>
-<p><code>()</code>和<code>[]</code>都表示它们自己，但是<code>{}</code>因为有特殊作用需要用<code>\lbrace \rbrece</code>表示。</p>
-<ul>
-<li>分数</li>
-</ul>
-<p><code>\frac{分母}{分子}</code>来表示分数</p>
-<ul>
-<li>开方</li>
-</ul>
-<p><code>\sqrt[次数][被开方数]</code>来表示开方</p>
-<ul>
-<li>求期望</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\mathbb&#123;E&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>正负无穷</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">+\infty</span><br><span class="line">-\infty</span><br></pre></td></tr></table></figure>
-<ul>
-<li>希腊字母</li>
-</ul>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">代码</th>
-<th style="text-align:center">大写</th>
-<th style="text-align:center">代码</th>
-<th style="text-align:left">小写</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><code>A</code></td>
-<td style="text-align:center">$A$</td>
-<td style="text-align:center"><code>\alpha</code></td>
-<td style="text-align:left">$\alpha$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>B</code></td>
-<td style="text-align:center">$B$</td>
-<td style="text-align:center"><code>\beta</code></td>
-<td style="text-align:left">$\beta$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>\Gamma</code></td>
-<td style="text-align:center">$\Gamma$</td>
-<td style="text-align:center"><code>\gamma</code></td>
-<td style="text-align:left">$\gamma$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>\Delta</code></td>
-<td style="text-align:center">$\Delta$</td>
-<td style="text-align:center"><code>\delta</code></td>
-<td style="text-align:left">$\delta$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>E</code></td>
-<td style="text-align:center">$E$</td>
-<td style="text-align:center"><code>\epsilon</code></td>
-<td style="text-align:left">$\epsilon$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>Z</code></td>
-<td style="text-align:center">$Z$</td>
-<td style="text-align:center"><code>\zeta</code></td>
-<td style="text-align:left">$\zeta$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>H</code></td>
-<td style="text-align:center">$H$</td>
-<td style="text-align:center"><code>\eta</code></td>
-<td style="text-align:left">$\eta$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>\Theta</code></td>
-<td style="text-align:center">$\Theta$</td>
-<td style="text-align:center"><code>\theta</code></td>
-<td style="text-align:left">$\theta$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>I</code></td>
-<td style="text-align:center">$I$</td>
-<td style="text-align:center"><code>\iota</code></td>
-<td style="text-align:left">$\iota$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>K</code></td>
-<td style="text-align:center">$K$</td>
-<td style="text-align:center"><code>\kappa</code></td>
-<td style="text-align:left">$\kappa$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>\Lambda</code></td>
-<td style="text-align:center">$\Lambda$</td>
-<td style="text-align:center"><code>\lambda</code></td>
-<td style="text-align:left">$\lambda$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>M</code></td>
-<td style="text-align:center">$M$</td>
-<td style="text-align:center"><code>\mu</code></td>
-<td style="text-align:left">$\mu$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>N</code></td>
-<td style="text-align:center">$N$</td>
-<td style="text-align:center"><code>\nu</code></td>
-<td style="text-align:left">$\nu$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>\Xi</code></td>
-<td style="text-align:center">$\Xi$</td>
-<td style="text-align:center"><code>\xi</code></td>
-<td style="text-align:left">$\xi$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>O</code></td>
-<td style="text-align:center">$O$</td>
-<td style="text-align:center"><code>\omicron</code></td>
-<td style="text-align:left">$\omicron$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>\Pi</code></td>
-<td style="text-align:center">$\Pi$</td>
-<td style="text-align:center"><code>\pi</code></td>
-<td style="text-align:left">$\pi$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>P</code></td>
-<td style="text-align:center">$P$</td>
-<td style="text-align:center"><code>\rho</code></td>
-<td style="text-align:left">$\rho$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>\Sigma</code></td>
-<td style="text-align:center">$\Sigma$</td>
-<td style="text-align:center"><code>\sigma</code></td>
-<td style="text-align:left">$\sigma$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>T</code></td>
-<td style="text-align:center">$T$</td>
-<td style="text-align:center"><code>\tau</code></td>
-<td style="text-align:left">$\tau$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>\Upsilon</code></td>
-<td style="text-align:center">$\Upsilon$</td>
-<td style="text-align:center"><code>\upsilon</code></td>
-<td style="text-align:left">$\upsilon$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>\Phi</code></td>
-<td style="text-align:center">$\Phi$</td>
-<td style="text-align:center"><code>\phi</code></td>
-<td style="text-align:left">$\phi$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>X</code></td>
-<td style="text-align:center">$X$</td>
-<td style="text-align:center"><code>\chi</code></td>
-<td style="text-align:left">$\chi$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>\Psi</code></td>
-<td style="text-align:center">$\Psi$</td>
-<td style="text-align:center"><code>\psi</code></td>
-<td style="text-align:left">$\psi$</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>\Omega</code></td>
-<td style="text-align:center">$\Omega$</td>
-<td style="text-align:center"><code>\omega</code></td>
-<td style="text-align:left">$\omega$</td>
-</tr>
-</tbody>
-</table>
-</div>
-<ul>
-<li><p>其他字符</p>
-<ul>
-<li>关系运算符</li>
-</ul>
-<p>|     符号     | 代码         |<br>| :—————: | :—————- |<br>|    $\pm$     | <code>\pm</code>        |<br>|   $\times$   | <code>\times</code>     |<br>|    $\div$    | <code>\div</code>       |<br>|    $\mid$    | <code>\mid</code>       |<br>|   $\nmid$    | <code>\nmid</code>      |<br>|   $\cdot$    | <code>\cdot</code>      |<br>|   $\circ$    | <code>\circ</code>      |<br>|    $\ast$    | <code>\ast</code>       |<br>|  $\bigodot$  | <code>\bigodot</code>   |<br>| $\bigotimes$ | <code>\bigotimes</code> |<br>| $\bigoplus$  | <code>\bigoplus</code>  |<br>|    $\leq$    | <code>\leq</code>       |<br>|    $\geq$    | <code>\geq</code>       |<br>|    $\neq$    | <code>\neq</code>       |<br>|  $\approx$   | <code>\approx</code>    |<br>|   $\equiv$   | <code>\equiv</code>     |<br>|    $\sum$    | <code>\sum</code>       |<br>|   $\prod$    | <code>\prod</code>      |<br>|  $\coprod$   | <code>\coprod</code>    |</p>
-<ul>
-<li>集合运算符</li>
-</ul>
-<p>|    符号     | 代码        |<br>| :————-: | :————— |<br>| $\emptyset$ | <code>\emptyset</code> |<br>|    $\in$    | <code>\in</code>       |<br>|  $\notin$   | <code>\notin</code>    |<br>|  $\subset$  | <code>\subset</code>   |<br>|  $\supset$  | <code>\supset</code>   |<br>| $\subseteq$ | <code>\subseteq</code> |<br>| $\supseteq$ | <code>\supseteq</code> |<br>|  $\bigcap$  | <code>\bigcap</code>   |<br>|  $\bigcup$  | <code>\bigcup</code>   |<br>|  $\bigvee$  | <code>\bigvee</code>   |<br>| $\bigwedge$ | <code>\bigwedge</code> |<br>| $\biguplus$ | <code>\biguplus</code> |<br>| $\bigsqcup$ | <code>\bigsqcup</code> |</p>
-<ul>
-<li>对数运算符</li>
-</ul>
-<p>|  符号  | 代码   |<br>| :——: | :——- |<br>| $\log$ | <code>\log</code> |<br>| $\lg$  | <code>\lg</code>  |<br>| $\ln$  | <code>\ln</code>  |</p>
-<ul>
-<li>三角运算符</li>
-</ul>
-<p>|   符号   | 代码     |<br>| :———: | :———- |<br>|  $\bot$  | <code>\bot</code>   |<br>| $\angle$ | <code>\angle</code> |<br>|  $\sin$  | <code>\sin</code>   |<br>|  $\cos$  | <code>\cos</code>   |<br>|  $\tan$  | <code>\tan</code>   |<br>|  $\cot$  | <code>\cot</code>   |<br>|  $\sec$  | <code>\sec</code>   |<br>|  $\csc$  | <code>\csc</code>   |</p>
-<ul>
-<li>微积分运算符</li>
-</ul>
-<p>|     符号     | 代码         |<br>| :—————: | :—————- |<br>|   $\prime$   | <code>\prime</code>     |<br>|    $\int$    | <code>\int</code>       |<br>|   $\iint$    | <code>\iint</code>      |<br>|   $\iiint$   | <code>\iiint</code>     |<br>|  $\iiiint$   | <code>\iiiint</code>    |<br>|   $\oint$    | <code>\oint</code>      |<br>|    $\lim$    | <code>\lim</code>       |<br>|   $\infty$   | <code>\infty</code>     |<br>|   $\nabla$   | <code>\nabla</code>     |<br>| $\mathrm{d}$ | <code>\mathrm{d}</code> |</p>
-<ul>
-<li>箭头</li>
-</ul>
-<p><img src="jiantou.png" alt></p>
-<ul>
-<li>不常用符号</li>
-</ul>
-<p><img src="buchangyong.png" alt></p>
-<ul>
-<li>非数学符号</li>
-</ul>
-<p><img src="feishuxue.png" alt></p>
-</li>
-</ul>
+            <p>
+              Hexo
+创建Hexo工程
 
+$ hexo init blog
+此处blog可以替换成你想要的名字。
+
+新建博文
+
+$ cd blog$ hexo new &apos;blog-name&apos;
+此时会在/blog/sources/_post/目录下生成’blog-name.md’文件和’blo
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/04/26/Hexo填坑/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1014,100 +815,21 @@
       
         
           
-            <p>GAN的相关知识主要是跟着李宏毅老师入门的，具体内容可以访问<a href="https://www.bilibili.com/video/av9770302/?p=15" target="_blank" rel="noopener">哔哩哔哩-李宏毅深度学习2017</a>进行学习。这篇文章主要对学习内容进行总结。</p>
-<h2 id="1-传统生成模型"><a href="#1-传统生成模型" class="headerlink" title="1.传统生成模型"></a>1.传统生成模型</h2><h3 id="AutoEncoder"><a href="#AutoEncoder" class="headerlink" title="AutoEncoder"></a>AutoEncoder</h3><blockquote>
-<p>AutoEncoder是前馈神经网络的一种，曾经重要用于数据的降维或者特征的抽取，而现在也被广泛用于生成模型。与其他前馈神经网络不同的是，其他前馈神经网络关注的是Output Layer和错误率，而AutoEncoder关注点是Hidden Layer；并且普通前馈神经网络一般比较深，而AutoEncoder通常只有一层Hidden Layer。Hidden Layer中神经元组成的向量（Code）用来表示Input</p>
-</blockquote>
-<img src="/2019/04/25/GAN初识/autoencoder.png">
-<p>如图该模型的作用是生成与原图像相似的图像。将原始图像输入神经网络，经过Encoder的压缩，表示成Code；再经过Decoder的解压生成图像；最后计算生成图像与输入图像的MSE（Mean Square Error），这样就可以对模型进行训练。</p>
-<p><img src="Decoder.png" alt></p>
-<p>若只取AutoEncoder的Decoder部分，随机生成Code向量输入网络进行解码，这样就可以生成图像。</p>
-<p>但是从上图可以看出AutoEncoder的图像生成效果非常的差，从计算loss方式分析其原因。</p>
-<p><img src="7.png" width="40%" height="40%"></p>
-<p>可以从上图中看出，两幅图像仅仅一个像素点的位置不同，但是用MSE计算loss是一样大的，这就说明MSE不能衡量图像像素点的位置信息。</p>
-<p>GAN就出场了，设计了Generator和Discriminator结构进行前馈运算，采用KL/JSD等方式，很好的解决了衡量两个图像分布之间‘difference’的问题。</p>
-<h2 id="2-GAN前馈流程图"><a href="#2-GAN前馈流程图" class="headerlink" title="2.GAN前馈流程图"></a>2.GAN前馈流程图</h2><p><img src="generator.png" width="70%" height="70%"></p>
-<p><img src="discriminator.png" width="25%" height="25%"></p>
-<p>初始化Generator和Discriminator网络参数，服从特定分布的随机变量输入Generator网络生成图像（标签为0），再和真实图像（标签为1）一块输入到Discriminator进行判断。</p>
-<p>若是Discriminator对生成图像的判分较低，则Generator参数进行梯度下降更新（此时固定Discriminator）；再将第二轮Generator生成的图像输入到Discriminator进行判断，若是Discriminator对其判分较高，则更新Discriminator参数。</p>
-<h2 id="3-GAN原理"><a href="#3-GAN原理" class="headerlink" title="3.GAN原理"></a>3.GAN原理</h2><ul>
-<li><h3 id="Maximum-Likelihood-Estimation"><a href="#Maximum-Likelihood-Estimation" class="headerlink" title="Maximum Likelihood Estimation"></a>Maximum Likelihood Estimation</h3></li>
-</ul>
-<p>给定真实数据分布$ P_{data}(x)$，此处的x代表真实图像构成的向量；设生成模型的分布$P_{G}(x;\theta)$，这个生成分布由$\theta$决定，生成图像模型的目标就是使得生成模型分布$P_{G}(x;\theta)$尽可能的接近真实数据分布$ P_{data}(x)$，也就是要计算$\theta$。</p>
-<p>这样就可以采用最大似然估计的方法来，具体方法如下：</p>
-<ol>
-<li>从真实数据分布$ P_{data}(x)$中采样得到${x^1,x^2,…,x^m}$；</li>
-<li>计算每个数据的概率$P_G(x^i;\theta)$</li>
-<li>计算似然：$L = \prod_{i=1}^mP_G(x^i;\theta)$</li>
-<li>求得$\theta$使得似然最大化</li>
-</ol>
-<p><img src="MLE.png" width="75%" height="75%"></p>
-<p>使用最大似然估计求得$\theta$的过程如上图所示，对似然求log变成log似然；真实分布中的所有x的期望等价于概率积分，所以可以转化成积分运算，因为减号之后的积分与$\theta$无关，所以添加上去之后还是等价的；经过这样拼凑之后最大似然估计可以变成求两个分布之间的KL散度，两个分布越相似，KL散度值越小。</p>
-<p>在求$\theta$之前必须要假定生成分布的类型，比如是高斯混合模型，但是在实践中这种假设的效果不太好，所以如何能设计出更加一般化的生成模型分布呢？</p>
-<p>这里采用神经网络来产生生成分布$P_{G}(x;\theta)$，$\theta$也就是神经网络的权重参数。神经网络只要有非线性激活函数，理论上可以去拟合任意函数，概率分布也可以看作是函数映射，所以可以采用神经网络去学习复杂的概率分布。</p>
-<p><img src="GAN%20Distribution.png" width="70%" height="70%"></p>
-<ul>
-<li><p>Generator G</p>
-<p>生成器G是一个函数，输入向量z，输出向量x</p>
-<p>$P_{prior}(z)$表示输入向量z的先验分布，$P_G(x)$由生成器G决定</p>
-</li>
-<li><p>Discriminator D</p>
-<p>判别器D是一个函数，输入向量x，输出标量值</p>
-<p>D用来衡量$P_G(x)$与$P_{data}(x)$之间的不同</p>
-</li>
-<li><p>GAN公式</p>
-<p>$G^*=arg\min\limits_{G}\max\limits_{D}V(G,D)$    </p>
-<p>$V=E_{x \sim P_{data}}[logD(x)]+E_{x \sim P_{G}}[log(1-D(x))]$ 衡量$P_G$与$P_{data}$的不同</p>
-<p>在G一定的情况，寻找D使得$V(G,D)$最大化，也就是对于真实分布中的x，D(x)要接近1，对于生成分布中的x，D(x)要接近于0，这样使得判别器的能力增强；<br>再固定D，寻找G使得$\max\limits_{D}V(G,D)$最小，也就是让来自于生成分布中的x的D(x)尽可能的接近1，这样使得生成器的能力增强。</p>
-</li>
-</ul>
-<p>接下来对$G^*=arg\min\limits_{G}\max\limits_{D}V(G,D)$进行求解。</p>
-<ul>
-<li><h3 id="求解-min-limits-G-max-limits-D-V-G-D"><a href="#求解-min-limits-G-max-limits-D-V-G-D" class="headerlink" title="求解$\min \limits_{G}\max \limits_{D}V(G,D)$"></a>求解$\min \limits_{G}\max \limits_{D}V(G,D)$</h3></li>
-</ul>
-<p>给定G，求得最优的$D^*$使得V最大。</p>
-<p><img src="maxv.png" width="70%" height="70%"></p>
-<p>接下来给定x，求$D^*$使得被积函数取极大值。$P_{data}(x)$和$P_{G}(x)$是已知值，只   需要对D求导即可得到极大值。</p>
-<p><img src="D*.png" width="70%" height="70%"></p>
-<p>将$D^*$代入V式进行整理。</p>
-<p><img src="maxv%E6%8E%A8%E5%AF%BC.png" width="70%" height="70%"></p>
-<p>$log2P_{data}(x)$对x积分之后得$log2$，概率积分为1。</p>
-<p><img src="maxv%E6%8E%A8%E5%AF%BC2.png" width="70%" height="70%"></p>
-<p>上图的推导主要是凑出JSD分布的形式，JS Divergence是KL散度的对称平滑版本，也是描述了两个分布之间的差异。因为JSD值域[0,log2]所以 $\max \limits_DV(G,D)$的取值范围为[-2log2,0]。</p>
-<p>接下来的问题就是如何优化G，使得$P_G(x)$尽可能接近$P_{data}(x)$</p>
-<p><img src="G.png" width="40%" height="40%"></p>
-<p>如上图，将$\max \limits_DV(G,D)$视为损失函数$L(G)$，采用梯度下降的方法进行优化</p>
-<p><img src="G2.png" width="40%" height="40%"></p>
-<h2 id="4-GAN训练"><a href="#4-GAN训练" class="headerlink" title="4.GAN训练"></a>4.GAN训练</h2><p><img src="%E8%AE%AD%E7%BB%83.png" width="65%" height="65%"></p>
-<p>如图所示，在实践训练中，我们不可能求得$P_G$和$P_{data}$的期望，所以只能从真实数据分布和生成数据分布中分别采样，代入到损失函数求的交叉熵。</p>
-<p>具体的算法流程如下</p>
-<p><img src="%E7%AE%97%E6%B3%95.png" width="65%" height="65%"></p>
-<h2 id="5-问题优化"><a href="#5-问题优化" class="headerlink" title="5.问题优化"></a>5.问题优化</h2><ul>
-<li><h3 id="训练初期缓慢"><a href="#训练初期缓慢" class="headerlink" title="训练初期缓慢"></a>训练初期缓慢</h3></li>
-</ul>
-<p><img src="%E7%94%9F%E6%88%90%E5%99%A8%E4%BC%98%E5%8C%96.png" width="25%" height="25%"></p>
-<p>在生成模型的优化过程中，生成器的loss Function是$V=E_{x\sim P_{G}}[-log(1-D(x))]$。如上图所示，当D(x)接近0的时候，梯度非常的小。这就导致在训练的初期，生成器G如果想要骗过判别器D变化是非常的缓慢的。所以就将生成器的loss修改成$V=E_{x\sim P_{G}}[-log(D(x))]$这样可以提高训练的速度。</p>
-<ul>
-<li><h3 id="Loss不变"><a href="#Loss不变" class="headerlink" title="Loss不变"></a>Loss不变</h3></li>
-</ul>
-<p>在实际训练中发现，loss一直不发生变化，即$\max \limits_DV(G,D)=0$</p>
-<p>因为JSD值域是[0,log2]，这也就是说明$P_G$和$P_{data}$没有相似之处，但是实际上两个分布是有相似之处的，出现问题的原因是我们在积分运算中国使用采样的方法，当训练过拟合的时候，D还是能把两部分的点给分开的，如下图所示。</p>
-<p><img src="%E8%BF%87%E6%8B%9F%E5%90%88.png" width="40%" height="40%"></p>
-<p>我们是不是应该让D变得弱一点，减弱它的分类能力，但是我们的初衷是让D变得更强，这就产生了矛盾。</p>
-<p>还有一种原因可能是，两个分布都是高维的，但是两个分布都十分的窄，交集相当的小，这就导致JSD比较大。</p>
-<p>解决方法：添加噪声，让两个分布变得更宽一些，这样可以增大它们之间的交集，在训练过程中，再使噪声逐渐减小。</p>
-<ul>
-<li><h3 id="Mode-Collapse"><a href="#Mode-Collapse" class="headerlink" title="Mode Collapse"></a>Mode Collapse</h3></li>
-</ul>
-<p><img src="mode.png" width="50%" height="50%"></p>
-<p>如上图所示，实际训练过程种可能出现这样的情况，真实的数据分布是双峰分布的，而生成的数据分布只拟合了其中一个峰的分布，也就是说没有学到整个分布。</p>
-<p>造成这种情况的原因是，KL散度中两个分布写反了。</p>
-<p><img src="mode2.png" width="50%" height="50%"></p>
-<p>如上图所示，若是第一KL散度的写法，为了防止出现无穷大，所有有$P_{data}$出现的地方都必须有$P_G$覆盖，这样就不回出现Mode Collapse。</p>
-<h2 id="6-代码"><a href="#6-代码" class="headerlink" title="6.代码"></a>6.代码</h2><p><a href="/files/originGAN.py">GAN代码实现</a></p>
-<h2 id="7-参考"><a href="#7-参考" class="headerlink" title="7.参考"></a>7.参考</h2><p><a href="https://www.cnblogs.com/bonelee/p/9166084.html" target="_blank" rel="noopener">https://www.cnblogs.com/bonelee/p/9166084.html</a></p>
-
+            <p>
+              GAN的相关知识主要是跟着李宏毅老师入门的，具体内容可以访问哔哩哔哩-李宏毅深度学习2017进行学习。这篇文章主要对学习内容进行总结。
+1.传统生成模型AutoEncoder
+AutoEncoder是前馈神经网络的一种，曾经重要用于数据的降维或者特征的抽取，而现在也被广泛用于生成模型。与其他前馈神经
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/04/25/GAN初识/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1405,37 +1127,24 @@
       
         
           
-            <blockquote>
-<p>This HuWeihuang theme created by <a href="http://www.huweihuang.com/" target="_blank" rel="noopener">HuWeihuang</a> modified from the original Porter <a href="https://github.com/YenYuHsuan/hexo-theme-beantech" target="_blank" rel="noopener">YuHsuan</a></p>
-</blockquote>
-<h1 id="Live-Demo"><a href="#Live-Demo" class="headerlink" title="Live Demo"></a>Live Demo</h1><p>Hu Weihuang Blog : <a href="http://www.huweihuang.com/" target="_blank" rel="noopener">www.huweihuang.com</a></p>
-<p><img src="https://res.cloudinary.com/dqxtn0ick/image/upload/v1553666111/blog/blog.jpg" alt="Theme HuWeihuang"></p>
-<h1 id="Install-Hexo"><a href="#Install-Hexo" class="headerlink" title="Install Hexo"></a>Install Hexo</h1><p>Install Node.js  and Git</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>For Mac</span><br><span class="line">brew install node</span><br><span class="line">brew install git</span><br></pre></td></tr></table></figure>
-<p>Install hexo</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>For more:https://hexo.io/zh-cn/index.html</span><br></pre></td></tr></table></figure>
-<h1 id="Theme-Usage"><a href="#Theme-Usage" class="headerlink" title="Theme Usage"></a>Theme Usage</h1><h2 id="Init"><a href="#Init" class="headerlink" title="Init"></a>Init</h2><hr>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/huweihuang/hexo-theme-huweihuang.git ./hexo-huweihuang</span><br><span class="line"><span class="built_in">cd</span> hexo-huweihuang</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-<h2 id="Modify"><a href="#Modify" class="headerlink" title="Modify"></a>Modify</h2><hr>
-<p>Modify <code>_config.yml</code> file with your own info.<br>Especially the section:</p>
-<h3 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h3><p>Replace to your own repo!<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span> <span class="attr">https://github.com/&lt;yourAccount&gt;/&lt;repo&gt;</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">&lt;your-branch&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="Sidebar-settings"><a href="#Sidebar-settings" class="headerlink" title="Sidebar settings"></a>Sidebar settings</h3><p>Copy your avatar image to <code>&lt;root&gt;/img/</code> and modify the <code>_config.yml</code>:<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sidebar:</span> <span class="literal">true</span>    <span class="comment"># whether or not using Sidebar.</span></span><br><span class="line"><span class="attr">sidebar-about-description:</span> <span class="string">"&lt;your description&gt;"</span></span><br><span class="line"><span class="attr">sidebar-avatar:</span> <span class="string">img/&lt;your</span> <span class="string">avatar</span> <span class="string">path&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>and activate your personal widget you like<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">widgets:</span>         <span class="comment"># here are widget you can use, you can comment out</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">featured-tags</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">short-about</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">recent-posts</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">friends-blog</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">archive</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">category</span></span><br></pre></td></tr></table></figure></p>
-<p>if you want to add sidebar widget, please add at <code>layout/_widget</code>.</p>
-<h3 id="Signature-Setup"><a href="#Signature-Setup" class="headerlink" title="Signature Setup"></a>Signature Setup</h3><p>Copy your signature image to <code>&lt;root&gt;/img/signature</code> and modify the <code>_config.yml</code>:<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">signature:</span> <span class="literal">true</span>   <span class="comment"># show signature</span></span><br><span class="line"><span class="attr">signature-img:</span> <span class="string">img/signature/&lt;your-signature-ID&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="Go-to-top-icon-Setup"><a href="#Go-to-top-icon-Setup" class="headerlink" title="Go to top icon Setup"></a>Go to top icon Setup</h3><p>My icon is using iron man, you can change to your own icon at <code>css/image</code>.</p>
-<h3 id="Post-tag"><a href="#Post-tag" class="headerlink" title="Post tag"></a>Post tag</h3><p>You can decide to show post tags or not.<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">home_posts_tag:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p><img src="/img/article/tag.png" alt="home_posts_tag-true"></p>
-<h3 id="Markdown-render"><a href="#Markdown-render" class="headerlink" title="Markdown render"></a>Markdown render</h3><p>My markdown render engine plugin is <a href="https://github.com/celsomiranda/hexo-renderer-markdown-it" target="_blank" rel="noopener">hexo-renderer-markdown-it</a>.<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Markdown-it config</span></span><br><span class="line"><span class="comment">## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki</span></span><br><span class="line"><span class="attr">markdown:</span></span><br><span class="line"><span class="attr">  render:</span></span><br><span class="line"><span class="attr">    html:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    xhtmlOut:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">    breaks:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    linkify:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    typographer:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    quotes:</span> <span class="string">'“”‘’'</span></span><br></pre></td></tr></table></figure></p>
-<p>and if you want to change the header anchor ‘ℬ’, you can go to <code>layout/post.ejs</code> to change it.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span>(<span class="string">"https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        anchors.options = &#123;</span><br><span class="line">          visible: <span class="string">'hover'</span>,</span><br><span class="line">          placement: <span class="string">'left'</span>,</span><br><span class="line">          icon: ℬ <span class="comment">// this is the header anchor "unicode" icon</span></span><br><span class="line">        &#125;;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Hexo-Basics"><a href="#Hexo-Basics" class="headerlink" title="Hexo Basics"></a>Hexo Basics</h2><hr>
-<p>Some hexo command:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo new post <span class="string">"&lt;post name&gt;"</span> <span class="comment"># you can change post to another layout if you want</span></span><br><span class="line">hexo clean &amp;&amp; hexo generate <span class="comment"># generate the static file</span></span><br><span class="line">hexo server <span class="comment"># run hexo in local environment</span></span><br><span class="line">hexo deploy <span class="comment"># hexo will push the static files automatically into the specific branch(gh-pages) of your repo!</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="Have-fun"><a href="#Have-fun" class="headerlink" title="Have fun ^_^"></a>Have fun ^_^</h1><hr>
-<!-- Place this tag in your head or just before your close body tag. -->
-<p><script async defer src="https://buttons.github.io/buttons.js"></script><br><!-- Place this tag where you want the button to render. --></p>
-<p>Please <a class="github-button" href="https://github.com/huweihuang/hexo-theme-huweihuang" data-icon="octicon-star" aria-label="Star huweihuang/hexo-theme-huweihuang on GitHub" target="_blank" rel="noopener">Star</a> this Project if you like it! <a class="github-button" href="https://github.com/huweihuang" aria-label="Follow @huweihuang on GitHub" target="_blank" rel="noopener">Follow</a> would also be appreciated!<br>Peace!</p>
+            <p>
+              
+This HuWeihuang theme created by HuWeihuang modified from the original Porter YuHsuan
 
+Live DemoHu Weihuang Blog : www.huweihuang.com
+
+Install HexoIn
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/09/18/hexo-theme-huweihuang/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
