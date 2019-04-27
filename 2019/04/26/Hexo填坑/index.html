@@ -14,7 +14,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="en">
+<html class="theme-next pisces use-motion" lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -70,7 +70,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Pisces',
     version: '7.1.0',
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
     back2top: true,
@@ -107,7 +107,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/26/Hexo填坑/jiantou.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/26/Hexo填坑/buchangyong.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/26/Hexo填坑/feishuxue.png">
-<meta property="og:updated_time" content="2019-04-26T12:01:48.826Z">
+<meta property="og:updated_time" content="2019-04-27T10:40:52.354Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo填坑">
 <meta name="twitter:description" content="Hexo 创建Hexo工程  1$ hexo init blog 此处blog可以替换成你想要的名字。  新建博文  12$ cd blog$ hexo new &amp;apos;blog-name&amp;apos; 此时会在/blog/sources/_post/目录下生成’blog-name.md’文件和’blog-name’的文件夹。md文件用于编辑博文，文件夹用于存放此博文内容照片。  运行服务器">
@@ -307,9 +307,6 @@
   
 
   
-    
-
-  
 
   
 </nav>
@@ -329,6 +326,9 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
+            
+
           
           <div id="content" class="content">
             
@@ -392,12 +392,24 @@
                 
               
 
-              <time title="Created: 2019-04-26 18:51:57 / Modified: 20:01:48" itemprop="dateCreated datePublished" datetime="2019-04-26T18:51:57+08:00">2019-04-26</time>
+              <time title="Created: 2019-04-26 18:51:57" itemprop="dateCreated datePublished" datetime="2019-04-26T18:51:57+08:00">2019-04-26</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-27 18:40:52" itemprop="dateModified" datetime="2019-04-27T18:40:52+08:00">2019-04-27</time>
               
             
           </span>
@@ -481,6 +493,11 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cd /blog/themes</span><br><span class="line">$ git clone https://github.com/wuchong/jacman.git ./jacman</span><br><span class="line">$ cd ./jacman</span><br><span class="line">$ git pull</span><br></pre></td></tr></table></figure>
 <p>然后修改站点配置文件/blog/config.yml，将其中的theme改成jacman</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: jacman</span><br></pre></td></tr></table></figure>
+<ul>
+<li>LaTex数学公式渲染</li>
+</ul>
+<p>先把node_modules文件夹下的渲染器删掉，再输入下面命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i hexo-renderer-kramed --save</span><br></pre></td></tr></table></figure>
 <ul>
 <li>插入图片</li>
 </ul>
@@ -857,7 +874,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -878,7 +895,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -911,7 +934,17 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -990,7 +1023,7 @@
 
 
 
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.0</div>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.0</div>
 
 
 
@@ -1104,8 +1137,9 @@
   
 
 
-  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+  <script src="/js/affix.js?v=7.1.0"></script>
 
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
 
 
 
