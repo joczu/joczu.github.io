@@ -103,20 +103,24 @@
 
 
 
-  <meta name="description" content="本文对GAN进行更加深入的探讨，主要参考 视频的讲解。 f-divergence这一章节是为了说明GAN中描述$P_G$和$P_{data}$两个分布差异不一定非要用JS divergence，还有其他的divergence可以替代。  其中P和Q表示两个分布，$p(x)$和$q(x)$是采样出来的x的可能性。f是一个凸函数，并且其极值是$f(1)=0$，$D_f(P||Q)$衡量PQ两个分布之间">
+  <meta name="description" content="本文对GAN进行更加深入的探讨，主要参考 视频的讲解。 FGANf-divergence这一章节是为了说明GAN中描述$P_G$和$P_{data}$两个分布差异不一定非要用JS divergence，还有其他的divergence可以替代。  其中P和Q表示两个分布，$p(x)$和$q(x)$是采样出来的x的可能性。f是一个凸函数，并且其极值是$f(1)=0$，$D_f(P||Q)$衡量PQ两个">
 <meta name="keywords" content="GAN,KL,JSD">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Improving GAN">
 <meta property="og:url" content="http://yoursite.com/2019/04/27/Improving-GAN/index.html">
 <meta property="og:site_name" content="Joczu">
-<meta property="og:description" content="本文对GAN进行更加深入的探讨，主要参考 视频的讲解。 f-divergence这一章节是为了说明GAN中描述$P_G$和$P_{data}$两个分布差异不一定非要用JS divergence，还有其他的divergence可以替代。  其中P和Q表示两个分布，$p(x)$和$q(x)$是采样出来的x的可能性。f是一个凸函数，并且其极值是$f(1)=0$，$D_f(P||Q)$衡量PQ两个分布之间">
+<meta property="og:description" content="本文对GAN进行更加深入的探讨，主要参考 视频的讲解。 FGANf-divergence这一章节是为了说明GAN中描述$P_G$和$P_{data}$两个分布差异不一定非要用JS divergence，还有其他的divergence可以替代。  其中P和Q表示两个分布，$p(x)$和$q(x)$是采样出来的x的可能性。f是一个凸函数，并且其极值是$f(1)=0$，$D_f(P||Q)$衡量PQ两个">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/2019/04/27/Improving-GAN/f.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/27/Improving-GAN/fall.png">
-<meta property="og:updated_time" content="2019-04-27T14:41:13.560Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/27/Improving-GAN/fc.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/27/Improving-GAN/fc2.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/27/Improving-GAN/fc3.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/27/Improving-GAN/fc4.png">
+<meta property="og:updated_time" content="2019-04-28T05:56:01.342Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Improving GAN">
-<meta name="twitter:description" content="本文对GAN进行更加深入的探讨，主要参考 视频的讲解。 f-divergence这一章节是为了说明GAN中描述$P_G$和$P_{data}$两个分布差异不一定非要用JS divergence，还有其他的divergence可以替代。  其中P和Q表示两个分布，$p(x)$和$q(x)$是采样出来的x的可能性。f是一个凸函数，并且其极值是$f(1)=0$，$D_f(P||Q)$衡量PQ两个分布之间">
+<meta name="twitter:description" content="本文对GAN进行更加深入的探讨，主要参考 视频的讲解。 FGANf-divergence这一章节是为了说明GAN中描述$P_G$和$P_{data}$两个分布差异不一定非要用JS divergence，还有其他的divergence可以替代。  其中P和Q表示两个分布，$p(x)$和$q(x)$是采样出来的x的可能性。f是一个凸函数，并且其极值是$f(1)=0$，$D_f(P||Q)$衡量PQ两个">
 <meta name="twitter:image" content="http://yoursite.com/2019/04/27/Improving-GAN/f.png">
 
 
@@ -400,12 +404,24 @@
                 
               
 
-              <time title="Created: 2019-04-27 14:13:33 / Modified: 22:41:13" itemprop="dateCreated datePublished" datetime="2019-04-27T14:13:33+08:00">2019-04-27</time>
+              <time title="Created: 2019-04-27 14:13:33" itemprop="dateCreated datePublished" datetime="2019-04-27T14:13:33+08:00">2019-04-27</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-28 13:56:01" itemprop="dateModified" datetime="2019-04-28T13:56:01+08:00">2019-04-28</time>
               
             
           </span>
@@ -458,7 +474,7 @@
                 
                   <span class="post-meta-item-text">Symbols count in article: </span>
                 
-                <span title="Symbols count in article">380</span>
+                <span title="Symbols count in article">427</span>
               
 
               
@@ -494,11 +510,16 @@
       
         <p>本文对GAN进行更加深入的探讨，主要参考</p>
 <p>视频的讲解。</p>
-<h2 id="f-divergence"><a href="#f-divergence" class="headerlink" title="f-divergence"></a>f-divergence</h2><p>这一章节是为了说明GAN中描述$P_G$和$P_{data}$两个分布差异不一定非要用JS divergence，还有其他的divergence可以替代。</p>
+<h2 id="FGAN"><a href="#FGAN" class="headerlink" title="FGAN"></a>FGAN</h2><h3 id="f-divergence"><a href="#f-divergence" class="headerlink" title="f-divergence"></a>f-divergence</h3><p>这一章节是为了说明GAN中描述$P_G$和$P_{data}$两个分布差异不一定非要用JS divergence，还有其他的divergence可以替代。</p>
 <p><img src="f.png" alt></p>
 <p>其中P和Q表示两个分布，$p(x)$和$q(x)$是采样出来的x的可能性。f是一个凸函数，并且其极值是$f(1)=0$，$D_f(P||Q)$衡量PQ两个分布之间的差异。<br>如果$p(x)=q(x)$，代入等式可得$D_f(P||Q)=0$；<br>当$p(x)!=q(x)$，$D_f(P||Q) \geq f(\int \limits_xq(x) \frac {p(x)}{q(x)})=f(x)=0$<br>当P和Q两个同分布时，$D_f(P||Q)$有最小值0。</p>
 <p>当然f函数可以取很多形式，如下所示<br><img src="fall.png" alt></p>
-<h2 id="Fenchel-Conjugate"><a href="#Fenchel-Conjugate" class="headerlink" title="Fenchel Conjugate"></a>Fenchel Conjugate</h2>
+<h3 id="Fenchel-Conjugate"><a href="#Fenchel-Conjugate" class="headerlink" title="Fenchel Conjugate"></a>Fenchel Conjugate</h3><p>细节内容见<a href="/2019/04/27/凸优化-Jensen不等式-共轭函数-Fenchel不等式/" title="凸优化:Jensen不等式-共轭函数-Fenchel不等式">凸优化:Jensen不等式-共轭函数-Fenchel不等式</a></p>
+<p><img src="fc.png" alt></p>
+<p><img src="fc2.png" alt></p>
+<p><img src="fc3.png" alt></p>
+<p><img src="fc4.png" alt></p>
+<h2 id="WGAN"><a href="#WGAN" class="headerlink" title="WGAN"></a>WGAN</h2>
       
     </div>
 
@@ -763,7 +784,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#f-divergence"><span class="nav-text">f-divergence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fenchel-Conjugate"><span class="nav-text">Fenchel Conjugate</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#FGAN"><span class="nav-text">FGAN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#f-divergence"><span class="nav-text">f-divergence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fenchel-Conjugate"><span class="nav-text">Fenchel Conjugate</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WGAN"><span class="nav-text">WGAN</span></a></li></ol></div>
             
 
           </div>
