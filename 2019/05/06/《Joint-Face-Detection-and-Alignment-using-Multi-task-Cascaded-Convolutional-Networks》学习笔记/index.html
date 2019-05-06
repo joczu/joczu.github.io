@@ -103,20 +103,21 @@
 
 
 
-  <meta name="description" content="content{:toc}  实验思路先对原图进行几何变化（旋转）变成长方形，再对图像进行分割 实验代码 clear clc init=imread(&apos;C:\Users\joczu\Desktop\作业3.bmp&apos;); %图像旋转 G=rgb2gray(init); E=edge(G); theta=1:180; [R,xp]=radon(E,theta); [E,J]=find(R&amp;gt;=max(">
-<meta name="keywords" content="图像处理 MATLAB">
+  <meta name="description" content="论文链接：https://arxiv.org/abs/1604.02878官方代码链接：https://github.com/kpzhang93/MTCNN_face_detection_alignment其他代码链接：https://github.com/YYuanAnyVision/mxnet_mtcnn_face_detection其他代码链接：https://github.com/Sean">
+<meta name="keywords" content="MTCNN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="图像分割——钢铁表面缺陷检测">
-<meta property="og:url" content="http://yoursite.com/2018/08/24/2018-08-24-image-segmentation/index.html">
+<meta property="og:title" content="《Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks》学习笔记">
+<meta property="og:url" content="http://yoursite.com/2019/05/06/《Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks》学习笔记/index.html">
 <meta property="og:site_name" content="Joczu">
-<meta property="og:description" content="content{:toc}  实验思路先对原图进行几何变化（旋转）变成长方形，再对图像进行分割 实验代码 clear clc init=imread(&apos;C:\Users\joczu\Desktop\作业3.bmp&apos;); %图像旋转 G=rgb2gray(init); E=edge(G); theta=1:180; [R,xp]=radon(E,theta); [E,J]=find(R&amp;gt;=max(">
+<meta property="og:description" content="论文链接：https://arxiv.org/abs/1604.02878官方代码链接：https://github.com/kpzhang93/MTCNN_face_detection_alignment其他代码链接：https://github.com/YYuanAnyVision/mxnet_mtcnn_face_detection其他代码链接：https://github.com/Sean">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://raw.githubusercontent.com/joczu/Picture-Set/master/图像分割-钢铁表面检测/图像分割-钢铁表面检测.png">
-<meta property="og:updated_time" content="2019-04-13T21:12:18.000Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/06/《Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks》学习笔记/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/06/《Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks》学习笔记/full.png">
+<meta property="og:updated_time" content="2019-05-06T13:41:00.146Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="图像分割——钢铁表面缺陷检测">
-<meta name="twitter:description" content="content{:toc}  实验思路先对原图进行几何变化（旋转）变成长方形，再对图像进行分割 实验代码 clear clc init=imread(&apos;C:\Users\joczu\Desktop\作业3.bmp&apos;); %图像旋转 G=rgb2gray(init); E=edge(G); theta=1:180; [R,xp]=radon(E,theta); [E,J]=find(R&amp;gt;=max(">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/joczu/Picture-Set/master/图像分割-钢铁表面检测/图像分割-钢铁表面检测.png">
+<meta name="twitter:title" content="《Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks》学习笔记">
+<meta name="twitter:description" content="论文链接：https://arxiv.org/abs/1604.02878官方代码链接：https://github.com/kpzhang93/MTCNN_face_detection_alignment其他代码链接：https://github.com/YYuanAnyVision/mxnet_mtcnn_face_detection其他代码链接：https://github.com/Sean">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/06/《Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks》学习笔记/2.png">
 
 
 
@@ -124,7 +125,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2018/08/24/2018-08-24-image-segmentation/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/06/《Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks》学习笔记/">
 
 
 
@@ -134,7 +135,7 @@
   };
 </script>
 
-  <title>图像分割——钢铁表面缺陷检测 | Joczu</title>
+  <title>《Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks》学习笔记 | Joczu</title>
   
 
 
@@ -356,7 +357,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/24/2018-08-24-image-segmentation/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/06/《Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks》学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Joczu">
@@ -373,7 +374,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">图像分割——钢铁表面缺陷检测
+          <h1 class="post-title" itemprop="name headline">《Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks》学习笔记
 
               
             
@@ -399,24 +400,12 @@
                 
               
 
-              <time title="Created: 2018-08-24 08:24:18" itemprop="dateCreated datePublished" datetime="2018-08-24T08:24:18+08:00">2018-08-24</time>
+              <time title="Created: 2019-05-06 19:42:33 / Modified: 21:41:00" itemprop="dateCreated datePublished" datetime="2019-05-06T19:42:33+08:00">2019-05-06</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-04-14 05:12:18" itemprop="dateModified" datetime="2019-04-14T05:12:18+08:00">2019-04-14</time>
               
             
           </span>
@@ -433,7 +422,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/图像处理/" itemprop="url" rel="index"><span itemprop="name">图像处理</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Face-Detection/" itemprop="url" rel="index"><span itemprop="name">Face Detection</span></a></span>
 
                 
                 
@@ -469,7 +458,7 @@
                 
                   <span class="post-meta-item-text">Symbols count in article: </span>
                 
-                <span title="Symbols count in article">584</span>
+                <span title="Symbols count in article">2.1k</span>
               
 
               
@@ -483,7 +472,7 @@
                 
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
-                <span title="Reading time">1 mins.</span>
+                <span title="Reading time">2 mins.</span>
               
             </div>
           
@@ -503,43 +492,33 @@
       
 
       
-        <ul>
-<li>content<br>{:toc}</li>
+        <p>论文链接：<a href="https://arxiv.org/abs/1604.02878" target="_blank" rel="noopener">https://arxiv.org/abs/1604.02878</a><br>官方代码链接：<a href="https://github.com/kpzhang93/MTCNN_face_detection_alignment" target="_blank" rel="noopener">https://github.com/kpzhang93/MTCNN_face_detection_alignment</a><br>其他代码链接：<a href="https://github.com/YYuanAnyVision/mxnet_mtcnn_face_detection" target="_blank" rel="noopener">https://github.com/YYuanAnyVision/mxnet_mtcnn_face_detection</a><br>其他代码链接：<a href="https://github.com/Seanlinx/mtcnn" target="_blank" rel="noopener">https://github.com/Seanlinx/mtcnn</a></p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>传统的人脸检测和人脸对齐任务忽略了它们之间固有的联系而各自分析，这样在本文作者看来是不可取的。本文提出了采用深度级联多任务网络（MTCNN）<strong>同时</strong>解决检测和对齐任务。MTCNN网络包含三个阶段的卷积网络（Proposal Network、Refine Network、Output Network）用来检测人脸和检测关键点位置。另外，本文提出一种Online hard sample mining strategy极大提高了算法在实践中的速度。</p>
+<h2 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h2><p><img src="2.png" alt></p>
+<p>首先把图像resize成不同尺度的图像金字塔作为网络的输入；</p>
+<ul>
+<li>Stage 1:  Proposal Network, P-Net<br>获得人脸的候选窗口和候选框的回归向量，然后候选框依据估计的边框回归向量进行校准，最后利用Non-maximum suppression(NMS)归并重叠范围比较大的候选框。</li>
+<li>Stage 2: Refine Network, R-Net<br>将第一阶段产生的候选框输入到R-Net，筛选掉大量的非人脸候选框，并且使用边框回归向量进行校准，利用NMS进行归并；</li>
+<li>Stage 3: Output Network, O-Net<br>与第二阶段相似，增加了输出5个人脸关键点位置。</li>
 </ul>
-<h3 id="实验思路"><a href="#实验思路" class="headerlink" title="实验思路"></a>实验思路</h3><p>先对原图进行几何变化（旋转）变成长方形，再对图像进行分割</p>
-<h3 id="实验代码"><a href="#实验代码" class="headerlink" title="实验代码"></a>实验代码</h3><p><pre><code>
-clear
-clc
-init=imread('C:\Users\joczu\Desktop\作业3.bmp');
-%图像旋转
-G=rgb2gray(init);
-E=edge(G);
-theta=1:180;
-[R,xp]=radon(E,theta);
-[E,J]=find(R>=max(max(R)));
-Q=90-J;
-I=imrotate(G,Q,'bilinear','crop');
-%图像切割
-s=I(:,:,1);
-bw=im2bw(s,graythresh(s));  %graythresh自动找比较合适的阈值
-se=strel('disk',1);  %创建切割形状
-bw2=imclose(bw,se);
-figure(1);
-imshow(bw2);
-perim=bwperim(bw2,8); %表示从输入图像BW1中返回只包括对象边缘坐标
-r=I(:,:,1);
-%g=I(:,:,2);
-%b=I(:,:,3);
-r(perim)=250;
-%g(perim)=0;
-%b(perim)=0;
-I(:,:,1)=r;
-%I(:,:,2)=g;
-%I(:,:,3)=b;
-figure(2);
-imshow(I);
-</code></pre></p>
-<h3 id="实验截图"><a href="#实验截图" class="headerlink" title="实验截图"></a>实验截图</h3><p><img src="https://raw.githubusercontent.com/joczu/Picture-Set/master/图像分割-钢铁表面检测/图像分割-钢铁表面检测.png" alt="钢铁表面缺陷分割"></p>
+<p><img src="full.png" alt></p>
+<h2 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h2><p>与网络的三阶段对应，MTCNN训练过程可以考虑三个阶段的损失，分别是人脸/非人脸二分类、边框回归、面部关键点位置。</p>
+<ol>
+<li><p>人脸识别<br>这是个二分类问题，对于每一个样本$x_i$，$p_i$是样本$x_i$为人脸的概率，真实标签$y_i^{det}\in {\lbrace 0,1\rbrace}$则采用交叉熵损失函数：</p>
+<script type="math/tex; mode=display">
+L_{i}^{d e t}=-\left(y_{i}^{d e t} \log \left(p_{i}\right)+\left(1-y_{i}^{d e t}\right)\left(1-\log \left(p_{i}\right)\right)\right)</script></li>
+<li><p>边框回归<br>采用欧式距离损失（L2 Loss）,最小化生成的边框坐标与真实边框坐标的欧式距离。对于每个样本$x_i$，$\hat y_i^{box}$表示其回归生成的边框坐标，$y_{i}^{b o x}$是真实的边框坐标。</p>
+<script type="math/tex; mode=display">
+L_{i}^{b o x}=\left\|\hat{y}_{i}^{b o x}-y_{i}^{b o x}\right\|_{2}^{2}</script></li>
+<li><p>人脸关键点位置<br>与边框回归相似，最小化回归生成的关键点坐标$\widehat{y}_{i}^{l a n d m a r k}$与真实的关键点坐标$y_{i}^{l a n d m a r k}$的欧式距离。$\widehat{y}_{i}^{l a n d m a r k}$代表左右眼睛/鼻子/左右嘴巴角的坐标，共10维向量。</p>
+<script type="math/tex; mode=display">
+L_{i}^{l a n d m a r k}=\left\|\widehat{y}_{i}^{l a n d m a r k}-y_{i}^{l a n d m a r k}\right\|_{2}^{2}</script></li>
+<li><p>Three Tasks’ loss Sum<br>在实践中对于每个阶段的网络都定义总的损失函数<strong>同时</strong>计算三种损失，这样不至于在求一种损失时，另外两种损失为零。作者在文章中提出在P-Net和R-Net中使用（$\alpha _{det}=1,\alpha_{box}=0.5,\alpha _{landmark}=0.5$）而在O-Net中使用（$\alpha _{det}=1,\alpha_{box}=0.5,\alpha _{landmark}=1$）这说明每个阶段的训练目标有所差异，在P-Net和R-Net中主要是检测人脸和产生边框，O-Net主要是产生关键点位置。</p>
+<script type="math/tex; mode=display">
+\min \sum_{i=1}^{N} \sum_{j \in\{\text {det}, b o x, l a n d m a r k\}} \alpha_{j} \beta_{i}^{j} L_{i}^{j}</script></li>
+<li><p>Online Hard Sample mining<br>传统的人脸二分类最小化误差时，是对每个样本都进行反向误差传播，这样计算量比较大。本文提出一种新的方法来解决人脸识别在线应用问题。<br>对于每一个mini-batch前向传播产生的loss进行降序排序，从全部的sample中挑选出Top 70%作为hard sample，然后在反向传播中仅仅计算这些hard sample产生的梯度。</p>
+</li>
+</ol>
 
       
     </div>
@@ -569,7 +548,7 @@ imshow(I);
       
         <div class="post-tags">
           
-            <a href="/tags/图像处理-MATLAB/" rel="tag"># 图像处理 MATLAB</a>
+            <a href="/tags/MTCNN/" rel="tag"># MTCNN</a>
           
         </div>
       
@@ -582,8 +561,8 @@ imshow(I);
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/21/2018-08-21-DICOM-process/" rel="next" title="DICOM医学图像处理">
-                <i class="fa fa-chevron-left"></i> DICOM医学图像处理
+              <a href="/2019/04/28/Improving-GAN/" rel="next" title="Improving GAN">
+                <i class="fa fa-chevron-left"></i> Improving GAN
               </a>
             
           </div>
@@ -591,10 +570,6 @@ imshow(I);
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/24/2018-08-24-caffe-train-data/" rel="prev" title="使用caffe训练数据集">
-                使用caffe训练数据集 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -805,7 +780,7 @@ imshow(I);
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实验思路"><span class="nav-text">实验思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验代码"><span class="nav-text">实验代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验截图"><span class="nav-text">实验截图</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络结构"><span class="nav-text">网络结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#训练"><span class="nav-text">训练</span></a></li></ol></div>
             
 
           </div>
