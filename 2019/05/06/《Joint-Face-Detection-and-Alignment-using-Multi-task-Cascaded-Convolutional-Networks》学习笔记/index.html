@@ -113,7 +113,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/2019/05/06/《Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks》学习笔记/2.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/06/《Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks》学习笔记/full.png">
-<meta property="og:updated_time" content="2019-05-06T13:45:22.307Z">
+<meta property="og:updated_time" content="2019-05-06T13:46:59.150Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MTCNN">
 <meta name="twitter:description" content="论文题目：《Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks》论文链接：https://arxiv.org/abs/1604.02878官方代码链接：https://github.com/kpzhang93/MTCNN_face_detection_alignment其他代码链接：">
@@ -400,7 +400,7 @@
                 
               
 
-              <time title="Created: 2019-05-06 19:42:33 / Modified: 21:45:22" itemprop="dateCreated datePublished" datetime="2019-05-06T19:42:33+08:00">2019-05-06</time>
+              <time title="Created: 2019-05-06 19:42:33 / Modified: 21:46:59" itemprop="dateCreated datePublished" datetime="2019-05-06T19:42:33+08:00">2019-05-06</time>
             
 
             
@@ -1006,6 +1006,46 @@ L_{i}^{l a n d m a r k}=\left\|\widehat{y}_{i}^{l a n d m a r k}-y_{i}^{l a n d 
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 
