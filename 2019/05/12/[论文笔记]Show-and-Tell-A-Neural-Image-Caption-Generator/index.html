@@ -107,17 +107,17 @@
 <meta name="keywords" content="CNN,LSTM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Show and Tell-A Neural Image Caption Generator">
-<meta property="og:url" content="http://yoursite.com/2019/05/12/Show-and-Tell-A-Neural-Image-Caption-Generator笔记/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/05/12/[论文笔记]Show-and-Tell-A-Neural-Image-Caption-Generator/index.html">
 <meta property="og:site_name" content="Joczu">
 <meta property="og:description" content="论文题目：《Show and Tell: A Neural Image Caption Generator》 论文链接：https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Vinyals_Show_and_Tell_2015_CVPR_paper.pdf 代码链接：https://github.com/joczu/S">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2019/05/12/Show-and-Tell-A-Neural-Image-Caption-Generator笔记/NIC.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/12/Show-and-Tell-A-Neural-Image-Caption-Generator笔记/cnnrnn.png">
-<meta property="og:updated_time" content="2019-05-12T11:09:41.375Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/[论文笔记]Show-and-Tell-A-Neural-Image-Caption-Generator/NIC.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/[论文笔记]Show-and-Tell-A-Neural-Image-Caption-Generator/cnnrnn.png">
+<meta property="og:updated_time" content="2019-05-12T11:18:33.417Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Show and Tell-A Neural Image Caption Generator">
 <meta name="twitter:description" content="论文题目：《Show and Tell: A Neural Image Caption Generator》 论文链接：https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Vinyals_Show_and_Tell_2015_CVPR_paper.pdf 代码链接：https://github.com/joczu/S">
-<meta name="twitter:image" content="http://yoursite.com/2019/05/12/Show-and-Tell-A-Neural-Image-Caption-Generator笔记/NIC.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/12/[论文笔记]Show-and-Tell-A-Neural-Image-Caption-Generator/NIC.png">
 
 
 
@@ -125,7 +125,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/05/12/Show-and-Tell-A-Neural-Image-Caption-Generator笔记/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/12/[论文笔记]Show-and-Tell-A-Neural-Image-Caption-Generator/">
 
 
 
@@ -357,7 +357,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/12/Show-and-Tell-A-Neural-Image-Caption-Generator笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/12/[论文笔记]Show-and-Tell-A-Neural-Image-Caption-Generator/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Joczu">
@@ -400,7 +400,7 @@
                 
               
 
-              <time title="Created: 2019-05-12 19:42:33 / Modified: 19:09:41" itemprop="dateCreated datePublished" datetime="2019-05-12T19:42:33+08:00">2019-05-12</time>
+              <time title="Created: 2019-05-12 19:42:33 / Modified: 19:18:33" itemprop="dateCreated datePublished" datetime="2019-05-12T19:42:33+08:00">2019-05-12</time>
             
 
             
@@ -518,6 +518,7 @@ h_{t+1}=f\left(h_{t}, x_{t}\right)</script><h2 id="推断策略"><a href="#推�
 <li>单词采用one-hot的表示方法</li>
 <li>每个句子前后都有标志词，表示句子的开始和结束</li>
 <li>图像只需要初始时输入一次（每个时刻都输入，会因噪声很容易过拟合，效果不好）</li>
+<li>本文使用VGG16训练好的模型参数初始化CNN网络</li>
 </ul>
 
       
