@@ -111,13 +111,13 @@
 <meta property="og:site_name" content="Joczu">
 <meta property="og:description" content="论文题目：《Show and Tell: A Neural Image Caption Generator》 论文链接：https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Vinyals_Show_and_Tell_2015_CVPR_paper.pdf 代码链接：https://github.com/joczu/S">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/Users/joczu/Desktop/NIC.png">
-<meta property="og:image" content="http://yoursite.com/Users/joczu/Desktop/cnnrnn.png">
-<meta property="og:updated_time" content="2019-05-12T11:05:09.091Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/Show-and-Tell-A-Neural-Image-Caption-Generator笔记/NIC.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/Show-and-Tell-A-Neural-Image-Caption-Generator笔记/cnnrnn.png">
+<meta property="og:updated_time" content="2019-05-12T11:09:41.375Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Show and Tell-A Neural Image Caption Generator">
 <meta name="twitter:description" content="论文题目：《Show and Tell: A Neural Image Caption Generator》 论文链接：https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Vinyals_Show_and_Tell_2015_CVPR_paper.pdf 代码链接：https://github.com/joczu/S">
-<meta name="twitter:image" content="http://yoursite.com/Users/joczu/Desktop/NIC.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/12/Show-and-Tell-A-Neural-Image-Caption-Generator笔记/NIC.png">
 
 
 
@@ -400,7 +400,7 @@
                 
               
 
-              <time title="Created: 2019-05-12 19:42:33 / Modified: 19:05:09" itemprop="dateCreated datePublished" datetime="2019-05-12T19:42:33+08:00">2019-05-12</time>
+              <time title="Created: 2019-05-12 19:42:33 / Modified: 19:09:41" itemprop="dateCreated datePublished" datetime="2019-05-12T19:42:33+08:00">2019-05-12</time>
             
 
             
@@ -498,10 +498,10 @@
 <p>代码链接：<a href="https://github.com/joczu/Show_and_Tell" target="_blank" rel="noopener">https://github.com/joczu/Show_and_Tell</a></p>
 </blockquote>
 <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>图像内容描述是人工智能领域的基础问题，是计算机视觉与自然语言处理的交叉领域。众所周知，CNN在目标检测和识别中的效果非常的出色，而RNN在机器翻译中也得到了充分的发挥。本文就是在两者的基础上对两种模型进行组合形成一个新的生成式模型称为NIC，实现图像内容描述的任务。</p>
-<p><img src="/Users/joczu/Desktop/NIC.png" alt></p>
+<p><img src="NIC.png" alt></p>
 <p>作者的思想源泉来自于目前比较前沿的机器翻译，给定一个源句子$S$，将其输入到模型中得到目标语言的句子$T$，模型所要做的就是$\max P(T|S)$。<br>目前机器翻译中比较火的模型莫属RNNs，RNNs可作为Encoder，把源句子编码成一个固定长度的词向量表示，又可作为Decoder生成目标句子。<br>在本文中，作者使用CNN来代替RNNs的Encoder功能，将输入图像编码成固定长度的词向量表示，这样做的原因在于CNN在图像特征提取中表现极为出色。CNN+RNNs这种端到端的神经网络使用起来相当方便。</p>
 <p>由于普通的RNN会出现梯度消失和梯度爆炸的现象，所以采用更加优良的LSTM模型。</p>
-<h2 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h2><p><img src="/Users/joczu/Desktop/cnnrnn.png" alt></p>
+<h2 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h2><p><img src="cnnrnn.png" alt></p>
 <p>如图所示，LSTM+CNN模型就是一个图像内容生成器。CNN将输入图像进行特征表示，生成512维的表示向量输入到第一个LSTM单元中，作为$t=-1$时刻，$S_i$代表某个单词的向量，采用one-hot编码，长度为整个词表的长度，$W_e$是词向量表示，$W_eS_i$为隐含层的词向量表示，长度也为512维。前向传播的过程如下：</p>
 <script type="math/tex; mode=display">
 \begin{aligned} x_{-1} &=\operatorname{CNN}(I) \\ x_{t} &=W_{e} S_{t}, \quad t \in\{0 \ldots N-1\} \\ p_{t+1} &=\operatorname{LSTM}\left(x_{t}\right), \quad t \in\{0 \ldots N-1\} \end{aligned}</script><p>上面说到，模型训练的目标为：</p>
