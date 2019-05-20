@@ -103,21 +103,23 @@
 
 
 
-  <meta name="description" content="论文题目：《Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks》论文链接：https://arxiv.org/abs/1604.02878官方代码链接：https://github.com/kpzhang93/MTCNN_face_detection_alignment其他代码链接">
-<meta name="keywords" content="MTCNN">
+  <meta name="description" content="尽管边缘和一-般曲线适合用来描述自然物体的轮廓，但人类世界中直线段到处都是。检测和匹配这些线条对于很多应用很有用，包括建筑学上的建模、城市环境下的姿态估计以及书面文档版式分析。本节将首先描述一些使用分段线性折线来近似曲线的算法，然后讲解一下Hough Transform，使得即使存在间隙和遮挡的时候，它都可以用于将边界元聚集成线片段。最后描述怎样将拥有”共同消失点（vanishing point）">
+<meta name="keywords" content="Image processing">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MTCNN">
-<meta property="og:url" content="http://yoursite.com/2019/05/06/《Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks》学习笔记/index.html">
+<meta property="og:title" content="特征检测与匹配--线条">
+<meta property="og:url" content="http://yoursite.com/2019/05/20/特征检测与匹配-线条/index.html">
 <meta property="og:site_name" content="Joczu">
-<meta property="og:description" content="论文题目：《Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks》论文链接：https://arxiv.org/abs/1604.02878官方代码链接：https://github.com/kpzhang93/MTCNN_face_detection_alignment其他代码链接">
+<meta property="og:description" content="尽管边缘和一-般曲线适合用来描述自然物体的轮廓，但人类世界中直线段到处都是。检测和匹配这些线条对于很多应用很有用，包括建筑学上的建模、城市环境下的姿态估计以及书面文档版式分析。本节将首先描述一些使用分段线性折线来近似曲线的算法，然后讲解一下Hough Transform，使得即使存在间隙和遮挡的时候，它都可以用于将边界元聚集成线片段。最后描述怎样将拥有”共同消失点（vanishing point）">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2019/05/06/《Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks》学习笔记/3.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/06/《Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks》学习笔记/full.png">
-<meta property="og:updated_time" content="2019-05-06T13:51:30.282Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/20/特征检测与匹配-线条/line.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/20/特征检测与匹配-线条/kongjian.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/20/特征检测与匹配-线条/suoyou.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/20/特征检测与匹配-线条/jiaodian.png">
+<meta property="og:updated_time" content="2019-05-20T12:53:59.416Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MTCNN">
-<meta name="twitter:description" content="论文题目：《Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks》论文链接：https://arxiv.org/abs/1604.02878官方代码链接：https://github.com/kpzhang93/MTCNN_face_detection_alignment其他代码链接">
-<meta name="twitter:image" content="http://yoursite.com/2019/05/06/《Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks》学习笔记/3.png">
+<meta name="twitter:title" content="特征检测与匹配--线条">
+<meta name="twitter:description" content="尽管边缘和一-般曲线适合用来描述自然物体的轮廓，但人类世界中直线段到处都是。检测和匹配这些线条对于很多应用很有用，包括建筑学上的建模、城市环境下的姿态估计以及书面文档版式分析。本节将首先描述一些使用分段线性折线来近似曲线的算法，然后讲解一下Hough Transform，使得即使存在间隙和遮挡的时候，它都可以用于将边界元聚集成线片段。最后描述怎样将拥有”共同消失点（vanishing point）">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/20/特征检测与匹配-线条/line.png">
 
 
 
@@ -125,7 +127,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/05/06/《Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks》学习笔记/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/20/特征检测与匹配-线条/">
 
 
 
@@ -135,7 +137,7 @@
   };
 </script>
 
-  <title>MTCNN | Joczu</title>
+  <title>特征检测与匹配--线条 | Joczu</title>
   
 
 
@@ -357,7 +359,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/06/《Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks》学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/20/特征检测与匹配-线条/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Joczu">
@@ -374,7 +376,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">MTCNN
+          <h1 class="post-title" itemprop="name headline">特征检测与匹配--线条
 
               
             
@@ -400,7 +402,7 @@
                 
               
 
-              <time title="Created: 2019-05-06 19:42:33 / Modified: 21:51:30" itemprop="dateCreated datePublished" datetime="2019-05-06T19:42:33+08:00">2019-05-06</time>
+              <time title="Created: 2019-05-20 18:57:06 / Modified: 20:53:59" itemprop="dateCreated datePublished" datetime="2019-05-20T18:57:06+08:00">2019-05-20</time>
             
 
             
@@ -422,7 +424,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Face-Detection/" itemprop="url" rel="index"><span itemprop="name">Face Detection</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/图像处理/" itemprop="url" rel="index"><span itemprop="name">图像处理</span></a></span>
 
                 
                 
@@ -458,7 +460,7 @@
                 
                   <span class="post-meta-item-text">Symbols count in article: </span>
                 
-                <span title="Symbols count in article">2.2k</span>
+                <span title="Symbols count in article">1.9k</span>
               
 
               
@@ -492,36 +494,32 @@
       
 
       
-        <blockquote>
-<p>论文题目：《Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks》<br>论文链接：<a href="https://arxiv.org/abs/1604.02878" target="_blank" rel="noopener">https://arxiv.org/abs/1604.02878</a><br>官方代码链接：<a href="https://github.com/kpzhang93/MTCNN_face_detection_alignment" target="_blank" rel="noopener">https://github.com/kpzhang93/MTCNN_face_detection_alignment</a><br>其他代码链接：<a href="https://github.com/YYuanAnyVision/mxnet_mtcnn_face_detection" target="_blank" rel="noopener">https://github.com/YYuanAnyVision/mxnet_mtcnn_face_detection</a><br>其他代码链接：<a href="https://github.com/Seanlinx/mtcnn" target="_blank" rel="noopener">https://github.com/Seanlinx/mtcnn</a></p>
-</blockquote>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>传统的人脸检测和人脸对齐任务忽略了它们之间固有的联系而各自分析，这样在本文作者看来是不可取的。本文提出了采用深度级联多任务网络（MTCNN）<strong>同时</strong>解决检测和对齐任务。MTCNN网络包含三个阶段的卷积网络（Proposal Network、Refine Network、Output Network）用来检测人脸和检测关键点位置。另外，本文提出一种Online hard sample mining strategy极大提高了算法在实践中的速度。</p>
-<h2 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h2><p><img src="3.png" alt></p>
-<p>首先把图像resize成不同尺度的图像金字塔作为网络的输入；</p>
-<ul>
-<li>Stage 1:  Proposal Network, P-Net<br>获得人脸的候选窗口和候选框的回归向量，然后候选框依据估计的边框回归向量进行校准，最后利用Non-maximum suppression(NMS)归并重叠范围比较大的候选框。</li>
-<li>Stage 2: Refine Network, R-Net<br>将第一阶段产生的候选框输入到R-Net，筛选掉大量的非人脸候选框，并且使用边框回归向量进行校准，利用NMS进行归并；</li>
-<li>Stage 3: Output Network, O-Net<br>与第二阶段相似，增加了输出5个人脸关键点位置。</li>
-</ul>
-<p><img src="full.png" alt></p>
-<h2 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h2><p>与网络的三阶段对应，MTCNN训练过程可以考虑三个阶段的损失，分别是人脸/非人脸二分类、边框回归、面部关键点位置。</p>
-<ol>
-<li><p>人脸识别<br>这是个二分类问题，对于每一个样本$x_i$，$p_i$是样本$x_i$为人脸的概率，真实标签$y_i^{det}\in {\lbrace 0,1\rbrace}$则采用交叉熵损失函数：</p>
+        <p>尽管边缘和一-般曲线适合用来描述自然物体的轮廓，但人类世界中直线段到处<br>都是。检测和匹配这些线条对于很多应用很有用，包括建筑学上的建模、城市环境<br>下的姿态估计以及书面文档版式分析。<br>本节将首先描述一些使用分段线性折线来近似曲线的算法，然后讲解一下Hough Transform，使得即使存在间隙和遮挡的时候，它都可以用于将边界元聚集成线片段。最后描述怎样将拥有”共同消失点（vanishing point）“的3D直线聚集在一起。</p>
+<h2 id="1-1-逐次近似"><a href="#1-1-逐次近似" class="headerlink" title="1.1 逐次近似"></a>1.1 逐次近似</h2><p><img src="line.png" alt></p>
+<p>用折线或者b样条曲线来近似一~个曲线(用黑色表示): (a)原始 曲线用一个红色<br>的折线来近似:(b)通过迭代地寻找与目前的近似离得最远的点做逐次近似;(c)拟合折线<br>顶点的光滑的内插样条用深蓝色显示。</p>
+<p>“直线简化”最简单的方法就是通过递归地细分连接两个端点的直线最远的曲线点来近似曲线。如果需要一个更平滑的表示或者可视化，就可以使用近似线或者插值样条或是曲线本身。</p>
+<h2 id="1-2-标准Hough变换"><a href="#1-2-标准Hough变换" class="headerlink" title="1.2 标准Hough变换"></a>1.2 标准Hough变换</h2><p><strong>定义</strong></p>
+<p>霍夫变换(Hough Transform)是图像处理中的一种特征提取技术，可以识别图像中的几何形状。它将图像空间中的特征点映射到参数空间进行投票，通过检测累计结果的局部极值点得到一个符合某特定形状的点的集合。经典霍夫变换用来检测图像中的直线，后来霍夫变换扩展到任意形状物体的识别，多为圆和椭圆。它的抗噪声、抗形变能力较强。另一种直线提取的方法是对图像边缘点进行链码追踪，在得到的链码串中提取直线。</p>
+<p>霍夫变换将在一个空间中具有相同形状的曲线或直线映射到另一个坐标空间的一个点上形成峰值，从而把检测任意形状的问题转化为统计峰值问题。</p>
+<p><strong>原理</strong></p>
+<p>霍夫变换最简单的是检测直线。我们知道，直线的方程表示可以由斜率和截距表示（这种表示方法，称为斜截式），如下所示：</p>
 <script type="math/tex; mode=display">
-L_{i}^{d e t}=-\left(y_{i}^{d e t} \log \left(p_{i}\right)+\left(1-y_{i}^{d e t}\right)\left(1-\log \left(p_{i}\right)\right)\right)</script></li>
-<li><p>边框回归<br>采用欧式距离损失（L2 Loss）,最小化生成的边框坐标与真实边框坐标的欧式距离。对于每个样本$x_i$，$\hat y_i^{box}$表示其回归生成的边框坐标，$y_{i}^{b o x}$是真实的边框坐标。</p>
+y=m x+b</script><p>如果用参数空间表示则为$(b,m)$,即用斜率和截距就能表示一条直线。</p>
+<p>但是这样会参数问题，垂直线的斜率不存在（或无限大），这使得斜率参数$m$的值接近于无限。为此，为了更好的计算，Richard O. Duda和Peter E. Hart在1971年4月，提出了Hesse normal form(Hesse法线式)</p>
 <script type="math/tex; mode=display">
-L_{i}^{b o x}=\left\|\hat{y}_{i}^{b o x}-y_{i}^{b o x}\right\|_{2}^{2}</script></li>
-<li><p>人脸关键点位置<br>与边框回归相似，最小化回归生成的关键点坐标$\widehat{y}_{i}^{l a n d m a r k}$与真实的关键点坐标$y_{i}^{l a n d m a r k}$的欧式距离。$\widehat{y}_{i}^{l a n d m a r k}$代表左右眼睛/鼻子/左右嘴巴角的坐标，共10维向量。</p>
-<script type="math/tex; mode=display">
-L_{i}^{l a n d m a r k}=\left\|\widehat{y}_{i}^{l a n d m a r k}-y_{i}^{l a n d m a r k}\right\|_{2}^{2}</script></li>
-<li><p>Three Tasks’ loss Sum<br>在实践中对于每个阶段的网络都定义总的损失函数<strong>同时</strong>计算三种损失，这样不至于在求一种损失时，另外两种损失为零。作者在文章中提出在P-Net和R-Net中使用（$\alpha _{det}=1,\alpha_{box}=0.5,\alpha _{landmark}=0.5$）而在O-Net中使用（$\alpha _{det}=1,\alpha_{box}=0.5,\alpha _{landmark}=1$）这说明每个阶段的训练目标有所差异，在P-Net和R-Net中主要是检测人脸和产生边框，O-Net主要是产生关键点位置。</p>
-<script type="math/tex; mode=display">
-\min \sum_{i=1}^{N} \sum_{j \in\{\text {det}, b o x, l a n d m a r k\}} \alpha_{j} \beta_{i}^{j} L_{i}^{j}</script></li>
-<li><p>Online Hard Sample mining<br>传统的人脸二分类最小化误差时，是对每个样本都进行反向误差传播，这样计算量比较大。本文提出一种新的方法来解决人脸识别在线应用问题。<br>对于每一个mini-batch前向传播产生的loss进行降序排序，从全部的sample中挑选出Top 70%作为hard sample，然后在反向传播中仅仅计算这些hard sample产生的梯度。</p>
-</li>
-</ol>
-<h2 id="其他参考"><a href="#其他参考" class="headerlink" title="其他参考"></a>其他参考</h2><p><a href="https://blog.csdn.net/u014380165/article/details/78906898" target="_blank" rel="noopener">https://blog.csdn.net/u014380165/article/details/78906898</a></p>
+r=x \cos \theta+y \sin \theta</script><p>其中$r$是原点到直线上最近点的距离(其他人可能把这记录为$ρ$，下面也可以把rr看成参数$ρ$)，$θ$是$x$轴与连接原点和最近点直线之间的夹角。如图所示。</p>
+<p><img src="kongjian.png" alt></p>
+<p>因此，可以将图像的每一条直线与一对参数($(r,θ)$相关联。这个参数$(r,θ)$平面有时被称为<strong>霍夫空间</strong>，用于二维直线的集合。</p>
+<p>经过Hough变换，将图像空间中经过一个点的所有直线映射到Hough空间，如下图示。</p>
+<p><img src="suoyou.png" alt></p>
+<p>Matlab代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">% 一个点的坐标为（3,4）</span><br><span class="line">x=3;</span><br><span class="line">y=4;</span><br><span class="line">%将给定的一个定点映射到霍夫变换空间</span><br><span class="line">theta=0:pi/200:2*pi;% 角度</span><br><span class="line">r=x*cos(theta)+y*sin(theta);</span><br><span class="line">plot(theta,r);%绘图</span><br><span class="line">set(gca,&apos;XTick&apos;,[0:pi/10:2*pi]);   % 修改x轴坐标间隔</span><br><span class="line"> xlabel(&apos;变量\theta&apos;)</span><br><span class="line"> ylabel(&apos;变量r&apos;)</span><br></pre></td></tr></table></figure>
+<p>所以我们可以得到一个结论，给定平面中的单个点，那么通过该点的所有直线的集合对应于$(r,θ)$平面中的正弦曲线，这对于该点是独特的。一组两个或更多点形成一条直线将产生在该线的$(r,θ)$处交叉的正弦曲线。因此，检测共线点的问题可以转化为找到并发曲线的问题。</p>
+<p><img src="jiaodian.png" alt></p>
+<p>如上图所示，粉红色交点即为三个点共现的直线。</p>
+<p>所以Hough 变换在图像直线检测的操作步骤如下：</p>
+<p>1、读取原始图并转换为灰度图，采用边缘检测算子（如Canny）转换成二值化边缘图像；<br>2、顺序搜索边缘图像中的每一个黑点，在霍夫空间中依次画出正弦曲线，根据各个正弦曲线的交点情况，在累加器的对应位置加1。（累加器为二维数组$\left(\lambda^{}, \theta^{}\right)$，存放着对应参数的个数）；<br>3、求出累加器中局部极大值，其位置为$\left(\lambda^{\prime}, \theta^{\prime}\right)$；<br>4、通过累加器得出的位置$\left(\lambda^{\prime}, \theta^{\prime}\right)$得出图像中对应的直线。</p>
+<h2 id="1-3-消失点检测"><a href="#1-3-消失点检测" class="headerlink" title="1.3 消失点检测"></a>1.3 消失点检测</h2><p>【待补充】</p>
 
       
     </div>
@@ -551,7 +549,7 @@ L_{i}^{l a n d m a r k}=\left\|\widehat{y}_{i}^{l a n d m a r k}-y_{i}^{l a n d 
       
         <div class="post-tags">
           
-            <a href="/tags/MTCNN/" rel="tag"># MTCNN</a>
+            <a href="/tags/Image-processing/" rel="tag"># Image processing</a>
           
         </div>
       
@@ -564,8 +562,8 @@ L_{i}^{l a n d m a r k}=\left\|\widehat{y}_{i}^{l a n d m a r k}-y_{i}^{l a n d 
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/28/Improving-GAN/" rel="next" title="Improving GAN">
-                <i class="fa fa-chevron-left"></i> Improving GAN
+              <a href="/2019/05/20/特征检测与匹配-边缘/" rel="next" title="特征检测与匹配--边缘">
+                <i class="fa fa-chevron-left"></i> 特征检测与匹配--边缘
               </a>
             
           </div>
@@ -573,10 +571,6 @@ L_{i}^{l a n d m a r k}=\left\|\widehat{y}_{i}^{l a n d m a r k}-y_{i}^{l a n d 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/12/[论文笔记]Show-and-Tell-A-Neural-Image-Caption-Generator/" rel="prev" title="Show and Tell-A Neural Image Caption Generator">
-                Show and Tell-A Neural Image Caption Generator <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -795,7 +789,7 @@ L_{i}^{l a n d m a r k}=\left\|\widehat{y}_{i}^{l a n d m a r k}-y_{i}^{l a n d 
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络结构"><span class="nav-text">网络结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#训练"><span class="nav-text">训练</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他参考"><span class="nav-text">其他参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-逐次近似"><span class="nav-text">1.1 逐次近似</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-标准Hough变换"><span class="nav-text">1.2 标准Hough变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-消失点检测"><span class="nav-text">1.3 消失点检测</span></a></li></ol></div>
             
 
           </div>
