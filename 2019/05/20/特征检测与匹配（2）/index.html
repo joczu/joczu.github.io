@@ -103,21 +103,20 @@
 
 
 
-  <meta name="description" content="论文题目：《Show and Tell: A Neural Image Caption Generator》 论文链接：https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Vinyals_Show_and_Tell_2015_CVPR_paper.pdf 代码链接：https://github.com/joczu/S">
-<meta name="keywords" content="CNN,LSTM">
+  <meta name="description" content="1.1 边缘检测灰度图像边缘检测 图像的边缘区域会存在明显的像素值阶跃，因此边缘检测主要是通过获得图像灰度梯度，进而通过梯度大小和变化来判断图像边缘的。  \begin{aligned} \Delta f_{x}(x, y) &amp;=f(x+1, y)-f(x, y) \\ \Delta f_{y}(x, y) &amp;=f(x, y+1)-f(x, y) \end{aligned}或者二阶差分对边缘区域进">
+<meta name="keywords" content="Image processing">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Show and Tell-A Neural Image Caption Generator">
-<meta property="og:url" content="http://yoursite.com/2019/05/12/[论文笔记]Show-and-Tell-A-Neural-Image-Caption-Generator/index.html">
+<meta property="og:title" content="特征检测与匹配--边缘">
+<meta property="og:url" content="http://yoursite.com/2019/05/20/特征检测与匹配（2）/index.html">
 <meta property="og:site_name" content="Joczu">
-<meta property="og:description" content="论文题目：《Show and Tell: A Neural Image Caption Generator》 论文链接：https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Vinyals_Show_and_Tell_2015_CVPR_paper.pdf 代码链接：https://github.com/joczu/S">
+<meta property="og:description" content="1.1 边缘检测灰度图像边缘检测 图像的边缘区域会存在明显的像素值阶跃，因此边缘检测主要是通过获得图像灰度梯度，进而通过梯度大小和变化来判断图像边缘的。  \begin{aligned} \Delta f_{x}(x, y) &amp;=f(x+1, y)-f(x, y) \\ \Delta f_{y}(x, y) &amp;=f(x, y+1)-f(x, y) \end{aligned}或者二阶差分对边缘区域进">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2019/05/12/[论文笔记]Show-and-Tell-A-Neural-Image-Caption-Generator/NIC.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/12/[论文笔记]Show-and-Tell-A-Neural-Image-Caption-Generator/cnnrnn.png">
-<meta property="og:updated_time" content="2019-05-12T11:18:33.417Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/20/特征检测与匹配（2）/bianyuan.png">
+<meta property="og:updated_time" content="2019-05-20T10:54:59.504Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Show and Tell-A Neural Image Caption Generator">
-<meta name="twitter:description" content="论文题目：《Show and Tell: A Neural Image Caption Generator》 论文链接：https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Vinyals_Show_and_Tell_2015_CVPR_paper.pdf 代码链接：https://github.com/joczu/S">
-<meta name="twitter:image" content="http://yoursite.com/2019/05/12/[论文笔记]Show-and-Tell-A-Neural-Image-Caption-Generator/NIC.png">
+<meta name="twitter:title" content="特征检测与匹配--边缘">
+<meta name="twitter:description" content="1.1 边缘检测灰度图像边缘检测 图像的边缘区域会存在明显的像素值阶跃，因此边缘检测主要是通过获得图像灰度梯度，进而通过梯度大小和变化来判断图像边缘的。  \begin{aligned} \Delta f_{x}(x, y) &amp;=f(x+1, y)-f(x, y) \\ \Delta f_{y}(x, y) &amp;=f(x, y+1)-f(x, y) \end{aligned}或者二阶差分对边缘区域进">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/20/特征检测与匹配（2）/bianyuan.png">
 
 
 
@@ -125,7 +124,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/05/12/[论文笔记]Show-and-Tell-A-Neural-Image-Caption-Generator/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/20/特征检测与匹配（2）/">
 
 
 
@@ -135,7 +134,7 @@
   };
 </script>
 
-  <title>Show and Tell-A Neural Image Caption Generator | Joczu</title>
+  <title>特征检测与匹配--边缘 | Joczu</title>
   
 
 
@@ -357,7 +356,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/12/[论文笔记]Show-and-Tell-A-Neural-Image-Caption-Generator/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/20/特征检测与匹配（2）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Joczu">
@@ -374,7 +373,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Show and Tell-A Neural Image Caption Generator
+          <h1 class="post-title" itemprop="name headline">特征检测与匹配--边缘
 
               
             
@@ -400,7 +399,7 @@
                 
               
 
-              <time title="Created: 2019-05-12 19:42:33 / Modified: 19:18:33" itemprop="dateCreated datePublished" datetime="2019-05-12T19:42:33+08:00">2019-05-12</time>
+              <time title="Created: 2019-05-20 18:18:11 / Modified: 18:54:59" itemprop="dateCreated datePublished" datetime="2019-05-20T18:18:11+08:00">2019-05-20</time>
             
 
             
@@ -422,7 +421,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Image-Caption/" itemprop="url" rel="index"><span itemprop="name">Image Caption</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/图像处理/" itemprop="url" rel="index"><span itemprop="name">图像处理</span></a></span>
 
                 
                 
@@ -458,7 +457,7 @@
                 
                   <span class="post-meta-item-text">Symbols count in article: </span>
                 
-                <span title="Symbols count in article">1.7k</span>
+                <span title="Symbols count in article">1.9k</span>
               
 
               
@@ -492,34 +491,23 @@
       
 
       
-        <blockquote>
-<p>论文题目：《Show and Tell: A Neural Image Caption Generator》</p>
-<p>论文链接：<a href="https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Vinyals_Show_and_Tell_2015_CVPR_paper.pdf" target="_blank" rel="noopener">https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Vinyals_Show_and_Tell_2015_CVPR_paper.pdf</a></p>
-<p>代码链接：<a href="https://github.com/joczu/Show_and_Tell" target="_blank" rel="noopener">https://github.com/joczu/Show_and_Tell</a></p>
-</blockquote>
-<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>图像内容描述是人工智能领域的基础问题，是计算机视觉与自然语言处理的交叉领域。众所周知，CNN在目标检测和识别中的效果非常的出色，而RNN在机器翻译中也得到了充分的发挥。本文就是在两者的基础上对两种模型进行组合形成一个新的生成式模型称为NIC，实现图像内容描述的任务。</p>
-<p><img src="NIC.png" alt></p>
-<p>作者的思想源泉来自于目前比较前沿的机器翻译，给定一个源句子$S$，将其输入到模型中得到目标语言的句子$T$，模型所要做的就是$\max P(T|S)$。<br>目前机器翻译中比较火的模型莫属RNNs，RNNs可作为Encoder，把源句子编码成一个固定长度的词向量表示，又可作为Decoder生成目标句子。<br>在本文中，作者使用CNN来代替RNNs的Encoder功能，将输入图像编码成固定长度的词向量表示，这样做的原因在于CNN在图像特征提取中表现极为出色。CNN+RNNs这种端到端的神经网络使用起来相当方便。</p>
-<p>由于普通的RNN会出现梯度消失和梯度爆炸的现象，所以采用更加优良的LSTM模型。</p>
-<h2 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h2><p><img src="cnnrnn.png" alt></p>
-<p>如图所示，LSTM+CNN模型就是一个图像内容生成器。CNN将输入图像进行特征表示，生成512维的表示向量输入到第一个LSTM单元中，作为$t=-1$时刻，$S_i$代表某个单词的向量，采用one-hot编码，长度为整个词表的长度，$W_e$是词向量表示，$W_eS_i$为隐含层的词向量表示，长度也为512维。前向传播的过程如下：</p>
+        <h2 id="1-1-边缘检测"><a href="#1-1-边缘检测" class="headerlink" title="1.1 边缘检测"></a>1.1 边缘检测</h2><p><strong>灰度图像边缘检测</strong></p>
+<p>图像的边缘区域会存在明显的像素值阶跃，因此边缘检测主要是通过获得图像灰度梯度，进而通过梯度大小和变化来判断图像边缘的。<br><img src="bianyuan.png" alt></p>
 <script type="math/tex; mode=display">
-\begin{aligned} x_{-1} &=\operatorname{CNN}(I) \\ x_{t} &=W_{e} S_{t}, \quad t \in\{0 \ldots N-1\} \\ p_{t+1} &=\operatorname{LSTM}\left(x_{t}\right), \quad t \in\{0 \ldots N-1\} \end{aligned}</script><p>上面说到，模型训练的目标为：</p>
+\begin{aligned} \Delta f_{x}(x, y) &=f(x+1, y)-f(x, y) \\ \Delta f_{y}(x, y) &=f(x, y+1)-f(x, y) \end{aligned}</script><p>或者二阶差分对边缘区域进行判断:</p>
 <script type="math/tex; mode=display">
-\theta^{\star}=\arg \max _{\theta} \sum_{(I, S)} \log p(S | I ; \theta) \\ \log p(S | I)=\sum_{t=0}^{N} \log p\left(S_{t} | I, S_{0}, \ldots, S_{t-1}\right)</script><p>其中$I$为输入的图像，$S$为生成的句子，$\theta$是模型的参数，我们要做的就是最大化这个目标函数，获得模型的参数$\theta$。(此处最大似然之后取log形式)</p>
-<p>上述Log似然公式，恰好对应到RNN的网络中，在$t$时刻，需要计算当前词$S_t$的概率，则可以将历史词$S_0$到$S_{t-1}$表示为一个确定长度的隐含层神经元向量$h_t$，同时输入图像$x_t$，在$t+1$时刻，隐含层向量被更新：</p>
+\begin{aligned} \Delta f_{x x}(x, y) &=f(x+1, y)+f(x-1, y)-2 f(x, y) \\ \Delta f_{y y}(x, y) &=f(x, y+1)+f(x, y-1)-2 f(x, y) \end{aligned}</script><p>其中一阶差分可以判断边缘是否存在，二阶差分还可以根据正负号判断像素点在图像边缘亮的一侧还是暗的一侧。<br>其他的边缘检测方法还包括一些梯度算子，例如<strong>Prewitt算子</strong>、<strong>Sobel算子</strong>，<strong>Canny算子</strong>，<strong>LOG</strong>边缘检测算子等，在此不做说明。</p>
+<p><strong>彩色图像边缘检测</strong></p>
+<p>彩色图像的每个像素包含红绿蓝三个分量，这样每个像素可以由一个三维向量来表示。但是在进行图像边缘检测的时候，我们遇到一个问题，那就是向量并不存在梯度概念。单独对每个颜色分量进行边缘检测，其梯度不能反映图像整体彩色的差异变化。<br>一个广为使用的彩色图像梯度方法来自Zenzo[1986]的论文</p>
 <script type="math/tex; mode=display">
-h_{t+1}=f\left(h_{t}, x_{t}\right)</script><h2 id="推断策略"><a href="#推断策略" class="headerlink" title="推断策略"></a>推断策略</h2><ul>
-<li>Sampling：直接将前一个词输入下一个时间点</li>
-<li>BeamSearch：第一个时间点，输出top k个候选词，这k个候选词分别输入第二个时间点，得到若干个第一个和第二个词组合，从这选择得分top k的，输入到第三个时间点，依次迭代</li>
-</ul>
-<h2 id="需要注意的点"><a href="#需要注意的点" class="headerlink" title="需要注意的点"></a>需要注意的点</h2><ul>
-<li>每个时刻的LSTM单元共享一套参数</li>
-<li>单词采用one-hot的表示方法</li>
-<li>每个句子前后都有标志词，表示句子的开始和结束</li>
-<li>图像只需要初始时输入一次（每个时刻都输入，会因噪声很容易过拟合，效果不好）</li>
-<li>本文使用VGG16训练好的模型参数初始化CNN网络</li>
-</ul>
+\begin{array}{l}{\vec{u}=\frac{\partial R}{\partial x} \vec{r}+\frac{\partial G}{\partial x} \vec{g}+\frac{\partial B}{\partial x} \vec{b}} \\ {\vec{v}=\frac{\partial R}{\partial y} \vec{r}+\frac{\partial G}{\partial y} \vec{g}+\frac{\partial B}{\partial y} \vec{b}}\end{array}</script><p>其中$R,G,B$是图像分量，$\vec{r}, \vec{g}, \vec{b}$等是单位向量，表征颜色分量坐标。然后继续计算有:</p>
+<script type="math/tex; mode=display">
+\begin{array}{c}{g_{x x}=\vec{u}^{T} \vec{u}=\left|\frac{\partial R}{\partial x}\right|^{2}+\left|\frac{\partial G}{\partial x}\right|^{2}+\left|\frac{\partial B}{\partial x}\right|^{2}} \\ {g_{y y}=\vec{v}^{T} \vec{v}=\left|\frac{\partial R}{\partial y}\right|^{2}+\left|\frac{\partial G}{\partial y}\right|^{2}+\left|\frac{\partial B}{\partial y}\right|^{2}} \\ {g_{x y}=\vec{u}^{T} \vec{v}=\frac{\partial R}{\partial x} \frac{\partial R}{\partial y}+\frac{\partial G}{\partial x} \frac{\partial G}{\partial y}+\frac{\partial B}{\partial x} \frac{\partial B}{\partial y}}\end{array}</script><p>注意这里执行的是向量乘法，而不是进一步求导。梯度方向为：</p>
+<script type="math/tex; mode=display">
+\theta=\frac{1}{2} \arctan \left[\frac{2 g_{x y}}{\left(g_{x x}-g_{y y}\right)}\right]</script><p>由梯度方向才能计算梯度:</p>
+<script type="math/tex; mode=display">
+F(\theta)=\left\{\frac{1}{2}\left[\left(g_{x x}+g_{y y}\right)+\left(g_{x x}-g_{y y}\right) \cos 2 \theta+2 g_{x y} \sin 2 \theta\right]\right\}^{\frac{1}{2}}</script><p>matlab上自带的edge函数目前没发现可以对彩色图像直接进行边缘检测的方法，C++的openCV库也没有发现。上述工具一般会对彩色图像进行灰度化再执行边缘检测，效果也不算差。</p>
+<h2 id="1-2-边缘检测"><a href="#1-2-边缘检测" class="headerlink" title="1.2 边缘检测"></a>1.2 边缘检测</h2><p>【待补充】</p>
 
       
     </div>
@@ -549,9 +537,7 @@ h_{t+1}=f\left(h_{t}, x_{t}\right)</script><h2 id="推断策略"><a href="#推�
       
         <div class="post-tags">
           
-            <a href="/tags/CNN/" rel="tag"># CNN</a>
-          
-            <a href="/tags/LSTM/" rel="tag"># LSTM</a>
+            <a href="/tags/Image-processing/" rel="tag"># Image processing</a>
           
         </div>
       
@@ -564,8 +550,8 @@ h_{t+1}=f\left(h_{t}, x_{t}\right)</script><h2 id="推断策略"><a href="#推�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/06/《Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks》学习笔记/" rel="next" title="MTCNN">
-                <i class="fa fa-chevron-left"></i> MTCNN
+              <a href="/2019/05/16/特征检测与匹配/" rel="next" title="特征检测与匹配—点与块">
+                <i class="fa fa-chevron-left"></i> 特征检测与匹配—点与块
               </a>
             
           </div>
@@ -573,10 +559,6 @@ h_{t+1}=f\left(h_{t}, x_{t}\right)</script><h2 id="推断策略"><a href="#推�
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/14/数字图像处理基础/" rel="prev" title="数字图像处理基础">
-                数字图像处理基础 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -795,7 +777,7 @@ h_{t+1}=f\left(h_{t}, x_{t}\right)</script><h2 id="推断策略"><a href="#推�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型结构"><span class="nav-text">模型结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推断策略"><span class="nav-text">推断策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#需要注意的点"><span class="nav-text">需要注意的点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-边缘检测"><span class="nav-text">1.1 边缘检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-边缘检测"><span class="nav-text">1.2 边缘检测</span></a></li></ol></div>
             
 
           </div>
