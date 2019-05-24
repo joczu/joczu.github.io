@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1 综述• 使用图 (graph) 来表示计算任务.• 在被称之为会话（Session）的上下文 (context) 中执行图.• 使用 tensor 表示数据.• 通过变量（Variable）维护状态.• 使用 feed 和 fetch 可以为任意的操作(arbitrary operation) 赋值或者从其中获取数据. 一个 TensorFlow 图描述了计算的过程. 为了进行计算, 图必须在">
+<meta name="keywords" content="深度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TensorFlow总结">
+<meta property="og:url" content="http://yoursite.com/2019/05/22/TensorFlow总结/index.html">
+<meta property="og:site_name" content="Joczu">
+<meta property="og:description" content="1 综述• 使用图 (graph) 来表示计算任务.• 在被称之为会话（Session）的上下文 (context) 中执行图.• 使用 tensor 表示数据.• 通过变量（Variable）维护状态.• 使用 feed 和 fetch 可以为任意的操作(arbitrary operation) 赋值或者从其中获取数据. 一个 TensorFlow 图描述了计算的过程. 为了进行计算, 图必须在">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/TensorFlow总结/graph.png">
+<meta property="og:updated_time" content="2019-05-24T05:45:58.431Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TensorFlow总结">
+<meta name="twitter:description" content="1 综述• 使用图 (graph) 来表示计算任务.• 在被称之为会话（Session）的上下文 (context) 中执行图.• 使用 tensor 表示数据.• 通过变量（Variable）维护状态.• 使用 feed 和 fetch 可以为任意的操作(arbitrary operation) 赋值或者从其中获取数据. 一个 TensorFlow 图描述了计算的过程. 为了进行计算, 图必须在">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/22/TensorFlow总结/graph.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/05/22/TensorFlow总结/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>TensorFlow总结 | Joczu</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joczu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">So let's set world on fire!</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/22/TensorFlow总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joczu">
+      <meta itemprop="description" content="So let's set world on fire!">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joczu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">TensorFlow总结
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-22 15:07:17" itemprop="dateCreated datePublished" datetime="2019-05-22T15:07:17+08:00">2019-05-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-24 13:45:58" itemprop="dateModified" datetime="2019-05-24T13:45:58+08:00">2019-05-24</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article: </span>
+                
+                <span title="Symbols count in article">11k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">10 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-综述"><a href="#1-综述" class="headerlink" title="1 综述"></a>1 综述</h2><p>• 使用图 (graph) 来表示计算任务.<br>• 在被称之为会话（Session）的上下文 (context) 中执行图.<br>• 使用 tensor 表示数据.<br>• 通过变量（Variable）维护状态.<br>• 使用 feed 和 fetch 可以为任意的操作(arbitrary operation) 赋值或者从其中获取数据.</p>
+<p>一个 TensorFlow 图描述了计算的过程. 为了进行计算, 图必须在Session里被启动. 将图的 op 分发到诸如 CPU 或 GPU 之类的设备上, 同时提供执行 op 的方法. 这些方法执行后, 将产生的 tensor 返回. 在 Python 语言中, 返回的 tensor 是 numpy ndarray对象; 在 C 和 C++ 语言中, 返回的 tensor 是tensorflow::Tensor 实例. </p>
+<h2 id="2-基本概念"><a href="#2-基本概念" class="headerlink" title="2 基本概念"></a>2 基本概念</h2><h3 id="2-1-计算图"><a href="#2-1-计算图" class="headerlink" title="2.1 计算图"></a>2.1 计算图</h3><p>TensorFlow 程序通常被组织成一个构建阶段和一个执行阶段. 在构建阶段, op 的执行步骤 被描述成一个图. 在执行阶段, 使用会话执行执行图中的 op.通常在构建阶段创建一个图来表示和训练神经网络, 然后在执行阶段反复执行图中的训练 op.</p>
+<h4 id="2-1-1-构建图"><a href="#2-1-1-构建图" class="headerlink" title="2.1.1 构建图"></a>2.1.1 构建图</h4><p>构建图的第一步, 是创建源 op (source op). 源 op 不需要任何输入, 例如 常量 (Constant) . 源 op 的输出被传递给其它 op 做运算.</p>
+<p>为了真正进行运算, 并得到运算的结果, 你必须在会话里启动这个图.</p>
+<h4 id="2-1-2-在一个会话中启动图"><a href="#2-1-2-在一个会话中启动图" class="headerlink" title="2.1.2 在一个会话中启动图"></a>2.1.2 在一个会话中启动图</h4><p>构造阶段完成后, 才能启动图. 启动图的第一步是创建一个 Session 对象, 如果无任何创建参数, 会话构造器将启动默认图.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sess = tf.Session()</span><br><span class="line"># 整个执行过程是自动化的, 会话负责传递 op 所需的全部输入. op 通常是并发执行的.</span><br><span class="line">result = sess.run(op)</span><br><span class="line">print result</span><br><span class="line"># ==&gt; [[ 12.]]</span><br><span class="line"># 任务完成, 关闭会话.</span><br><span class="line">sess.close()</span><br></pre></td></tr></table></figure>
+<p>Session 对象在使用完后需要关闭以释放资源. 除了显式调用 close 外, 也可以使用 “with” 代码块 来自动完成关闭动作.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">with tf.Session() as sess:</span><br><span class="line">  result = sess.run([product])</span><br><span class="line">  print result</span><br></pre></td></tr></table></figure>
+<p>在实现上, TensorFlow 将图形定义转换成分布式执行的操作, 以充分利用可用的计算资源(如 CPU 或 GPU). 一般你不需要显式指定使用 CPU 还是 GPU, TensorFlow 能自动检测. 如果检测到 GPU, TensorFlow 会尽可能地利用找到的第一个 GPU 来执行操作.</p>
+<p>如果机器上有超过一个可用的 GPU, 除第一个外的其它 GPU 默认是不参与计算的. 为了让 TensorFlow 使用这些GPU, 你必须将 op 明确指派给它们执行.<code>with…Device</code> 语句用来指派特定的 CPU 或 GPU 执行操作:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">with tf.Session() as sess:</span><br><span class="line">  with tf.device(&quot;/gpu:1&quot;):</span><br><span class="line">    matrix1 = tf.constant([[3., 3.]])</span><br><span class="line">    matrix2 = tf.constant([[2.],[2.]])</span><br><span class="line">    product = tf.matmul(matrix1, matrix2)</span><br><span class="line">    ..</span><br></pre></td></tr></table></figure>
+<p>设备用字符串进行标识. 目前支持的设备包括: </p>
+<ul>
+<li>“/cpu:0” : 机器的 CPU. </li>
+<li>“/gpu:0” : 机器的第一个 GPU, 如果有的话. </li>
+<li>“/gpu:1” : 机器的第二个 GPU, 以此类推. </li>
+</ul>
+<h3 id="2-2-Tensor"><a href="#2-2-Tensor" class="headerlink" title="2.2 Tensor"></a>2.2 Tensor</h3><p>TensorFlow 程序使用 tensor 数据结构来代表所有的数据, 计算图中, 操作间传递的数据都是 tensor. 你可以把 TensorFlow tensor 看作是一个 n 维的数组或列表. 一个 tensor 包含一个静态类型 rank, 和 一个 shape.</p>
+<h3 id="2-3-变量"><a href="#2-3-变量" class="headerlink" title="2.3 变量"></a>2.3 变量</h3><p>变量维护图执行过程中的状态信息.通常会将一个统计模型中的参数表示为一组变量. 例如, 你可以将一个神经网络的权重作为某个变量存储在一个tensor 中. 在训练过程中, 通过重复运行训练图, 更新这个 tensor.</p>
+<h3 id="2-4-Fetch"><a href="#2-4-Fetch" class="headerlink" title="2.4 Fetch"></a>2.4 Fetch</h3><p>为了取回操作的输出内容, 可以在使用 Session 对象的 <code>run()</code>调用 执行图时, 传入一些 tensor, 这些 tensor 会帮助你取回结果. 在之前的例子里, 我们只取回了单个节点 state , 但是你也可以取回多个 tensor。需要获取的多个 tensor 值，在 op 的一次运行中一起获得(而不是逐个去获取 tensor)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = sess.run([mul, intermed])</span><br></pre></td></tr></table></figure>
+<h3 id="2-5-Feed"><a href="#2-5-Feed" class="headerlink" title="2.5 Feed"></a>2.5 Feed</h3><p>上述示例在计算图中引入了 tensor, 以常量或变量的形式存储. TensorFlow 还提供了 feed 机制, 该机制 可以 临时替代图中的任意操作中的 tensor 可以对图中任何操作提交补丁, 直接插入一个 tensor. </p>
+<p>feed 使用一个 tensor 值临时替换一个操作的输出结果. 你可以提供 feed 数据作为 <code>run()</code>调用的参数. feed 只在调用它的方法内有效, 方法结束, feed 就会消失. 最常见的用例是将某些特殊的操作指定为 “feed” 操作, 标记的方法是使用 <code>tf.placeholder()</code>为这些操作创建占位符. </p>
+<h2 id="3-运作方式"><a href="#3-运作方式" class="headerlink" title="3 运作方式"></a>3 运作方式</h2><h3 id="3-1-变量：创建、初始化、保存和加载"><a href="#3-1-变量：创建、初始化、保存和加载" class="headerlink" title="3.1 变量：创建、初始化、保存和加载"></a>3.1 变量：创建、初始化、保存和加载</h3><p>当训练模型时，用变量来存储和更新参数。变量包含张量 (Tensor)存放于内存的缓存区。建模时它们需要被明确地初始化，模型训练后它们必须被存储到磁盘。这些变量的值可在之后模型训练和分析是被加载。</p>
+<h4 id="3-1-1-创建"><a href="#3-1-1-创建" class="headerlink" title="3.1.1 创建"></a>3.1.1 创建</h4><p>当创建一个变量时，你将一个 张量 作为初始值传入构造函数 <code>Variable()</code>。TensorFlow提供了一系列操作符来初始化张量，初始值是常量或是随机值。</p>
+<p>注意，所有这些操作符都需要你指定张量的shape。那个形状自动成为变量的shape。变量的shape通常是固定的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> # Create two variables.</span><br><span class="line">weights = tf.Variable(tf.random_normal([784, 200], stddev=0.35),</span><br><span class="line">                      name=&quot;weights&quot;)</span><br><span class="line">biases = tf.Variable(tf.zeros([200]), name=&quot;biases&quot;)</span><br></pre></td></tr></table></figure>
+<p>调用<code>tf.Variable()</code>添加一些操作<code>(Op, operation)</code>到graph: </p>
+<p>• 一个 操作存放变量的值。<br>• 一个初始化op将变量设置为初始值。这事实上是一个 操作.<br>• 初始值的操作，例如示例中对 变量的 操作也被加入了graph。 </p>
+<p><code>tf.Variable()</code>的返回值是Python的 类的一个实例。 </p>
+<h4 id="3-1-2-初始化"><a href="#3-1-2-初始化" class="headerlink" title="3.1.2 初始化"></a>3.1.2 初始化</h4><p>变量的初始化必须在模型的其它操作运行之前先明确地完成。最简单的方法就是添加一个给所有变量初始化的操作，并在使用模型之前首先运行那个操作。</p>
+<p>使用 <code>tf.initialize_all_variables()</code>添加一个操作对变量做初始化。记得在完全构建好模型并加载之后再运行那个操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> # Create two variables.</span><br><span class="line">weights = tf.Variable(tf.random_normal([784, 200], stddev=0.35),</span><br><span class="line">                      name=&quot;weights&quot;)</span><br><span class="line">biases = tf.Variable(tf.zeros([200]), name=&quot;biases&quot;)</span><br><span class="line">...</span><br><span class="line"> # Add an op to initialize the variables.</span><br><span class="line">init_op = tf.initialize_all_variables()</span><br><span class="line"> # Later, when launching the model</span><br><span class="line">with tf.Session() as sess:</span><br><span class="line">  # Run the init operation.</span><br><span class="line">  sess.run(init_op)</span><br><span class="line">  ...</span><br><span class="line">  # Use the model</span><br><span class="line">  ...</span><br></pre></td></tr></table></figure>
+<p><strong>由另一个变量初始化</strong></p>
+<p>你有时候会需要用另一个变量的初始化值给当前变量初始化。由于<code>tf.initialize_all_variables()</code>是并行地初始 化所有变量，所以在有这种需求的情况下需要小心。 </p>
+<p>用其它变量的值初始化一个新的变量时，使用其它变量的<code>initialized_value()</code>属性。你可以直接把已初始化的值作为新变量的初始值，或者把它当做tensor计算得到一个值赋予新变量。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> # Create a variable with a random value.</span><br><span class="line">weights = tf.Variable(tf.random_normal([784, 200], stddev=0.35),</span><br><span class="line">                      name=&quot;weights&quot;)</span><br><span class="line"> # Create another variable with the same value as &apos;weights&apos;.</span><br><span class="line">w2 = tf.Variable(weights.initialized_value(), name=&quot;w2&quot;)</span><br><span class="line"> # Create another variable with twice the value of &apos;weights&apos;</span><br><span class="line">w_twice = tf.Variable(weights.initialized_value() * 0.2, name=&quot;w_twice&quot;)</span><br></pre></td></tr></table></figure>
+<p><strong>自定义初始化</strong></p>
+<p><code>tf.initialize_all_variables()</code> 函数便捷地添加一个op来初始化模型的所有变量。你也可以给它传入一组变量进行初始化。</p>
+<h4 id="3-1-3-保存和加载"><a href="#3-1-3-保存和加载" class="headerlink" title="3.1.3 保存和加载"></a>3.1.3 保存和加载</h4><p>最简单的保存和恢复模型的方法是使用 tf.train.Saver 对象。构造器给graph的所有变量，或是定义在列表里的变量，添加 save 和 restore ops。saver对象提供了方法来运行这些ops，定义检查点文件的读写路径。 </p>
+<p><strong>检查点文件ckpt</strong></p>
+<p>变量存储在二进制文件里，主要包含从变量名到tensor值的映射关系。</p>
+<p>当你创建一个 Saver 对象时，你可以选择性地为检查点文件中的变量挑选变量名。</p>
+<p><strong>保存变量</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> # Create some variables.</span><br><span class="line">v1 = tf.Variable(..., name=&quot;v1&quot;)</span><br><span class="line">v2 = tf.Variable(..., name=&quot;v2&quot;)</span><br><span class="line">...</span><br><span class="line"> # Add an op to initialize the variables.</span><br><span class="line">init_op = tf.initialize_all_variables()</span><br><span class="line"> # Add ops to save and restore all the variables.</span><br><span class="line">saver = tf.train.Saver()</span><br><span class="line"> # Later, launch the model, initialize the variables, do some work, save the</span><br><span class="line"> # variables to disk.</span><br><span class="line">with tf.Session() as sess:</span><br><span class="line">  sess.run(init_op)</span><br><span class="line">  # Do some work with the model.</span><br><span class="line">  ..</span><br><span class="line">  # Save the variables to disk.</span><br><span class="line">  save_path = saver.save(sess, &quot;/tmp/model.ckpt&quot;)</span><br><span class="line">  print &quot;Model saved in file: &quot;, save_path</span><br></pre></td></tr></table></figure>
+<p><strong>恢复变量</strong></p>
+<p>用同一个 Saver 对象来恢复变量。<strong>注意，当你从文件中恢复变量时，不需要事先对它们做初始化。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> # Create some variables.</span><br><span class="line">v1 = tf.Variable(..., name=&quot;v1&quot;)</span><br><span class="line">v2 = tf.Variable(..., name=&quot;v2&quot;)</span><br><span class="line">...</span><br><span class="line"> # Add ops to save and restore all the variables.</span><br><span class="line">saver = tf.train.Saver()</span><br><span class="line"> # Later, launch the model, use the saver to restore variables from disk, and</span><br><span class="line"> # do some work with the model.</span><br><span class="line">with tf.Session() as sess:</span><br><span class="line">  # Restore variables from disk.</span><br><span class="line">  saver.restore(sess, &quot;/tmp/model.ckpt&quot;)</span><br><span class="line">  print &quot;Model restored.&quot;</span><br><span class="line">  # Do some work with the model</span><br><span class="line">  ...</span><br></pre></td></tr></table></figure>
+<p><strong>选择存储和恢复哪些变量</strong></p>
+<p>如果你不给 tf.train.Saver() 传入任何参数，那么saver将处理graph中的所有变量。其中每一个变量都以变量创 建时传入的名称被保存。 </p>
+<p>有时候在检查点文件中明确定义变量的名称很有用。举个例子，你也许已经训练得到了一个模型，其中有个变量 命名为 “weights” ，你想把它的值恢复到一个新的变量 “params” 中。 </p>
+<p>有时候仅保存和恢复模型的一部分变量很有用。再举个例子，你也许训练得到了一个5层神经网络，现在想训练一 个6层的新模型，可以将之前5层模型的参数导入到新模型的前5层中。 </p>
+<p>你可以通过给 tf.train.Saver() 构造函数传入Python字典，很容易地定义需要保持的变量及对应名称:键对应使 用的名称，值对应被管理的变量。 </p>
+<h3 id="3-2-TensorBoard：可视化学习"><a href="#3-2-TensorBoard：可视化学习" class="headerlink" title="3.2 TensorBoard：可视化学习"></a>3.2 TensorBoard：可视化学习</h3><h4 id="3-2-1-数据序列化"><a href="#3-2-1-数据序列化" class="headerlink" title="3.2.1 数据序列化"></a>3.2.1 数据序列化</h4><p>TensorBoard 通过读取 TensorFlow 的事件文件来运行。TensorFlow 的事件文件包括了你会在 TensorFlow 运行中涉及到的主要数据。下面是 TensorBoard 中汇总数据(Summary data)的大体生命周期。</p>
+<p>首先，创建你想汇总数据的 TensorFlow 图，然后再选择你想在哪个节点进行汇总(summary)操作。</p>
+<p>比如，假设你正在训练一个卷积神经网络，用于识别 MNISt 标签。你可能希望记录学习速度(learning rate)如何变化，以及目标函数如何变化。通过向节点附加scalar_summary操作来分别输出学习速度和期望误差。然后你可以给每个 scalary_summary 分配一个有意义的 标签 ，比如 ‘learning rate’ 和 ‘loss function’ 。或者你还希望显示一个特殊层中激活的分布，或者梯度权重的分布。可以通过分别附加 histogram_summary 运算来收集权重变量和梯度输出。</p>
+<p>在TensorFlow中，所有的操作只有当你执行，或者另一个操作依赖于它的输出时才会运行。我们刚才创建的这些 节点(summary nodes)都围绕着你的图像:没有任何操作依赖于它们的结果。因此，为了生成汇总信息，我们需 要运行所有这些节点。这样的手动工作是很乏味的，因此可以使用<code>tf.merge_all_summaries</code>来将他们合并为一个操作。 </p>
+<p>然后你可以执行合并命令，它会依据特点步骤将所有数据生成一个序列化的Summary protobuf对象。最后，为了 将汇总数据写入磁盘，需要将汇总的protobuf对象传递给<code>tf.train.Summarywriter</code>。 </p>
+<p>SummaryWriter 的构造函数中包含了参数 logdir。这个 logdir 非常重要，所有事件都会写到它所指的目录 下。此外， SummaryWriter 中还包含了一个可选择的参数 GraphDef 。如果输入了该参数，那么 TensorBoard 也会显示你的图像。 </p>
+<p>现在已经修改了你的图，也有了 SummaryWriter ，现在就可以运行你的神经网络了!如果你愿意的话，你可以每 一步执行一次合并汇总，这样你会得到一大堆训练数据。这很有可能超过了你想要的数据量。你也可以每一百步 执行一次合并汇总，或者如下面代码里示范的这样。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">merged_summary_op = tf.merge_all_summaries()</span><br><span class="line">summary_writer = tf.train.SummaryWriter(&apos;/tmp/mnist_logs&apos;, sess.graph)</span><br><span class="line">total_step = 0</span><br><span class="line">while training:</span><br><span class="line">  total_step += 1</span><br><span class="line">  session.run(training_op)</span><br><span class="line">  if total_step % 100 == 0:</span><br><span class="line">    summary_str = session.run(merged_summary_op)</span><br><span class="line">    summary_writer.add_summary(summary_str, total_step)</span><br></pre></td></tr></table></figure>
+<p>现在已经准备好用 TensorBoard 来可视化这些数据了。</p>
+<h4 id="3-2-2-启动TensorBoard"><a href="#3-2-2-启动TensorBoard" class="headerlink" title="3.2.2 启动TensorBoard"></a>3.2.2 启动TensorBoard</h4><p>在terminal中输入下面命令（log文件地址需填写准确）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tensorboard --logdir=/path/to/log-directory</span><br></pre></td></tr></table></figure>
+<h4 id="3-2-3-名称域（Name-Scoping）和节点（Node）"><a href="#3-2-3-名称域（Name-Scoping）和节点（Node）" class="headerlink" title="3.2.3 名称域（Name Scoping）和节点（Node）"></a>3.2.3 名称域（Name Scoping）和节点（Node）</h4><p>典型的 TensorFlow 可以有数以千计的节点，如此多而难以一下全部看到，甚至无法使用标准图表工具来展示。为简单起见，我们为变量名划定范围，并且可视化把该信息用于在图表中的节点上定义一个层级。默认情况下， 只有顶层节点会显示。下面这个例子使用 <code>tf.name_scope</code>在 <code>hidden</code> 命名域下定义了三个操作:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">with tf.name_scope(&apos;hidden&apos;) as scope:</span><br><span class="line">  a = tf.constant(5, name=&apos;alpha&apos;)</span><br><span class="line">  W = tf.Variable(tf.random_uniform([1, 2], -1.0, 1.0), name=&apos;weights&apos;)</span><br><span class="line">  b = tf.Variable(tf.zeros([1]), name=&apos;biases&apos;)</span><br></pre></td></tr></table></figure>
+<p>结果是得到了下面三个操作名: </p>
+<p>• hidden/alpha<br>• hidden/weights<br>• hidden/biases </p>
+<p>默认地，三个操作名会折叠为一个节点并标注为 hidden 。其额外细节并没有丢失，你可以双击，或点击右上方橙 色的 + 来展开节点，然后就会看到三个子节点 alpha ， weights 和 biases 了。 </p>
+<p><img src="graph.png" alt></p>
+<p>通过名称域把节点分组来得到可读性高的图表很关键的。如果你在构建一个模型，名称域就可以用来控制可视化结果。你的名称域越好，可视性就越好。 </p>
+<p>TensorFlow 图表有两种连接关系:数据依赖和控制依赖。数据依赖显示两个操作之间tensor流程，用实心箭头指示，而控制依赖用点线表示。</p>
+<h3 id="3-3-使用GPUs"><a href="#3-3-使用GPUs" class="headerlink" title="3.3 使用GPUs"></a>3.3 使用GPUs</h3><h4 id="3-3-1-支持的设备"><a href="#3-3-1-支持的设备" class="headerlink" title="3.3.1 支持的设备"></a>3.3.1 支持的设备</h4><p>在一套标准的系统上通常有多个计算设备. TensorFlow 支持 CPU 和 GPU 这两种设备. 我们用指定字符串来标识这些设备. 比如: </p>
+<ul>
+<li>“/cpu:0” : 机器中的 CPU </li>
+<li>“/gpu:0” : 机器中的 GPU, 如果你有一个的话. </li>
+<li>“/gpu:1” : 机器中的第二个 GPU, 以此类推… </li>
+</ul>
+<p>如果一个 TensorFlow 的 operation 中兼有 CPU 和 GPU 的实现, 当这个算子被指派设备时, GPU 有优先权. 比 如 matmul 中 CPU 和 GPU kernel 函数都存在. 那么在 cpu:0 和 gpu:0 中, matmul operation 会被指派给 gpu:0 . </p>
+<h4 id="3-3-2-记录设备指派情况"><a href="#3-3-2-记录设备指派情况" class="headerlink" title="3.3.2 记录设备指派情况"></a>3.3.2 记录设备指派情况</h4><p>为了获取你的 operations 和 Tensor 被指派到哪个设备上运行, 用 log_device_placement 新建一个 session , 并设置为 True . </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 新建一个 graph. </span><br><span class="line">a = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[2, 3], name=&apos;a&apos;)</span><br><span class="line">b = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[3, 2], name=&apos;b&apos;)</span><br><span class="line">c = tf.matmul(a, b)</span><br><span class="line"># 新建session with log_device_placement并设置为True. </span><br><span class="line">sess = tf.Session(config=tf.ConfigProto(log_device_placement=True)) </span><br><span class="line"># 运行这个 op. </span><br><span class="line">print sess.run(c)</span><br></pre></td></tr></table></figure>
+<h4 id="3-3-3-手工指派设备"><a href="#3-3-3-手工指派设备" class="headerlink" title="3.3.3 手工指派设备"></a>3.3.3 手工指派设备</h4><p>如果你不想使用系统来为 operation 指派设备, 而是手工指派设备, 你可以用 <code>with tf.device</code>创建一个设备环境, 这个环境下的 operation 都统一运行在环境指定的设备上.</p>
+<p># 新建一个graph. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">with tf.device(&apos;/cpu:0&apos;):</span><br><span class="line">  a = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[2, 3], name=&apos;a&apos;)</span><br><span class="line">  b = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[3, 2], name=&apos;b&apos;)</span><br><span class="line">c = tf.matmul(a, b)</span><br><span class="line"># 新建session with log_device_placement并设置为True. </span><br><span class="line">sess = tf.Session(config=tf.ConfigProto(log_device_placement=True)) </span><br><span class="line"># 运行这个op. </span><br><span class="line">print sess.run(c)</span><br></pre></td></tr></table></figure>
+<p>你会发现现在 a 和 b 操作都被指派给了 <code>cpu:0</code> .</p>
+<h4 id="3-3-4-在多GPU系统里使用单一GPU"><a href="#3-3-4-在多GPU系统里使用单一GPU" class="headerlink" title="3.3.4 在多GPU系统里使用单一GPU"></a>3.3.4 在多GPU系统里使用单一GPU</h4><p>如果你的系统里有多个 GPU, 那么 ID 最小的 GPU 会默认使用. 如果你想用别的 GPU, 可以用下面的方法显式的声明你的偏好:</p>
+<p># 新建一个 graph. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">with tf.device(&apos;/gpu:2&apos;):</span><br><span class="line">  a = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[2, 3], name=&apos;a&apos;)</span><br><span class="line">  b = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[3, 2], name=&apos;b&apos;)</span><br><span class="line">  c = tf.matmul(a, b)</span><br><span class="line">  # 新建 session with log_device_placement 并设置为 True. </span><br><span class="line">  sess = tf.Session(config=tf.ConfigProto(</span><br><span class="line">      allow_soft_placement=True, log_device_placement=True))</span><br><span class="line">  # 运行这个 op. </span><br><span class="line">  print sess.run(c)</span><br></pre></td></tr></table></figure>
+<h4 id="3-3-5-使用多个GPU"><a href="#3-3-5-使用多个GPU" class="headerlink" title="3.3.5 使用多个GPU"></a>3.3.5 使用多个GPU</h4><p>如果你想让 TensorFlow 在多个 GPU 上运行, 你可以建立 multi-tower 结构, 在这个结构 里每个 tower 分别被指配给不同的 GPU 运行. 比如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 新建一个 graph.</span><br><span class="line">c = []</span><br><span class="line">for d in [&apos;/gpu:2&apos;, &apos;/gpu:3&apos;]:</span><br><span class="line">  with tf.device(d):</span><br><span class="line">    a = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[2, 3])</span><br><span class="line">    b = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[3, 2])</span><br><span class="line">    c.append(tf.matmul(a, b))</span><br><span class="line">with tf.device(&apos;/cpu:0&apos;):</span><br><span class="line">  sum = tf.add_n(c)</span><br><span class="line"># 新建session with log_device_placement并设置为True.</span><br><span class="line">sess = tf.Session(config=tf.ConfigProto(log_device_placement=True)) </span><br><span class="line"># 运行这个op.</span><br><span class="line">print sess.run(sum)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+   ----------------------------- 我是有底线 ~..~ ------------------------------
+    </div>
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/21/图像分割（传统方法）/" rel="next" title="图像分割（传统方法）">
+                <i class="fa fa-chevron-left"></i> 图像分割（传统方法）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Joczu</p>
+              <div class="site-description motion-element" itemprop="description">So let's set world on fire!</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="//cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.min.js"></script>
+  <script>
+      var gitalk = new Gitalk({
+        clientID: '4fb081c87c89ca9caac1',
+        clientSecret: 'f4a6ac5731041e6f44285e52e1e4effb0d9af715',
+        repo: 'joczu.github.io',
+        owner: 'joczu',
+        admin: 'joczu',
+        id: md5(location.pathname),
+        distractionFreeMode: 'true'
+      });
+      var div = document.createElement('div');
+      div.setAttribute("id", "gitalk_comments");
+      div.setAttribute("class", "post-nav");
+      var bro = document.getElementById('posts').getElementsByTagName('article');
+      bro = bro[0].getElementsByClassName('post-block');
+      bro = bro[0].getElementsByTagName('footer');
+      bro = bro[0];
+      bro.appendChild(div);
+      gitalk.render('gitalk_comments');
+  </script>
+
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-综述"><span class="nav-text">1 综述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-基本概念"><span class="nav-text">2 基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-计算图"><span class="nav-text">2.1 计算图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-构建图"><span class="nav-text">2.1.1 构建图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-在一个会话中启动图"><span class="nav-text">2.1.2 在一个会话中启动图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Tensor"><span class="nav-text">2.2 Tensor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-变量"><span class="nav-text">2.3 变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-Fetch"><span class="nav-text">2.4 Fetch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-Feed"><span class="nav-text">2.5 Feed</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-运作方式"><span class="nav-text">3 运作方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-变量：创建、初始化、保存和加载"><span class="nav-text">3.1 变量：创建、初始化、保存和加载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-创建"><span class="nav-text">3.1.1 创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-初始化"><span class="nav-text">3.1.2 初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-3-保存和加载"><span class="nav-text">3.1.3 保存和加载</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-TensorBoard：可视化学习"><span class="nav-text">3.2 TensorBoard：可视化学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-数据序列化"><span class="nav-text">3.2.1 数据序列化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2-启动TensorBoard"><span class="nav-text">3.2.2 启动TensorBoard</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-3-名称域（Name-Scoping）和节点（Node）"><span class="nav-text">3.2.3 名称域（Name Scoping）和节点（Node）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-使用GPUs"><span class="nav-text">3.3 使用GPUs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-1-支持的设备"><span class="nav-text">3.3.1 支持的设备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-2-记录设备指派情况"><span class="nav-text">3.3.2 记录设备指派情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-3-手工指派设备"><span class="nav-text">3.3.3 手工指派设备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-4-在多GPU系统里使用单一GPU"><span class="nav-text">3.3.4 在多GPU系统里使用单一GPU</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-5-使用多个GPU"><span class="nav-text">3.3.5 使用多个GPU</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Joczu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">87k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total">1:19</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
