@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="按分割目的划分 普通分割 将不同分属不同物体的像素区域分开。如前景与后景分割开，狗的区域与猫的区域与背景分割开。  语义分割 在普通分割的基础上，分类出每一块区域的语义（即这块区域是什么物体）。如把画面中的所有物体都指出它们各自的类别。  实例分割 在语义分割的基础上，给每个物体编号。如这个是该画面中的狗A，那个是画面中的狗B。   CNN图像语义分割一般流程： 下采样+上采样：Convlutio">
+<meta name="keywords" content="Image processing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图像分割（深度学习）">
+<meta property="og:url" content="http://yoursite.com/2019/05/24/图像分割（深度学习）/index.html">
+<meta property="og:site_name" content="Joczu">
+<meta property="og:description" content="按分割目的划分 普通分割 将不同分属不同物体的像素区域分开。如前景与后景分割开，狗的区域与猫的区域与背景分割开。  语义分割 在普通分割的基础上，分类出每一块区域的语义（即这块区域是什么物体）。如把画面中的所有物体都指出它们各自的类别。  实例分割 在语义分割的基础上，给每个物体编号。如这个是该画面中的狗A，那个是画面中的狗B。   CNN图像语义分割一般流程： 下采样+上采样：Convlutio">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/05/24/图像分割（深度学习）/net.png">
+<meta property="og:updated_time" content="2019-05-24T06:28:31.381Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图像分割（深度学习）">
+<meta name="twitter:description" content="按分割目的划分 普通分割 将不同分属不同物体的像素区域分开。如前景与后景分割开，狗的区域与猫的区域与背景分割开。  语义分割 在普通分割的基础上，分类出每一块区域的语义（即这块区域是什么物体）。如把画面中的所有物体都指出它们各自的类别。  实例分割 在语义分割的基础上，给每个物体编号。如这个是该画面中的狗A，那个是画面中的狗B。   CNN图像语义分割一般流程： 下采样+上采样：Convlutio">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/24/图像分割（深度学习）/net.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/05/24/图像分割（深度学习）/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>图像分割（深度学习） | Joczu</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joczu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">So let's set world on fire!</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/24/图像分割（深度学习）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joczu">
+      <meta itemprop="description" content="So let's set world on fire!">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joczu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">图像分割（深度学习）
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-24 14:06:59 / Modified: 14:28:31" itemprop="dateCreated datePublished" datetime="2019-05-24T14:06:59+08:00">2019-05-24</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/图像处理/" itemprop="url" rel="index"><span itemprop="name">图像处理</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article: </span>
+                
+                <span title="Symbols count in article">13k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">12 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="按分割目的划分"><a href="#按分割目的划分" class="headerlink" title="按分割目的划分"></a>按分割目的划分</h2><ul>
+<li><p><strong>普通分割</strong></p>
+<p>将不同分属不同物体的像素区域分开。<br>如前景与后景分割开，狗的区域与猫的区域与背景分割开。</p>
+</li>
+<li><p><strong>语义分割</strong></p>
+<p>在普通分割的基础上，分类出每一块区域的语义（即这块区域是什么物体）。<br>如把画面中的所有物体都指出它们各自的类别。</p>
+</li>
+<li><p><strong>实例分割</strong></p>
+<p>在语义分割的基础上，给每个物体编号。<br>如这个是该画面中的狗A，那个是画面中的狗B。</p>
+</li>
+</ul>
+<h2 id="CNN图像语义分割一般流程："><a href="#CNN图像语义分割一般流程：" class="headerlink" title="CNN图像语义分割一般流程："></a>CNN图像语义分割一般流程：</h2><ol>
+<li><strong>下采样+上采样：Convlution + Deconvlution／Resize</strong></li>
+<li><strong>多尺度特征融合：特征逐点相加／特征channel维度拼接</strong></li>
+<li><strong>获得像素级别的segement map：对每一个像素点进行判断类别</strong></li>
+</ol>
+<h2 id="图像分割网络结构比较"><a href="#图像分割网络结构比较" class="headerlink" title="图像分割网络结构比较"></a>图像分割网络结构比较</h2><p><img src="net.png" alt></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>FCN更像一种技巧。随着基本网络（如VGG， ResNet）性能的提升而不断进步。</li>
+<li>深度学习+概率图模型（PGM）是一种趋势。其实DL说白了就是进行特征提取，而PGM能够从数学理论很好的解释事物本质间的联系。</li>
+<li>概率图模型的网络化。因为PGM通常不太方便加入DL的模型中，将PGM网络化后能够是PGM参数自学习，同时构成end-to-end的系统。</li>
+</ul>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><h3 id="入门学习"><a href="#入门学习" class="headerlink" title="入门学习"></a>入门学习</h3><ol>
+<li>A 2017 Guide to Semantic Segmentation with Deep Learning 概述——用深度学习做语义分割<ul>
+<li>[<a href="http://blog.qure.ai/notes/semantic-segmentation-deep-learning-review" target="_blank" rel="noopener">http://blog.qure.ai/notes/semantic-segmentation-deep-learning-review</a>]</li>
+<li>中文翻译：[<a href="http://simonduan.site/2017/07/23/notes-semantic-segmentation-deep-learning-review/" target="_blank" rel="noopener">http://simonduan.site/2017/07/23/notes-semantic-segmentation-deep-learning-review/</a>]</li>
+</ul>
+</li>
+<li>从全卷积网络到大型卷积核：深度学习的语义分割全指南<ul>
+<li>[<a href="https://www.jiqizhixin.com/articles/2017-07-14-10" target="_blank" rel="noopener">https://www.jiqizhixin.com/articles/2017-07-14-10</a>]</li>
+</ul>
+</li>
+<li>Fully Convolutional Networks<ul>
+<li>[<a href="http://simtalk.cn/2016/11/01/Fully-Convolutional-Networks/" target="_blank" rel="noopener">http://simtalk.cn/2016/11/01/Fully-Convolutional-Networks/</a>]</li>
+</ul>
+</li>
+<li>语义分割中的深度学习方法全解：从FCN、SegNet到各代DeepLab<ul>
+<li>[<a href="https://zhuanlan.zhihu.com/p/27794982" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/27794982</a>]</li>
+</ul>
+</li>
+<li>图像语义分割之FCN和CRF<ul>
+<li>[<a href="https://zhuanlan.zhihu.com/p/22308032" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/22308032</a>]</li>
+</ul>
+</li>
+<li>从特斯拉到计算机视觉之「图像语义分割」<ul>
+<li>[<a href="http://www.52cs.org/?p=1089" target="_blank" rel="noopener">http://www.52cs.org/?p=1089</a>]</li>
+</ul>
+</li>
+<li>计算机视觉之语义分割<ul>
+<li>[<a href="http://blog.geohey.com/ji-suan-ji-shi-jue-zhi-yu-yi-fen-ge/" target="_blank" rel="noopener">http://blog.geohey.com/ji-suan-ji-shi-jue-zhi-yu-yi-fen-ge/</a>]</li>
+</ul>
+</li>
+<li>Segmentation Results: VOC2012 PASCAL语义分割比赛排名<ul>
+<li>[<a href="http://host.robots.ox.ac.uk:8080/leaderboard/displaylb.php?challengeid=11&amp;compid=6" target="_blank" rel="noopener">http://host.robots.ox.ac.uk:8080/leaderboard/displaylb.php?challengeid=11&amp;compid=6</a>]</li>
+</ul>
+</li>
+</ol>
+<h3 id="进阶论文"><a href="#进阶论文" class="headerlink" title="进阶论文"></a>进阶论文</h3><ol>
+<li>U-Net [<a href="https://arxiv.org/pdf/1505.04597.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1505.04597.pdf</a>]</li>
+<li>SegNet [<a href="https://arxiv.org/pdf/1511.00561.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1511.00561.pdf</a>]</li>
+<li>DeepLab [<a href="https://arxiv.org/pdf/1606.00915.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1606.00915.pdf</a>]</li>
+<li>FCN [<a href="https://arxiv.org/pdf/1605.06211.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1605.06211.pdf</a>]</li>
+<li>ENet [<a href="https://arxiv.org/pdf/1606.02147.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1606.02147.pdf</a>]</li>
+<li>LinkNet [<a href="https://arxiv.org/pdf/1707.03718.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1707.03718.pdf</a>]</li>
+<li>DenseNet [<a href="https://arxiv.org/pdf/1608.06993.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1608.06993.pdf</a>]</li>
+<li>Tiramisu [<a href="https://arxiv.org/pdf/1611.09326.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1611.09326.pdf</a>]</li>
+<li>DilatedNet [<a href="https://arxiv.org/pdf/1511.07122.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1511.07122.pdf</a>]</li>
+<li>PixelNet [<a href="https://arxiv.org/pdf/1609.06694.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1609.06694.pdf</a>]</li>
+<li>ICNet [<a href="https://arxiv.org/pdf/1704.08545.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1704.08545.pdf</a>]</li>
+<li>ERFNet [<a href="http://www.robesafe.uah.es/personal/eduardo.romera/pdfs/Romera17iv.pdf" target="_blank" rel="noopener">http://www.robesafe.uah.es/personal/eduardo.romera/pdfs/Romera17iv.pdf</a>]</li>
+<li>RefineNet [<a href="https://arxiv.org/pdf/1611.06612.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1611.06612.pdf</a>]</li>
+<li>PSPNet [<a href="https://arxiv.org/pdf/1612.01105.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1612.01105.pdf</a>]</li>
+<li>CRFasRNN [<a href="http://www.robots.ox.ac.uk/~szheng/papers/CRFasRNN.pdf" target="_blank" rel="noopener">http://www.robots.ox.ac.uk/%7Eszheng/papers/CRFasRNN.pdf</a>]</li>
+<li>Dilated convolution [<a href="https://arxiv.org/pdf/1511.07122.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1511.07122.pdf</a>]</li>
+<li>DeconvNet [<a href="https://arxiv.org/pdf/1505.04366.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1505.04366.pdf</a>]</li>
+<li>FRRN [<a href="https://arxiv.org/pdf/1611.08323.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1611.08323.pdf</a>]</li>
+<li>GCN [<a href="https://arxiv.org/pdf/1703.02719.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1703.02719.pdf</a>]</li>
+<li>DUC, HDC [<a href="https://arxiv.org/pdf/1702.08502.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1702.08502.pdf</a>]</li>
+<li>Segaware [<a href="https://arxiv.org/pdf/1708.04607.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1708.04607.pdf</a>]</li>
+<li>Semantic Segmentation using Adversarial Networks [<a href="https://arxiv.org/pdf/1611.08408.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1611.08408.pdf</a>]</li>
+</ol>
+<h3 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h3><ol>
+<li>A Review on Deep Learning Techniques Applied to Semantic Segmentation Alberto Garcia-Garcia, Sergio Orts-Escolano, Sergiu Oprea, Victor Villena-Martinez, Jose Garcia-Rodriguez 2017<ul>
+<li>[<a href="https://arxiv.org/abs/1704.06857" target="_blank" rel="noopener">https://arxiv.org/abs/1704.06857</a>]</li>
+</ul>
+</li>
+<li>Computer Vision for Autonomous Vehicles: Problems, Datasets and State-of-the-Art<ul>
+<li>[<a href="https://arxiv.org/abs/1704.05519" target="_blank" rel="noopener">https://arxiv.org/abs/1704.05519</a>]</li>
+</ul>
+</li>
+<li>基于内容的图像分割方法综述 姜 枫 顾 庆 郝慧珍 李 娜 郭延文 陈道蓄 2017<ul>
+<li>[<a href="http://www.jos.org.cn/ch/reader/create_pdf.aspx?file_no=5136&amp;journal_id=jos" target="_blank" rel="noopener">http://www.jos.org.cn/ch/reader/create_pdf.aspx?file_no=5136&amp;journal_id=jos</a>]</li>
+</ul>
+</li>
+</ol>
+<h3 id="Tutorial"><a href="#Tutorial" class="headerlink" title="Tutorial"></a>Tutorial</h3><ol>
+<li>Semantic Image Segmentation with Deep Learning<ul>
+<li>[<a href="http://www.robots.ox.ac.uk/~sadeep/files/crfasrnn_presentation.pdf" target="_blank" rel="noopener">http://www.robots.ox.ac.uk/~sadeep/files/crfasrnn_presentation.pdf</a>]</li>
+</ul>
+</li>
+<li>A 2017 Guide to Semantic Segmentation with Deep Learning<ul>
+<li>[<a href="http://blog.qure.ai/notes/semantic-segmentation-deep-learning-review" target="_blank" rel="noopener">http://blog.qure.ai/notes/semantic-segmentation-deep-learning-review</a>]</li>
+</ul>
+</li>
+<li>Image Segmentation with Tensorflow using CNNs and Conditional Random Fields<ul>
+<li>[<a href="http://warmspringwinds.github.io/tensorflow/tf-slim/2016/12/18/image-segmentation-with-tensorflow-using-cnns-and-conditional-random-fields/" target="_blank" rel="noopener">http://warmspringwinds.github.io/tensorflow/tf-slim/2016/12/18/image-segmentation-with-tensorflow-using-cnns-and-conditional-random-fields/</a>]</li>
+</ul>
+</li>
+</ol>
+<h3 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a>视频教程</h3><ol>
+<li>CS231n: Convolutional Neural Networks for Visual Recognition Lecture 11 Detection and Segmentation <ul>
+<li>[<a href="http://cs231n.stanford.edu/syllabus.html" target="_blank" rel="noopener">http://cs231n.stanford.edu/syllabus.html</a>]</li>
+</ul>
+</li>
+<li>Machine Learning for Semantic Segmentation - Basics of Modern Image Analysis<ul>
+<li>[<a href="https://www.youtube.com/watch?v=psLChcm8aiU" target="_blank" rel="noopener">https://www.youtube.com/watch?v=psLChcm8aiU</a>]</li>
+</ul>
+</li>
+</ol>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><h4 id="Semantic-segmentation"><a href="#Semantic-segmentation" class="headerlink" title="Semantic segmentation"></a>Semantic segmentation</h4><ol>
+<li>U-Net (<a href="https://arxiv.org/pdf/1505.04597.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1505.04597.pdf</a>)<ul>
+<li><a href="https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/" target="_blank" rel="noopener">https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/</a> (Caffe - Matlab)</li>
+<li><a href="https://github.com/jocicmarko/ultrasound-nerve-segmentation" target="_blank" rel="noopener">https://github.com/jocicmarko/ultrasound-nerve-segmentation</a> (Keras)</li>
+<li><a href="https://github.com/EdwardTyantov/ultrasound-nerve-segmentation(Keras" target="_blank" rel="noopener">https://github.com/EdwardTyantov/ultrasound-nerve-segmentation(Keras</a>)</li>
+<li><a href="https://github.com/ZFTurbo/ZF_UNET_224_Pretrained_Model" target="_blank" rel="noopener">https://github.com/ZFTurbo/ZF_UNET_224_Pretrained_Model</a> (Keras)</li>
+<li><a href="https://github.com/yihui-he/u-net" target="_blank" rel="noopener">https://github.com/yihui-he/u-net</a> (Keras)</li>
+<li><a href="https://github.com/jakeret/tf_unet" target="_blank" rel="noopener">https://github.com/jakeret/tf_unet</a> (Tensorflow)</li>
+<li><a href="https://github.com/DLTK/DLTK/blob/master/examples/Toy_segmentation/simple_dltk_unet.ipynb" target="_blank" rel="noopener">https://github.com/DLTK/DLTK/blob/master/examples/Toy_segmentation/simple_dltk_unet.ipynb</a> (Tensorflow)</li>
+<li><a href="https://github.com/divamgupta/image-segmentation-keras" target="_blank" rel="noopener">https://github.com/divamgupta/image-segmentation-keras</a> (Keras)</li>
+<li><a href="https://github.com/ZijunDeng/pytorch-semantic-segmentation" target="_blank" rel="noopener">https://github.com/ZijunDeng/pytorch-semantic-segmentation</a> (PyTorch)</li>
+<li><a href="https://github.com/akirasosa/mobile-semantic-segmentation" target="_blank" rel="noopener">https://github.com/akirasosa/mobile-semantic-segmentation</a> (Keras)</li>
+<li><a href="https://github.com/orobix/retina-unet" target="_blank" rel="noopener">https://github.com/orobix/retina-unet</a> (Keras)</li>
+</ul>
+</li>
+<li>SegNet (<a href="https://arxiv.org/pdf/1511.00561.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1511.00561.pdf</a>)<ul>
+<li><a href="https://github.com/alexgkendall/caffe-segnet" target="_blank" rel="noopener">https://github.com/alexgkendall/caffe-segnet</a> (Caffe)</li>
+<li><a href="https://github.com/developmentseed/caffe/tree/segnet-multi-gpu" target="_blank" rel="noopener">https://github.com/developmentseed/caffe/tree/segnet-multi-gpu</a> (Caffe)</li>
+<li><a href="https://github.com/preddy5/segnet" target="_blank" rel="noopener">https://github.com/preddy5/segnet</a> (Keras)</li>
+<li><a href="https://github.com/imlab-uiip/keras-segnet" target="_blank" rel="noopener">https://github.com/imlab-uiip/keras-segnet</a> (Keras)</li>
+<li><a href="https://github.com/andreaazzini/segnet" target="_blank" rel="noopener">https://github.com/andreaazzini/segnet</a> (Tensorflow)</li>
+<li><a href="https://github.com/fedor-chervinskii/segnet-torch" target="_blank" rel="noopener">https://github.com/fedor-chervinskii/segnet-torch</a> (Torch)</li>
+<li><a href="https://github.com/0bserver07/Keras-SegNet-Basic" target="_blank" rel="noopener">https://github.com/0bserver07/Keras-SegNet-Basic</a> (Keras)</li>
+<li><a href="https://github.com/tkuanlun350/Tensorflow-SegNet" target="_blank" rel="noopener">https://github.com/tkuanlun350/Tensorflow-SegNet</a> (Tensorflow)</li>
+<li><a href="https://github.com/divamgupta/image-segmentation-keras" target="_blank" rel="noopener">https://github.com/divamgupta/image-segmentation-keras</a> (Keras)</li>
+<li><a href="https://github.com/ZijunDeng/pytorch-semantic-segmentation" target="_blank" rel="noopener">https://github.com/ZijunDeng/pytorch-semantic-segmentation</a> (PyTorch)</li>
+<li><a href="https://github.com/chainer/chainercv/tree/master/examples/segnet(Chainer" target="_blank" rel="noopener">https://github.com/chainer/chainercv/tree/master/examples/segnet(Chainer</a>)</li>
+<li><a href="https://github.com/ykamikawa/keras-SegNet" target="_blank" rel="noopener">https://github.com/ykamikawa/keras-SegNet</a> (Keras)</li>
+</ul>
+</li>
+<li>DeepLab (<a href="https://arxiv.org/pdf/1606.00915.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1606.00915.pdf</a>)<ul>
+<li><a href="https://bitbucket.org/deeplab/deeplab-public/" target="_blank" rel="noopener">https://bitbucket.org/deeplab/deeplab-public/</a> (Caffe)</li>
+<li><a href="https://github.com/cdmh/deeplab-public" target="_blank" rel="noopener">https://github.com/cdmh/deeplab-public</a> (Caffe)</li>
+<li><a href="https://bitbucket.org/aquariusjay/deeplab-public-ver2" target="_blank" rel="noopener">https://bitbucket.org/aquariusjay/deeplab-public-ver2</a> (Caffe)</li>
+<li><a href="https://github.com/TheLegendAli/DeepLab-Context" target="_blank" rel="noopener">https://github.com/TheLegendAli/DeepLab-Context</a> (Caffe)</li>
+<li><a href="https://github.com/msracver/Deformable-ConvNets/tree/master/deeplab(MXNet" target="_blank" rel="noopener">https://github.com/msracver/Deformable-ConvNets/tree/master/deeplab(MXNet</a>)</li>
+<li><a href="https://github.com/DrSleep/tensorflow-deeplab-resnet" target="_blank" rel="noopener">https://github.com/DrSleep/tensorflow-deeplab-resnet</a> (Tensorflow)</li>
+<li><a href="https://github.com/muyang0320/tensorflow-deeplab-resnet-crf(TensorFlow" target="_blank" rel="noopener">https://github.com/muyang0320/tensorflow-deeplab-resnet-crf(TensorFlow</a>)</li>
+<li><a href="https://github.com/isht7/pytorch-deeplab-resnet" target="_blank" rel="noopener">https://github.com/isht7/pytorch-deeplab-resnet</a> (PyTorch)</li>
+<li><a href="https://github.com/bermanmaxim/jaccardSegment" target="_blank" rel="noopener">https://github.com/bermanmaxim/jaccardSegment</a> (PyTorch)</li>
+<li><a href="https://github.com/martinkersner/train-DeepLab" target="_blank" rel="noopener">https://github.com/martinkersner/train-DeepLab</a> (Caffe)</li>
+<li><a href="https://github.com/chenxi116/TF-deeplab" target="_blank" rel="noopener">https://github.com/chenxi116/TF-deeplab</a> (Tensorflow)</li>
+</ul>
+</li>
+<li>FCN (<a href="https://arxiv.org/pdf/1605.06211.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1605.06211.pdf</a>)<ul>
+<li><a href="https://github.com/vlfeat/matconvnet-fcn" target="_blank" rel="noopener">https://github.com/vlfeat/matconvnet-fcn</a> (MatConvNet)</li>
+<li><a href="https://github.com/shelhamer/fcn.berkeleyvision.org" target="_blank" rel="noopener">https://github.com/shelhamer/fcn.berkeleyvision.org</a> (Caffe)</li>
+<li><a href="https://github.com/MarvinTeichmann/tensorflow-fcn" target="_blank" rel="noopener">https://github.com/MarvinTeichmann/tensorflow-fcn</a> (Tensorflow)</li>
+<li><a href="https://github.com/aurora95/Keras-FCN" target="_blank" rel="noopener">https://github.com/aurora95/Keras-FCN</a> (Keras)</li>
+<li><a href="https://github.com/mzaradzki/neuralnets/tree/master/vgg_segmentation_keras" target="_blank" rel="noopener">https://github.com/mzaradzki/neuralnets/tree/master/vgg_segmentation_keras</a> (Keras)</li>
+<li><a href="https://github.com/k3nt0w/FCN_via_keras" target="_blank" rel="noopener">https://github.com/k3nt0w/FCN_via_keras</a> (Keras)</li>
+<li><a href="https://github.com/shekkizh/FCN.tensorflow" target="_blank" rel="noopener">https://github.com/shekkizh/FCN.tensorflow</a> (Tensorflow)</li>
+<li><a href="https://github.com/seewalker/tf-pixelwise" target="_blank" rel="noopener">https://github.com/seewalker/tf-pixelwise</a> (Tensorflow)</li>
+<li><a href="https://github.com/divamgupta/image-segmentation-keras" target="_blank" rel="noopener">https://github.com/divamgupta/image-segmentation-keras</a> (Keras)</li>
+<li><a href="https://github.com/ZijunDeng/pytorch-semantic-segmentation" target="_blank" rel="noopener">https://github.com/ZijunDeng/pytorch-semantic-segmentation</a> (PyTorch)</li>
+<li><a href="https://github.com/wkentaro/pytorch-fcn" target="_blank" rel="noopener">https://github.com/wkentaro/pytorch-fcn</a> (PyTorch)</li>
+<li><a href="https://github.com/wkentaro/fcn" target="_blank" rel="noopener">https://github.com/wkentaro/fcn</a> (Chainer)</li>
+<li><a href="https://github.com/apache/incubator-mxnet/tree/master/example/fcn-xs(MxNet" target="_blank" rel="noopener">https://github.com/apache/incubator-mxnet/tree/master/example/fcn-xs(MxNet</a>)</li>
+<li><a href="https://github.com/muyang0320/tf-fcn" target="_blank" rel="noopener">https://github.com/muyang0320/tf-fcn</a> (Tensorflow)</li>
+<li><a href="https://github.com/ycszen/pytorch-seg" target="_blank" rel="noopener">https://github.com/ycszen/pytorch-seg</a> (PyTorch)</li>
+<li><a href="https://github.com/Kaixhin/FCN-semantic-segmentation" target="_blank" rel="noopener">https://github.com/Kaixhin/FCN-semantic-segmentation</a> (PyTorch)</li>
+</ul>
+</li>
+<li>ENet (<a href="https://arxiv.org/pdf/1606.02147.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1606.02147.pdf</a>)<ul>
+<li><a href="https://github.com/TimoSaemann/ENet" target="_blank" rel="noopener">https://github.com/TimoSaemann/ENet</a> (Caffe)</li>
+<li><a href="https://github.com/e-lab/ENet-training" target="_blank" rel="noopener">https://github.com/e-lab/ENet-training</a> (Torch)</li>
+<li><a href="https://github.com/PavlosMelissinos/enet-keras" target="_blank" rel="noopener">https://github.com/PavlosMelissinos/enet-keras</a> (Keras)</li>
+</ul>
+</li>
+<li>LinkNet (<a href="https://arxiv.org/pdf/1707.03718.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1707.03718.pdf</a>)<ul>
+<li><a href="https://github.com/e-lab/LinkNet" target="_blank" rel="noopener">https://github.com/e-lab/LinkNet</a> (Torch)</li>
+</ul>
+</li>
+<li>DenseNet (<a href="https://arxiv.org/pdf/1608.06993.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1608.06993.pdf</a>)<ul>
+<li><a href="https://github.com/flyyufelix/DenseNet-Keras" target="_blank" rel="noopener">https://github.com/flyyufelix/DenseNet-Keras</a> (Keras)</li>
+</ul>
+</li>
+<li>Tiramisu (<a href="https://arxiv.org/pdf/1611.09326.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1611.09326.pdf</a>)<ul>
+<li><a href="https://github.com/0bserver07/One-Hundred-Layers-Tiramisu" target="_blank" rel="noopener">https://github.com/0bserver07/One-Hundred-Layers-Tiramisu</a> (Keras)</li>
+<li><a href="https://github.com/SimJeg/FC-DenseNet" target="_blank" rel="noopener">https://github.com/SimJeg/FC-DenseNet</a> (Lasagne)</li>
+</ul>
+</li>
+<li>DilatedNet (<a href="https://arxiv.org/pdf/1511.07122.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1511.07122.pdf</a>)<ul>
+<li><a href="https://github.com/nicolov/segmentation_keras" target="_blank" rel="noopener">https://github.com/nicolov/segmentation_keras</a> (Keras)</li>
+</ul>
+</li>
+<li>PixelNet (<a href="https://arxiv.org/pdf/1609.06694.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1609.06694.pdf</a>)<ul>
+<li><a href="https://github.com/aayushbansal/PixelNet" target="_blank" rel="noopener">https://github.com/aayushbansal/PixelNet</a> (Caffe)</li>
+</ul>
+</li>
+<li>ICNet (<a href="https://arxiv.org/pdf/1704.08545.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1704.08545.pdf</a>)<ul>
+<li><a href="https://github.com/hszhao/ICNet" target="_blank" rel="noopener">https://github.com/hszhao/ICNet</a> (Caffe)</li>
+</ul>
+</li>
+<li>ERFNet (<a href="http://www.robesafe.uah.es/personal/eduardo.romera/pdfs/Romera17iv.pdf" target="_blank" rel="noopener">http://www.robesafe.uah.es/personal/eduardo.romera/pdfs/Romera17iv.pdf</a>)<ul>
+<li><a href="https://github.com/Eromera/erfnet" target="_blank" rel="noopener">https://github.com/Eromera/erfnet</a> (Torch)</li>
+</ul>
+</li>
+<li>RefineNet (<a href="https://arxiv.org/pdf/1611.06612.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1611.06612.pdf</a>)<ul>
+<li><a href="https://github.com/guosheng/refinenet" target="_blank" rel="noopener">https://github.com/guosheng/refinenet</a> (MatConvNet)</li>
+</ul>
+</li>
+<li>PSPNet (<a href="https://arxiv.org/pdf/1612.01105.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1612.01105.pdf</a>)<ul>
+<li><a href="https://github.com/hszhao/PSPNet" target="_blank" rel="noopener">https://github.com/hszhao/PSPNet</a> (Caffe)</li>
+<li><a href="https://github.com/ZijunDeng/pytorch-semantic-segmentation" target="_blank" rel="noopener">https://github.com/ZijunDeng/pytorch-semantic-segmentation</a> (PyTorch)</li>
+<li><a href="https://github.com/mitmul/chainer-pspnet" target="_blank" rel="noopener">https://github.com/mitmul/chainer-pspnet</a> (Chainer)</li>
+<li><a href="https://github.com/Vladkryvoruchko/PSPNet-Keras-tensorflow(Keras/Tensorflow" target="_blank" rel="noopener">https://github.com/Vladkryvoruchko/PSPNet-Keras-tensorflow(Keras/Tensorflow</a>)</li>
+<li><a href="https://github.com/pudae/tensorflow-pspnet" target="_blank" rel="noopener">https://github.com/pudae/tensorflow-pspnet</a> (Tensorflow)</li>
+</ul>
+</li>
+<li>CRFasRNN (<a href="http://www.robots.ox.ac.uk/%7Eszheng/papers/CRFasRNN.pdf" target="_blank" rel="noopener">http://www.robots.ox.ac.uk/%7Eszheng/papers/CRFasRNN.pdf</a>)<ul>
+<li><a href="https://github.com/torrvision/crfasrnn" target="_blank" rel="noopener">https://github.com/torrvision/crfasrnn</a> (Caffe)</li>
+<li><a href="https://github.com/sadeepj/crfasrnn_keras" target="_blank" rel="noopener">https://github.com/sadeepj/crfasrnn_keras</a> (Keras)</li>
+</ul>
+</li>
+<li>Dilated convolution (<a href="https://arxiv.org/pdf/1511.07122.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1511.07122.pdf</a>)<ul>
+<li><a href="https://github.com/fyu/dilation" target="_blank" rel="noopener">https://github.com/fyu/dilation</a> (Caffe)</li>
+<li><a href="https://github.com/fyu/drn#semantic-image-segmentataion" target="_blank" rel="noopener">https://github.com/fyu/drn#semantic-image-segmentataion</a> (PyTorch)</li>
+<li><a href="https://github.com/hangzhaomit/semantic-segmentation-pytorch" target="_blank" rel="noopener">https://github.com/hangzhaomit/semantic-segmentation-pytorch</a> (PyTorch)</li>
+</ul>
+</li>
+<li>DeconvNet (<a href="https://arxiv.org/pdf/1505.04366.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1505.04366.pdf</a>)<ul>
+<li><a href="http://cvlab.postech.ac.kr/research/deconvnet/" target="_blank" rel="noopener">http://cvlab.postech.ac.kr/research/deconvnet/</a> (Caffe)</li>
+<li><a href="https://github.com/HyeonwooNoh/DeconvNet" target="_blank" rel="noopener">https://github.com/HyeonwooNoh/DeconvNet</a> (Caffe)</li>
+<li><a href="https://github.com/fabianbormann/Tensorflow-DeconvNet-Segmentation(Tensorflow" target="_blank" rel="noopener">https://github.com/fabianbormann/Tensorflow-DeconvNet-Segmentation(Tensorflow</a>)</li>
+</ul>
+</li>
+<li>FRRN (<a href="https://arxiv.org/pdf/1611.08323.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1611.08323.pdf</a>)<ul>
+<li><a href="https://github.com/TobyPDE/FRRN" target="_blank" rel="noopener">https://github.com/TobyPDE/FRRN</a> (Lasagne)</li>
+</ul>
+</li>
+<li>GCN (<a href="https://arxiv.org/pdf/1703.02719.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1703.02719.pdf</a>)<ul>
+<li><a href="https://github.com/ZijunDeng/pytorch-semantic-segmentation" target="_blank" rel="noopener">https://github.com/ZijunDeng/pytorch-semantic-segmentation</a> (PyTorch)</li>
+<li><a href="https://github.com/ycszen/pytorch-seg" target="_blank" rel="noopener">https://github.com/ycszen/pytorch-seg</a> (PyTorch)</li>
+</ul>
+</li>
+<li>DUC, HDC (<a href="https://arxiv.org/pdf/1702.08502.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1702.08502.pdf</a>)<ul>
+<li><a href="https://github.com/ZijunDeng/pytorch-semantic-segmentation" target="_blank" rel="noopener">https://github.com/ZijunDeng/pytorch-semantic-segmentation</a> (PyTorch)</li>
+<li><a href="https://github.com/ycszen/pytorch-seg" target="_blank" rel="noopener">https://github.com/ycszen/pytorch-seg</a> (PyTorch)</li>
+</ul>
+</li>
+<li>Segaware (<a href="https://arxiv.org/pdf/1708.04607.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1708.04607.pdf</a>)<ul>
+<li><a href="https://github.com/aharley/segaware" target="_blank" rel="noopener">https://github.com/aharley/segaware</a> (Caffe)</li>
+</ul>
+</li>
+<li>Semantic Segmentation using Adversarial Networks (<a href="https://arxiv.org/pdf/1611.08408.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1611.08408.pdf</a>)<ul>
+<li><a href="https://github.com/oyam/Semantic-Segmentation-using-Adversarial-Networks" target="_blank" rel="noopener">https://github.com/oyam/Semantic-Segmentation-using-Adversarial-Networks</a> (Chainer)</li>
+</ul>
+</li>
+</ol>
+<h4 id="Instance-aware-segmentation"><a href="#Instance-aware-segmentation" class="headerlink" title="Instance aware segmentation"></a>Instance aware segmentation</h4><ol>
+<li>FCIS [<a href="https://arxiv.org/pdf/1611.07709.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1611.07709.pdf</a>]<ul>
+<li><a href="https://github.com/msracver/FCIS" target="_blank" rel="noopener">https://github.com/msracver/FCIS</a> [MxNet]</li>
+</ul>
+</li>
+<li>MNC [<a href="https://arxiv.org/pdf/1512.04412.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1512.04412.pdf</a>]<ul>
+<li><a href="https://github.com/daijifeng001/MNC" target="_blank" rel="noopener">https://github.com/daijifeng001/MNC</a> [Caffe]</li>
+</ul>
+</li>
+<li>DeepMask [<a href="https://arxiv.org/pdf/1506.06204.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1506.06204.pdf</a>]<ul>
+<li><a href="https://github.com/facebookresearch/deepmask" target="_blank" rel="noopener">https://github.com/facebookresearch/deepmask</a> [Torch]</li>
+</ul>
+</li>
+<li>SharpMask [<a href="https://arxiv.org/pdf/1603.08695.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1603.08695.pdf</a>]<ul>
+<li><a href="https://github.com/facebookresearch/deepmask" target="_blank" rel="noopener">https://github.com/facebookresearch/deepmask</a> [Torch]</li>
+</ul>
+</li>
+<li>Mask-RCNN [<a href="https://arxiv.org/pdf/1703.06870.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1703.06870.pdf</a>]<ul>
+<li><a href="https://github.com/CharlesShang/FastMaskRCNN" target="_blank" rel="noopener">https://github.com/CharlesShang/FastMaskRCNN</a> [Tensorflow]</li>
+<li><a href="https://github.com/jasjeetIM/Mask-RCNN" target="_blank" rel="noopener">https://github.com/jasjeetIM/Mask-RCNN</a> [Caffe]</li>
+<li><a href="https://github.com/TuSimple/mx-maskrcnn" target="_blank" rel="noopener">https://github.com/TuSimple/mx-maskrcnn</a> [MxNet]</li>
+<li><a href="https://github.com/matterport/Mask_RCNN" target="_blank" rel="noopener">https://github.com/matterport/Mask_RCNN</a> [Keras]</li>
+</ul>
+</li>
+<li>RIS [<a href="https://arxiv.org/pdf/1511.08250.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1511.08250.pdf</a>]<ul>
+<li><a href="https://github.com/bernard24/RIS" target="_blank" rel="noopener">https://github.com/bernard24/RIS</a> [Torch]</li>
+</ul>
+</li>
+<li>FastMask [<a href="https://arxiv.org/pdf/1612.08843.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1612.08843.pdf</a>]<ul>
+<li><a href="https://github.com/voidrank/FastMask" target="_blank" rel="noopener">https://github.com/voidrank/FastMask</a> [Caffe]</li>
+</ul>
+</li>
+</ol>
+<h4 id="Satellite-images-segmentation"><a href="#Satellite-images-segmentation" class="headerlink" title="Satellite images segmentation"></a>Satellite images segmentation</h4><ul>
+<li><a href="https://github.com/mshivaprakash/sat-seg-thesis" target="_blank" rel="noopener">https://github.com/mshivaprakash/sat-seg-thesis</a></li>
+<li><a href="https://github.com/KGPML/Hyperspectral" target="_blank" rel="noopener">https://github.com/KGPML/Hyperspectral</a></li>
+<li><a href="https://github.com/lopuhin/kaggle-dstl" target="_blank" rel="noopener">https://github.com/lopuhin/kaggle-dstl</a></li>
+<li><a href="https://github.com/mitmul/ssai" target="_blank" rel="noopener">https://github.com/mitmul/ssai</a></li>
+<li><a href="https://github.com/mitmul/ssai-cnn" target="_blank" rel="noopener">https://github.com/mitmul/ssai-cnn</a></li>
+<li><a href="https://github.com/azavea/raster-vision" target="_blank" rel="noopener">https://github.com/azavea/raster-vision</a></li>
+<li><a href="https://github.com/nshaud/DeepNetsForEO" target="_blank" rel="noopener">https://github.com/nshaud/DeepNetsForEO</a></li>
+<li><a href="https://github.com/trailbehind/DeepOSM" target="_blank" rel="noopener">https://github.com/trailbehind/DeepOSM</a></li>
+</ul>
+<h4 id="Video-segmentation"><a href="#Video-segmentation" class="headerlink" title="Video segmentation"></a>Video segmentation</h4><ul>
+<li><a href="https://github.com/shelhamer/clockwork-fcn" target="_blank" rel="noopener">https://github.com/shelhamer/clockwork-fcn</a></li>
+<li><a href="https://github.com/JingchunCheng/Seg-with-SPN" target="_blank" rel="noopener">https://github.com/JingchunCheng/Seg-with-SPN</a></li>
+</ul>
+<h4 id="Autonomous-driving"><a href="#Autonomous-driving" class="headerlink" title="Autonomous driving"></a>Autonomous driving</h4><ul>
+<li><a href="https://github.com/MarvinTeichmann/MultiNet" target="_blank" rel="noopener">https://github.com/MarvinTeichmann/MultiNet</a></li>
+<li><a href="https://github.com/MarvinTeichmann/KittiSeg" target="_blank" rel="noopener">https://github.com/MarvinTeichmann/KittiSeg</a></li>
+<li><a href="https://github.com/vxy10/p5_VehicleDetection_Unet" target="_blank" rel="noopener">https://github.com/vxy10/p5_VehicleDetection_Unet</a> [Keras]</li>
+<li><a href="https://github.com/ndrplz/self-driving-car" target="_blank" rel="noopener">https://github.com/ndrplz/self-driving-car</a></li>
+<li><a href="https://github.com/mvirgo/MLND-Capstone" target="_blank" rel="noopener">https://github.com/mvirgo/MLND-Capstone</a></li>
+</ul>
+<h4 id="Annotation-Tools"><a href="#Annotation-Tools" class="headerlink" title="Annotation Tools:"></a>Annotation Tools:</h4><ul>
+<li><a href="https://github.com/AKSHAYUBHAT/ImageSegmentation" target="_blank" rel="noopener">https://github.com/AKSHAYUBHAT/ImageSegmentation</a></li>
+<li><a href="https://github.com/kyamagu/js-segment-annotator" target="_blank" rel="noopener">https://github.com/kyamagu/js-segment-annotator</a></li>
+<li><a href="https://github.com/CSAILVision/LabelMeAnnotationTool" target="_blank" rel="noopener">https://github.com/CSAILVision/LabelMeAnnotationTool</a></li>
+<li><a href="https://github.com/seanbell/opensurfaces-segmentation-ui" target="_blank" rel="noopener">https://github.com/seanbell/opensurfaces-segmentation-ui</a></li>
+<li><a href="https://github.com/lzx1413/labelImgPlus" target="_blank" rel="noopener">https://github.com/lzx1413/labelImgPlus</a></li>
+<li><a href="https://github.com/wkentaro/labelme" target="_blank" rel="noopener">https://github.com/wkentaro/labelme</a></li>
+</ul>
+<h3 id="Datasets"><a href="#Datasets" class="headerlink" title="Datasets"></a>Datasets</h3><ol>
+<li>Stanford Background Dataset[<a href="http://dags.stanford.edu/projects/scenedataset.html" target="_blank" rel="noopener">http://dags.stanford.edu/projects/scenedataset.html</a>]</li>
+<li>Sift Flow Dataset[<a href="http://people.csail.mit.edu/celiu/SIFTflow/" target="_blank" rel="noopener">http://people.csail.mit.edu/celiu/SIFTflow/</a>]</li>
+<li>Barcelona Dataset[<a href="http://www.cs.unc.edu/~jtighe/Papers/ECCV10/" target="_blank" rel="noopener">http://www.cs.unc.edu/~jtighe/Papers/ECCV10/</a>]</li>
+<li>Microsoft COCO dataset[<a href="http://mscoco.org/" target="_blank" rel="noopener">http://mscoco.org/</a>]</li>
+<li>MSRC Dataset[<a href="http://research.microsoft.com/en-us/projects/objectclassrecognition/" target="_blank" rel="noopener">http://research.microsoft.com/en-us/projects/objectclassrecognition/</a>]</li>
+<li>LITS Liver Tumor Segmentation Dataset[<a href="https://competitions.codalab.org/competitions/15595" target="_blank" rel="noopener">https://competitions.codalab.org/competitions/15595</a>]</li>
+<li>KITTI[<a href="http://www.cvlibs.net/datasets/kitti/eval_road.php" target="_blank" rel="noopener">http://www.cvlibs.net/datasets/kitti/eval_road.php</a>]</li>
+<li>Stanford background dataset[<a href="http://dags.stanford.edu/projects/scenedataset.html" target="_blank" rel="noopener">http://dags.stanford.edu/projects/scenedataset.html</a>]</li>
+<li>Data from Games dataset[<a href="https://download.visinf.tu-darmstadt.de/data/from_games/" target="_blank" rel="noopener">https://download.visinf.tu-darmstadt.de/data/from_games/</a>]</li>
+<li>Human parsing dataset[<a href="https://github.com/lemondan/HumanParsing-Dataset" target="_blank" rel="noopener">https://github.com/lemondan/HumanParsing-Dataset</a>]</li>
+<li>Silenko person database[<a href="https://github.com/Maxfashko/CamVid" target="_blank" rel="noopener">https://github.com/Maxfashko/CamVid</a>]</li>
+<li>Mapillary Vistas Dataset[<a href="https://www.mapillary.com/dataset/vistas" target="_blank" rel="noopener">https://www.mapillary.com/dataset/vistas</a>]</li>
+<li>Microsoft AirSim[<a href="https://github.com/Microsoft/AirSim" target="_blank" rel="noopener">https://github.com/Microsoft/AirSim</a>]</li>
+<li>MIT Scene Parsing Benchmark[<a href="http://sceneparsing.csail.mit.edu/" target="_blank" rel="noopener">http://sceneparsing.csail.mit.edu/</a>]</li>
+<li>COCO 2017 Stuff Segmentation Challenge[<a href="http://cocodataset.org/#stuff-challenge2017" target="_blank" rel="noopener">http://cocodataset.org/#stuff-challenge2017</a>]</li>
+<li>ADE20K Dataset[<a href="http://groups.csail.mit.edu/vision/datasets/ADE20K/" target="_blank" rel="noopener">http://groups.csail.mit.edu/vision/datasets/ADE20K/</a>]</li>
+<li>INRIA Annotations for Graz-02[<a href="http://lear.inrialpes.fr/people/marszalek/data/ig02/" target="_blank" rel="noopener">http://lear.inrialpes.fr/people/marszalek/data/ig02/</a>]</li>
+</ol>
+<h3 id="比赛"><a href="#比赛" class="headerlink" title="比赛"></a>比赛</h3><ol>
+<li>MSRC-21 [<a href="http://rodrigob.github.io/are_we_there_yet/build/semantic_labeling_datasets_results.html" target="_blank" rel="noopener">http://rodrigob.github.io/are_we_there_yet/build/semantic_labeling_datasets_results.html</a>]</li>
+<li>Cityscapes [<a href="https://www.cityscapes-dataset.com/benchmarks/" target="_blank" rel="noopener">https://www.cityscapes-dataset.com/benchmarks/</a>]</li>
+<li>VOC2012 [<a href="http://host.robots.ox.ac.uk:8080/leaderboard/displaylb.php?challengeid=11&amp;compid=6" target="_blank" rel="noopener">http://host.robots.ox.ac.uk:8080/leaderboard/displaylb.php?challengeid=11&amp;compid=6</a>]</li>
+</ol>
+<h3 id="领域专家"><a href="#领域专家" class="headerlink" title="领域专家"></a>领域专家</h3><ol>
+<li>Jonathan Long<ul>
+<li>[<a href="http://people.eecs.berkeley.edu/~jonlong/" target="_blank" rel="noopener">http://people.eecs.berkeley.edu/~jonlong/</a>]</li>
+</ul>
+</li>
+<li>Liang-Chieh Chen<ul>
+<li>[<a href="http://liangchiehchen.com/" target="_blank" rel="noopener">http://liangchiehchen.com/</a>]</li>
+</ul>
+</li>
+<li>Hyeonwoo Noh<ul>
+<li>[<a href="http://cvlab.postech.ac.kr/~hyeonwoonoh/" target="_blank" rel="noopener">http://cvlab.postech.ac.kr/~hyeonwoonoh/</a>]</li>
+</ul>
+</li>
+<li>Bharath Hariharan<ul>
+<li>[<a href="http://home.bharathh.info/" target="_blank" rel="noopener">http://home.bharathh.info/</a>]</li>
+</ul>
+</li>
+<li>Fisher Yu<ul>
+<li>[<a href="http://www.yf.io/" target="_blank" rel="noopener">http://www.yf.io/</a>]</li>
+</ul>
+</li>
+<li>Vijay Badrinarayanan<ul>
+<li>[<a href="https://sites.google.com/site/vijaybacademichomepage/home/papers" target="_blank" rel="noopener">https://sites.google.com/site/vijaybacademichomepage/home/papers</a>]</li>
+</ul>
+</li>
+<li>Guosheng Lin<ul>
+<li>[<a href="https://sites.google.com/site/guoshenglin/" target="_blank" rel="noopener">https://sites.google.com/site/guoshenglin/</a>]</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+   ----------------------------- 我是有底线 ~..~ ------------------------------
+    </div>
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Image-processing/" rel="tag"># Image processing</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/22/TensorFlow总结/" rel="next" title="TensorFlow总结">
+                <i class="fa fa-chevron-left"></i> TensorFlow总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Joczu</p>
+              <div class="site-description motion-element" itemprop="description">So let's set world on fire!</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="//cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.min.js"></script>
+  <script>
+      var gitalk = new Gitalk({
+        clientID: '4fb081c87c89ca9caac1',
+        clientSecret: 'f4a6ac5731041e6f44285e52e1e4effb0d9af715',
+        repo: 'joczu.github.io',
+        owner: 'joczu',
+        admin: 'joczu',
+        id: md5(location.pathname),
+        distractionFreeMode: 'true'
+      });
+      var div = document.createElement('div');
+      div.setAttribute("id", "gitalk_comments");
+      div.setAttribute("class", "post-nav");
+      var bro = document.getElementById('posts').getElementsByTagName('article');
+      bro = bro[0].getElementsByClassName('post-block');
+      bro = bro[0].getElementsByTagName('footer');
+      bro = bro[0];
+      bro.appendChild(div);
+      gitalk.render('gitalk_comments');
+  </script>
+
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#按分割目的划分"><span class="nav-text">按分割目的划分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CNN图像语义分割一般流程："><span class="nav-text">CNN图像语义分割一般流程：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图像分割网络结构比较"><span class="nav-text">图像分割网络结构比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源"><span class="nav-text">资源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#入门学习"><span class="nav-text">入门学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进阶论文"><span class="nav-text">进阶论文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#综述"><span class="nav-text">综述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tutorial"><span class="nav-text">Tutorial</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视频教程"><span class="nav-text">视频教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Semantic-segmentation"><span class="nav-text">Semantic segmentation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Instance-aware-segmentation"><span class="nav-text">Instance aware segmentation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Satellite-images-segmentation"><span class="nav-text">Satellite images segmentation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Video-segmentation"><span class="nav-text">Video segmentation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Autonomous-driving"><span class="nav-text">Autonomous driving</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Annotation-Tools"><span class="nav-text">Annotation Tools:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Datasets"><span class="nav-text">Datasets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比赛"><span class="nav-text">比赛</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#领域专家"><span class="nav-text">领域专家</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Joczu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">101k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total">1:31</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
