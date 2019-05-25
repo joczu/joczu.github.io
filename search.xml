@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title>目标检测：r-cnn、fast、R-CNN、YOLO、SSD</title>
+      <title>目标检测：R-CNN、Fast R-CNN、Faster R-CNN、YOLO、SSD</title>
       <link href="/2019/05/25/R-CNN%E3%80%81YOLO%E3%80%81SSD/"/>
       <url>/2019/05/25/R-CNN%E3%80%81YOLO%E3%80%81SSD/</url>
       
@@ -20,7 +20,15 @@
       
         <tags>
             
-            <tag> 目标检测 </tag>
+            <tag> RCNN </tag>
+            
+            <tag> Fast RCNN </tag>
+            
+            <tag> Faster RCNN </tag>
+            
+            <tag> YOLO </tag>
+            
+            <tag> SSD </tag>
             
         </tags>
       
