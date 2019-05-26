@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="转自：[机器学习ML NOTE] CNN演化史(AlexNet、VGG、Inception、ResNet)+Keras Coding)  CNN演化史  我这里只列出几个比较重要的突破，也是比较经典的模型。  CNN Classification revolution 为什么AlexNet会标成红色呢？因为在2012年这一年中，AlexNet为一个重大的突破，也开始了大CNN时代，CNN开始有了很">
+<meta name="keywords" content="AlexNet,VGG,Inception,ResNet,Keras">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CNN演化史：AlexNet VGG Inception ResNet">
+<meta property="og:url" content="http://yoursite.com/2019/05/26/ResNet/index.html">
+<meta property="og:site_name" content="Joczu">
+<meta property="og:description" content="转自：[机器学习ML NOTE] CNN演化史(AlexNet、VGG、Inception、ResNet)+Keras Coding)  CNN演化史  我这里只列出几个比较重要的突破，也是比较经典的模型。  CNN Classification revolution 为什么AlexNet会标成红色呢？因为在2012年这一年中，AlexNet为一个重大的突破，也开始了大CNN时代，CNN开始有了很">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*_NM-YjF7PfKUqzcIaLCqpQ.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*Wb5a_EQyGRCC080gzof6WQ.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*OGKIZpwz5fkCjaGDLc89Xg.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*B-JrdBtl8j_UaegNMzYwgw.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/0*UAd520mZ3Y9V43td.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*L-cP8WibvFtx6U1Chv4gHg.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*Vk0CrK6Mn0ivj1OKVzTQag.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*a7CzlBrphNUUOwjHPG6R3A.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*ZBFU_090IVgqd_fMJIM1vQ.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*PmDW7pDK6-rb7H_SksKa9g.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*YfpAfqgtzmv0C0hKxjSYlA.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*jwwgznyAkVUU43EBvXYd6g.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*RRCHlOlqmtO7kQwjZ7kbjQ.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*j-EElbCcPBApN1zgMLXdOA.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*QrjIWmOHOoqfegwF12Yw-A.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*o_lYxIveuYYSqN0DylcM_g.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*k3Co1TZfc5A1Q0NyMe6VRg.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/0*ZZzeZUt5K7h0lu1t.gif">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*_W7yvHGEv40LHHFzRnpWKQ.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*Isekywaa_uOKnsk0wv9NUg.png">
+<meta property="og:updated_time" content="2019-05-26T08:41:15.156Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CNN演化史：AlexNet VGG Inception ResNet">
+<meta name="twitter:description" content="转自：[机器学习ML NOTE] CNN演化史(AlexNet、VGG、Inception、ResNet)+Keras Coding)  CNN演化史  我这里只列出几个比较重要的突破，也是比较经典的模型。  CNN Classification revolution 为什么AlexNet会标成红色呢？因为在2012年这一年中，AlexNet为一个重大的突破，也开始了大CNN时代，CNN开始有了很">
+<meta name="twitter:image" content="https://cdn-images-1.medium.com/max/1600/1*_NM-YjF7PfKUqzcIaLCqpQ.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/05/26/ResNet/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>CNN演化史：AlexNet VGG Inception ResNet | Joczu</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joczu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">So let's set world on fire!</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/26/ResNet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joczu">
+      <meta itemprop="description" content="So let's set world on fire!">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joczu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CNN演化史：AlexNet VGG Inception ResNet
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-26 16:37:13 / Modified: 16:41:15" itemprop="dateCreated datePublished" datetime="2019-05-26T16:37:13+08:00">2019-05-26</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article: </span>
+                
+                <span title="Symbols count in article">4.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">4 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>转自：<a href="[https://medium.com/%E9%9B%9E%E9%9B%9E%E8%88%87%E5%85%94%E5%85%94%E7%9A%84%E5%B7%A5%E7%A8%8B%E4%B8%96%E7%95%8C/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92-ml-note-cnn%E6%BC%94%E5%8C%96%E5%8F%B2-alexnet-vgg-inception-resnet-keras-coding-668f74879306](https://medium.com/雞雞與兔兔的工程世界/機器學習-ml-note-cnn演化史-alexnet-vgg-inception-resnet-keras-coding-668f74879306">[机器学习ML NOTE] CNN演化史(AlexNet、VGG、Inception、ResNet)+Keras Coding</a>)</p>
+<blockquote>
+<p><strong>CNN演化史</strong></p>
+</blockquote>
+<p>我这里只列出几个比较重要的突破，也是比较经典的模型。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*_NM-YjF7PfKUqzcIaLCqpQ.png" alt="img"></p>
+<p>CNN Classification revolution</p>
+<p>为什么AlexNet会标成红色呢？因为在2012年这一年中，AlexNet为一个重大的突破，也开始了大CNN时代，CNN开始有了很大的突破，各种CNN的模型也开始出现，也站稳了在影像上面很重要的一席之地，接下来我来简易介绍各种模型，然后也附上各种Model在分类上的实作(Keras)</p>
+<blockquote>
+<p><a href="http://www.dengfanxin.cn/wp-content/uploads/2016/03/1998Lecun.pdf" target="_blank" rel="noopener"><strong>LeNet(论文连结)</strong></a></p>
+</blockquote>
+<p>没错，这就是CNN之父，前面也介绍过了卷积跟池化，所以应该可以很容易理解LeNet的运作，就是简单利用了卷积跟池化，并接上全连结层做分类，这里我们用Mnist data来实作LeNet training</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*Wb5a_EQyGRCC080gzof6WQ.png" alt="img"></p>
+<p>LeNet Architecture, 1998</p>
+<iframe width="700" height="250" data-src="/media/c5be0dcb703a3da033c6afa147e9fa3d?postId=668f74879306" data-media-id="c5be0dcb703a3da033c6afa147e9fa3d" data-thumbnail="https://i.embed.ly/1/image?url=https%3A%2F%2Favatars3.githubusercontent.com%2Fu%2F22870603%3Fs%3D400%26v%3D4&amp;key=a19fcc184b9711e1b4764040d3dc5c07" class="progressiveMedia-iframe js-progressiveMedia-iframe" allowfullscreen frameborder="0" src="https://medium.com/media/c5be0dcb703a3da033c6afa147e9fa3d?postId=668f74879306" style="display: block; position: absolute; margin: auto; max-width: 100%; box-sizing: border-box; transform: translateZ(0px); top: 0px; left: 0px; width: 700px; height: 1627px;"></iframe>
+
+
+
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*OGKIZpwz5fkCjaGDLc89Xg.png" alt="img"></p>
+<p>Train 5 个epoch就可以达到98.69的精确率</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*B-JrdBtl8j_UaegNMzYwgw.png" alt="img"></p>
+<p>Loss 跟 Accuracy</p>
+<blockquote>
+<p><a href="https://www.nvidia.cn/content/tesla/pdf/machine-learning/imagenet-classification-with-deep-convolutional-nn.pdf" target="_blank" rel="noopener"><strong>AlexNet(论文连结)</strong></a></p>
+</blockquote>
+<p>AlexNet 在2012年的ImageNet LSVRC的比赛上拿了冠军，而且准确率完胜第二名，那时候造成很大的轰动，也使得CNN开始被重视，变成所谓的CNN大时代，之后的比赛也都是由CNN拿下冠军，深度学习正式大爆发。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/0*UAd520mZ3Y9V43td.png" alt="img"></p>
+<p>AlexNet structure</p>
+<p>AlexNet的特点：</p>
+<ol>
+<li>使用了非线性的激活函数(Activation function)：Relu<br>对于什么是Activation function，我之后会找时间来介绍，不懂的可以先参考这个<a href="https://blog.csdn.net/qrlhl/article/details/60883604" target="_blank" rel="noopener">网站</a>，在AlexNet以前，大部分的网路都是用tanh当作激活函数</li>
+<li>使用了Data augmentation 和Dropout 来防止Overfitting</li>
+<li>多个GPU并行运算</li>
+</ol>
+<p>之所以为什么上面架构会分成上下2层去训练，是因为当初在训练的时候记忆体不够所以分成两块在GPU上训练，其实这样的网路要弄成一层也是可以的，以下这张图就是一层的网路架构图，其实是跟LeNet有点类似的，这里我用开源dataset <a href="http://www.robots.ox.ac.uk/~vgg/data/flowers/17/" target="_blank" rel="noopener">oxflower17</a>来实行AlexNet，我也加入了data augumentation，大家可以参考看看。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*L-cP8WibvFtx6U1Chv4gHg.png" alt="img"></p>
+<iframe width="700" height="250" src="https://medium.com/media/eb1e2bebe7d0113e48a7dac2ec8cc225?postId=668f74879306" data-media-id="eb1e2bebe7d0113e48a7dac2ec8cc225" allowfullscreen frameborder="0" style="display: block; position: absolute; margin: auto; max-width: 100%; box-sizing: border-box; transform: translateZ(0px); top: 0px; left: 0px; width: 700px; height: 1935px;"></iframe>
+
+
+
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*Vk0CrK6Mn0ivj1OKVzTQag.png" alt="img"></p>
+<p>30个epochs可达到55% 准确值</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*a7CzlBrphNUUOwjHPG6R3A.png" alt="img"></p>
+<p>Loss and accuracy of AlexNet</p>
+<blockquote>
+<p><a href="https://arxiv.org/pdf/1409.1556.pdf" target="_blank" rel="noopener"><strong>VGGNet(论文连结)</strong></a></p>
+</blockquote>
+<p>VGGNet在2014年ILSVRC的分类比赛中拿到了第二名(第一名是等等要介绍的InceptionNet)，其实VGGNet跟AlexNet之间并没有什么太大的差异，只是将网路的深度变深，进而得到更好的结果，我一样用开源dataset <a href="http://www.robots.ox.ac.uk/~vgg/data/flowers/17/" target="_blank" rel="noopener">oxflower17</a>来实行VGG16Net，因为VGG16的深度变深，相对的，VGG的参数就会是AlexNet的好几倍，训练时间也会相对的较长。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*ZBFU_090IVgqd_fMJIM1vQ.png" alt="img"></p>
+<iframe width="700" height="250" data-src="/media/0cfa69aa6b07baeb72f665257b5e2d22?postId=668f74879306" data-media-id="0cfa69aa6b07baeb72f665257b5e2d22" data-thumbnail="https://i.embed.ly/1/image?url=https%3A%2F%2Favatars3.githubusercontent.com%2Fu%2F22870603%3Fs%3D400%26v%3D4&amp;key=a19fcc184b9711e1b4764040d3dc5c07" class="progressiveMedia-iframe js-progressiveMedia-iframe" allowfullscreen frameborder="0" src="https://medium.com/media/0cfa69aa6b07baeb72f665257b5e2d22?postId=668f74879306" style="display: block; position: absolute; margin: auto; max-width: 100%; box-sizing: border-box; transform: translateZ(0px); top: 0px; left: 0px; width: 700px; height: 1956.98px;"></iframe>
+
+
+
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*PmDW7pDK6-rb7H_SksKa9g.png" alt="img"></p>
+<p>VGG16的参数量为AlexNet的3倍左右</p>
+<blockquote>
+<p><strong>Inception(GoogLeNet)</strong></p>
+</blockquote>
+<p>GoogLeNet在2014年ILSVRC的分类比赛中拿到了第一名，GoogLeNet做了一个创新，他并不是像VGG或是AlexNet那种加深网路的概念，而是加入了一个叫做Inception的结构来取代了原本单纯的卷积层(但他其实也是利用卷积来达成)，而他的训练参数也比AlexNet少上好几倍，而且准确率相对更好，所以当时才拿下了第一名的宝座，一直到现在，Inception已经衍生到InceptionV4。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*YfpAfqgtzmv0C0hKxjSYlA.png" alt="img"></p>
+<p>GoogLeNet 架构</p>
+<p>而GoogLeNet最重要的就是Inception架构：</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*jwwgznyAkVUU43EBvXYd6g.png" alt="img"></p>
+<p>Inception架构</p>
+<p>GoogLeNet将3种convolution跟一个pooling叠在一起，增加了网路的宽度，而且这样堆叠在一起后，更能撷取输入图片的更多的细节讯息跟特征，那为什么要加一个1x1的卷积呢？其实他的目前就在于减少图片的维度跟减少训练参数，假设我们input的大小为100x100x56，如果我们做一个有125个filter的5x5卷积层之后(stride = 1 , pad = 2)，输出将为100x100x125 ，那么这个卷积层的参数就为56<em>5</em>5<em>125 = 175000，如果我们先经过28个filter的1x1的卷积，再经过有125个filter的5x5卷积层之后，输出一样为100x100x125，但是参数就减少成56</em>1<em>1</em>28+28<em>5</em>5*125=89068，相对少了快一半的参数。</p>
+<p>GoogleNet有以下几种不同的地方：</p>
+<ol>
+<li>将单纯的卷积层跟池化层改成Inception架构</li>
+<li>最后分类时使用average pooling来替代了全连结层</li>
+<li>网路加入了2个辅助分类器，为了避免梯度消失的情况</li>
+</ol>
+<p>论文连结：</p>
+<p><a href="http://arxiv.org/abs/1409.4842" target="_blank" rel="noopener">Inception V1</a> , Going Deeper withConvolutions.<br><a href="http://arxiv.org/abs/1502.03167" target="_blank" rel="noopener">Inception V2</a> , Batch Normalization:Accelerating Deep Network Training by Reducing Internal Covariate Shift.<br><a href="http://arxiv.org/abs/1512.00567" target="_blank" rel="noopener">Inception V3</a> ,Rethinking theInception Architecture for Computer Vision.<br><a href="http://arxiv.org/abs/1602.07261" target="_blank" rel="noopener">Inception V4</a> , Inception-v4,Inception-ResNet and the Impact of Residual Connections on Learning.</p>
+<p>我们用InceptionV1论文中提到的这个Table来实现GoogLeNet的网路，跟之前一样，都用开源dataset <a href="http://www.robots.ox.ac.uk/~vgg/data/flowers/17/" target="_blank" rel="noopener">oxflower17</a>来进行训练，</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*RRCHlOlqmtO7kQwjZ7kbjQ.png" alt="img"></p>
+<iframe width="700" height="250" data-src="/media/c74f689d87def4a92114fa1290b175ff?postId=668f74879306" data-media-id="c74f689d87def4a92114fa1290b175ff" data-thumbnail="https://i.embed.ly/1/image?url=https%3A%2F%2Favatars3.githubusercontent.com%2Fu%2F22870603%3Fs%3D400%26v%3D4&amp;key=a19fcc184b9711e1b4764040d3dc5c07" class="progressiveMedia-iframe js-progressiveMedia-iframe" allowfullscreen frameborder="0" src="https://medium.com/media/c74f689d87def4a92114fa1290b175ff?postId=668f74879306" style="display: block; position: absolute; margin: auto; max-width: 100%; box-sizing: border-box; transform: translateZ(0px); top: 0px; left: 0px; width: 700px; height: 2639px;"></iframe>
+
+
+
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*j-EElbCcPBApN1zgMLXdOA.png" alt="img"></p>
+<p>Inception的参数为VGG的1/20左右</p>
+<blockquote>
+<p><a href="https://arxiv.org/pdf/1512.03385.pdf" target="_blank" rel="noopener"><strong>ResNet残差网路(论文连结)</strong></a></p>
+</blockquote>
+<p>我们经过之前VGG的结果，深度学习是不是越<strong>深</strong>就越好呢？如果一直无限延伸的增加层数，是不是结果就会比较好呢？我们来看一下论文里面的图，咦！？怎么56层的网路结果却比20层的网路差!!!，不是说越深越好吗？</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*QrjIWmOHOoqfegwF12Yw-A.png" alt="img"></p>
+<p>=======================================</p>
+<p><strong>在经过实验后发现：网路层数的增加可以有效的超加准确率没错，但如果到达一定的层数后，训练的准确率就会开始下降了，这代表说如果网路过深的话，会变得更加难以训练</strong></p>
+<p>=======================================</p>
+<p>那为什么深度越深反而变得更难训练呢？我们回到神经网路反向传递的部份，我们知道要更新参数的方法是利用Loss function对参数的偏”微分”来得出参数调整的梯度，通过不断的训练，来找到一个Loss function最小的结果，如果现在是只有1层网路，反向传递的梯度也就只需要传递1次，相对的，如果现在有100层网路，反向传递的梯度就需要传递100才能到最前面的参数，所以当网路层数加深时，梯度在传递的过程中就会慢慢的消失，这也就是所谓的<strong>梯度消失</strong>，就会无法对前面网路层的参数进行有效的更新，因此Deep Residual Network就出现了，也就是ResNet。</p>
+<p>PS想知道关于梯度消失和梯度爆炸的可以先参考<a href="https://blog.csdn.net/qq_25737169/article/details/78847691" target="_blank" rel="noopener">这篇文章</a>，写得很好。</p>
+<blockquote>
+<p><a href="https://arxiv.org/pdf/1512.03385.pdf" target="_blank" rel="noopener"><strong>深度残差网路（Deep Residual Network，简称DRN）</strong></a></p>
+</blockquote>
+<p>重点来了，什么是DRN呢？这边就有点小抽象了，可能需要想一下才会理解，我先把残差网路的架构图放上来</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*o_lYxIveuYYSqN0DylcM_g.png" alt="img"></p>
+<p>从上面图来看，左边是一般的网路(平原网路)，右边是加入捷径的残差网路，我们假设H(x)是我们的期望输出，原本网路的最后的H(x)就是F(x)，而我们可以看出在残差网路那边在F(x)加上了原本的输入x，所以H(x)=F(x)+x，那为什么要这样呢？</p>
+<p>这里我们来思考一下，前面我们说到了反向传递，是用loss function来决定的，而loss function不外乎就是跟output跟target的值，然而我们说到了梯度消失的问题，假设我们已经学习到比较饱和的准确率的时候，那么接下来要学习的目标就会变成是”恒等映射”的学习，而什么是恒等映射呢？其实就是要将输入x 近似于输出H(x)，这样就可以保持后面的层数中比较不会造成准确率下降。</p>
+<p>好吧，或许你看到这里还是有些不懂，那我们来看一下右边的残差网路，残差网路在输出的部份加入了一个x，输出H(x)就会变成H(x )=F(x)+x，那如果我们把F(x)=0时，咦！？就会变成H(x) = x了，这不就是前面所说的恒等映射吗？所以残差网路就变成<strong>训练F(x):H(x)-x</strong>，而目标就是要将F(x)趋近于0，这样才可以使网路加深，准确率不会下降。</p>
+<p>上面一堆文字你是不是快崩溃了，我自己在读的时候也是快崩溃了XDD，我想了一下，这是不是就跟”以讹传讹”这句成语是一样的意思呢？如果传的人越多，那错误率是不是就越高，而残差网路的捷径就是直接把话传给最后一个人来减少错误率(如果这想法有错请帮忙纠正&gt;&lt;)，大概就是下面这张图的概念XD</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*k3Co1TZfc5A1Q0NyMe6VRg.png" alt="img"></p>
+<p>然后论文有说到优化残差网路比优化原本网路更好，这又是为什么？我直接来举个例子会比较好了解：<br>======================================= =<br>假设输入x = 5<br>经过第一层出来后的H(x)为5.1，那么F(x) = 5.1–5 = 0.1<br>经过第二层出来后的H(x)为5.2，那么F(x) = 5.2–5 = 0.2<br>原本网路的变化率会是(5.2–5.1)/5.1 = 1.96%<br>那残差网路的变化率是多少(0.2–0.1)/0.1 = 100%<br>对的，残差网路对于调整参数的效果会更好</p>
+<p><strong>残差去掉了相同的主体部份，进而突显出微小的变化</strong>================================== ======</p>
+<p>终于把理念讲完了(头痛…)，接下来我们来进行实作啦~~~~</p>
+<p>我们来看一下论文上面的网路跟卷积核数量，我们会发现一件很奇怪的事，为什么残差网路的捷径有分实线跟虚线的部份，再仔细看一下，虚线的部份的输入channel跟中间的F(x)channel是不一样的，所以<strong>虚线的部份会再对输入x进行一次卷积来调整x的维度再进行相加=&gt; H(x)=F(x )+Wx，W就是卷积</strong>。我们直接上Code啦(实作ResNet34)!</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/0*ZZzeZUt5K7h0lu1t.gif" alt="img"></p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*_W7yvHGEv40LHHFzRnpWKQ.png" alt="img"></p>
+<iframe width="700" height="250" data-src="/media/e76c6bc0a851b4c207c3cbdbb5690ad4?postId=668f74879306" data-media-id="e76c6bc0a851b4c207c3cbdbb5690ad4" data-thumbnail="https://i.embed.ly/1/image?url=https%3A%2F%2Favatars3.githubusercontent.com%2Fu%2F22870603%3Fs%3D400%26v%3D4&amp;key=a19fcc184b9711e1b4764040d3dc5c07" class="progressiveMedia-iframe js-progressiveMedia-iframe" allowfullscreen frameborder="0" src="https://medium.com/media/e76c6bc0a851b4c207c3cbdbb5690ad4?postId=668f74879306" style="display: block; position: absolute; margin: auto; max-width: 100%; box-sizing: border-box; transform: translateZ(0px); top: 0px; left: 0px; width: 700px; height: 2529px;"></iframe>
+
+
+
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*Isekywaa_uOKnsk0wv9NUg.png" alt="img"></p>
+<p>参数量比Inception多</p>
+<blockquote>
+<p><strong>结论</strong></p>
+</blockquote>
+<p>最后附上全部Model的Github，CNN的演进是很有趣的，有些观念其实还满直观的，只是就是想不出来，这些演进大多都是基于最基本的卷积跟池化演变来的，之后还有一些CNN的变形，Attention，RCNN…等等等的CNN模型用在影像处理上面，不得不说，CNN真的是太有趣了</p>
+
+      
+    </div>
+
+    
+    
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+   ----------------------------- 我是有底线 ~..~ ------------------------------
+    </div>
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AlexNet/" rel="tag"># AlexNet</a>
+          
+            <a href="/tags/VGG/" rel="tag"># VGG</a>
+          
+            <a href="/tags/Inception/" rel="tag"># Inception</a>
+          
+            <a href="/tags/ResNet/" rel="tag"># ResNet</a>
+          
+            <a href="/tags/Keras/" rel="tag"># Keras</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/25/Mask RCNN/" rel="next" title="实例分割:Mask RCNN">
+                <i class="fa fa-chevron-left"></i> 实例分割:Mask RCNN
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Joczu</p>
+              <div class="site-description motion-element" itemprop="description">So let's set world on fire!</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="//cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.min.js"></script>
+  <script>
+      var gitalk = new Gitalk({
+        clientID: '4fb081c87c89ca9caac1',
+        clientSecret: 'f4a6ac5731041e6f44285e52e1e4effb0d9af715',
+        repo: 'joczu.github.io',
+        owner: 'joczu',
+        admin: 'joczu',
+        id: md5(location.pathname),
+        distractionFreeMode: 'true'
+      });
+      var div = document.createElement('div');
+      div.setAttribute("id", "gitalk_comments");
+      div.setAttribute("class", "post-nav");
+      var bro = document.getElementById('posts').getElementsByTagName('article');
+      bro = bro[0].getElementsByClassName('post-block');
+      bro = bro[0].getElementsByTagName('footer');
+      bro = bro[0];
+      bro.appendChild(div);
+      gitalk.render('gitalk_comments');
+  </script>
+
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Joczu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">120k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total">1:49</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
