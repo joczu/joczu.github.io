@@ -106,56 +106,56 @@
   <meta name="description" content="转自：一文读懂目标检测：r-cnn、fast、R-CNN、YOLO、SSD 一、目标检测常见算法object detection，就是在给定的图片中精确找到物体所在位置，并标注出物体的类别。所以，object detection要解决的问题就是物体在哪里以及是什么的整个流程问题。 然而，这个问题可不是那么容易解决的，物体的尺寸变化范围很大，摆放物体的角度，姿态不定，而且可以出现在图片的任何地方，更">
 <meta name="keywords" content="Faster RCNN,RCNN,Fast RCNN,YOLO,SSD">
 <meta property="og:type" content="article">
-<meta property="og:title" content="目标检测：R-CNN、Fast R-CNN、Faster R-CNN、YOLO、SSD">
-<meta property="og:url" content="http://yoursite.com/2019/05/25/RCNN Fast RCNN Faster RCNN YOLO SSD/index.html">
+<meta property="og:title" content="目标检测：R-CNN Fast R-CNN Faster R-CNN YOLO SSD">
+<meta property="og:url" content="http://yoursite.com/2019/05/25/目标检测方法总结/index.html">
 <meta property="og:site_name" content="Joczu">
 <meta property="og:description" content="转自：一文读懂目标检测：r-cnn、fast、R-CNN、YOLO、SSD 一、目标检测常见算法object detection，就是在给定的图片中精确找到物体所在位置，并标注出物体的类别。所以，object detection要解决的问题就是物体在哪里以及是什么的整个流程问题。 然而，这个问题可不是那么容易解决的，物体的尺寸变化范围很大，摆放物体的角度，姿态不定，而且可以出现在图片的任何地方，更">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/fenlei.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/1.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/2.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/3.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/4.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/5.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/6.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/7.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/8.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/9.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/10.png1">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/11.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/12.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/13.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/14.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/15.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/16.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/17.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/18.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/19.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/20.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/21.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/22.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/23.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/24.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/25.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/26.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/27.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/28.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/29.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/30.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/31.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/32.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/33.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/34.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/35.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/36.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/37.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/38.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/39.png">
-<meta property="og:updated_time" content="2019-05-25T12:10:13.225Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/fenlei.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/8.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/9.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/10.png1">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/11.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/12.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/13.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/14.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/15.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/16.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/17.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/18.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/19.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/20.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/21.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/22.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/23.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/24.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/25.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/26.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/27.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/28.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/29.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/30.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/31.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/32.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/33.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/34.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/35.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/36.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/37.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/38.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/39.png">
+<meta property="og:updated_time" content="2019-05-26T09:22:25.178Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="目标检测：R-CNN、Fast R-CNN、Faster R-CNN、YOLO、SSD">
+<meta name="twitter:title" content="目标检测：R-CNN Fast R-CNN Faster R-CNN YOLO SSD">
 <meta name="twitter:description" content="转自：一文读懂目标检测：r-cnn、fast、R-CNN、YOLO、SSD 一、目标检测常见算法object detection，就是在给定的图片中精确找到物体所在位置，并标注出物体的类别。所以，object detection要解决的问题就是物体在哪里以及是什么的整个流程问题。 然而，这个问题可不是那么容易解决的，物体的尺寸变化范围很大，摆放物体的角度，姿态不定，而且可以出现在图片的任何地方，更">
-<meta name="twitter:image" content="http://yoursite.com/2019/05/25/RCNN%20Fast%20RCNN%20Faster%20RCNN%20YOLO%20SSD/fenlei.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/25/目标检测方法总结/fenlei.png">
 
 
 
@@ -163,7 +163,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/05/25/RCNN Fast RCNN Faster RCNN YOLO SSD/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/25/目标检测方法总结/">
 
 
 
@@ -173,7 +173,7 @@
   };
 </script>
 
-  <title>目标检测：R-CNN、Fast R-CNN、Faster R-CNN、YOLO、SSD | Joczu</title>
+  <title>目标检测：R-CNN Fast R-CNN Faster R-CNN YOLO SSD | Joczu</title>
   
 
 
@@ -395,7 +395,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/25/RCNN Fast RCNN Faster RCNN YOLO SSD/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/25/目标检测方法总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Joczu">
@@ -412,7 +412,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">目标检测：R-CNN、Fast R-CNN、Faster R-CNN、YOLO、SSD
+          <h1 class="post-title" itemprop="name headline">目标检测：R-CNN Fast R-CNN Faster R-CNN YOLO SSD
 
               
             
@@ -438,12 +438,24 @@
                 
               
 
-              <time title="Created: 2019-05-25 19:35:57 / Modified: 20:10:13" itemprop="dateCreated datePublished" datetime="2019-05-25T19:35:57+08:00">2019-05-25</time>
+              <time title="Created: 2019-05-25 19:35:57" itemprop="dateCreated datePublished" datetime="2019-05-25T19:35:57+08:00">2019-05-25</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-26 17:22:25" itemprop="dateModified" datetime="2019-05-26T17:22:25+08:00">2019-05-26</time>
               
             
           </span>
