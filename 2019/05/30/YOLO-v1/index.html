@@ -103,38 +103,46 @@
 
 
 
-  <meta name="description" content="GAN的相关知识主要是跟着李宏毅老师入门的，具体内容可以访问哔哩哔哩-李宏毅深度学习2017进行学习。这篇文章主要对学习内容进行总结。 1.传统生成模型AutoEncoder AutoEncoder是前馈神经网络的一种，曾经重要用于数据的降维或者特征的抽取，而现在也被广泛用于生成模型。与其他前馈神经网络不同的是，其他前馈神经网络关注的是Output Layer和错误率，而AutoEncoder关注">
-<meta name="keywords" content="GAN,MLE,AutoEncoder">
+  <meta name="description" content="引自：图解YOLO 核心思想从R-CNN到Fast R-CNN一直采用的思路是proposal+分类 （proposal 提供位置信息， 分类提供类别信息）精度已经很高，但是速度还不行。 YOLO提供了另一种更为直接的思路： 直接在输出层回归bounding box的位置和bounding box所属的类别(整张图作为网络的输入，把 Object Detection 的问题转化成一个 Regres">
+<meta name="keywords" content="深度学习,YOLO">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GAN初识">
-<meta property="og:url" content="http://yoursite.com/2019/04/25/GAN初识/index.html">
+<meta property="og:title" content="YOLO-v1">
+<meta property="og:url" content="http://yoursite.com/2019/05/30/YOLO-v1/index.html">
 <meta property="og:site_name" content="Joczu">
-<meta property="og:description" content="GAN的相关知识主要是跟着李宏毅老师入门的，具体内容可以访问哔哩哔哩-李宏毅深度学习2017进行学习。这篇文章主要对学习内容进行总结。 1.传统生成模型AutoEncoder AutoEncoder是前馈神经网络的一种，曾经重要用于数据的降维或者特征的抽取，而现在也被广泛用于生成模型。与其他前馈神经网络不同的是，其他前馈神经网络关注的是Output Layer和错误率，而AutoEncoder关注">
+<meta property="og:description" content="引自：图解YOLO 核心思想从R-CNN到Fast R-CNN一直采用的思路是proposal+分类 （proposal 提供位置信息， 分类提供类别信息）精度已经很高，但是速度还不行。 YOLO提供了另一种更为直接的思路： 直接在输出层回归bounding box的位置和bounding box所属的类别(整张图作为网络的输入，把 Object Detection 的问题转化成一个 Regres">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/autoencoder.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/Decoder.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/7.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/generator.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/discriminator.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/MLE.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/GAN%20Distribution.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/maxv.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/D*.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/maxv%E6%8E%A8%E5%AF%BC.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/maxv%E6%8E%A8%E5%AF%BC2.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/G.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/G2.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/%E8%AE%AD%E7%BB%83.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/%E7%AE%97%E6%B3%95.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/%E7%94%9F%E6%88%90%E5%99%A8%E4%BC%98%E5%8C%96.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/%E8%BF%87%E6%8B%9F%E5%90%88.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/mode.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/25/GAN初识/mode2.png">
-<meta property="og:updated_time" content="2019-04-27T10:09:49.277Z">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-faf511707c0ee29fe58516488240c903_hd.png">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-06fc9342b6b291c33fd5386184f1657d_hd.png">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=x_%7Bcenter%7D%2Cy_%7Bcenter%7D%2Cw%2Ch">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-a6ac1595dc4d61a1cb0b850b7f7b6f0e_hd.png">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-f28410d5069d7026527753d4c5390cf2_hd.png">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-fb3ca1a334bf15697b0c75a1b2accf30_hd.png">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-b646262ae5e3cf7d55a2f774d49d61c0_hd.png">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=x_%7Bcenter%7D%2Cy_%7Bcenter%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=x_%7Bcenter%7D%2Cy_%7Bcenter%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=Pr%28Object%29+%5Cast+IOU%5E%7Btruth%7D_%7Bpred%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=x_%7Bcenter%7D%2Cy_%7Bcenter%7D%2Cw%2Ch%2Cconfidence">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-d8ee28eba7f0576f93e6e33ff3e04dcc_hd.png">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-1ad557fda288473b0335fe64e03bc049_hd.png">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-e6e98aeac2daa2a21a9cb1c677f459ac_hd.png">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-f9af0b8094b35f7c2ab2179efb6f4c8c_hd.png">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Clambda_%7Bcoord%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Clambda_%7Bnoobj%7D">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-bfac676d0f0db4a1d9f4f9aa782341dd_hd.png">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=Pr%28Class_i+%7C+Object%29">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=Pr%28Object%29+%5Cast+IOU%5E%7Btruth%7D_%7Bpred%7D">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-9bc2b9b6e509c304323be0bbeb72709d_hd.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-34f2ca04ea7cb73b26ba963c6a1f6957_hd.png">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-fc989797e7b2cb48d8df6123ffb9e8b0_hd.png">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-88571c5a76b85fe58fcf0220c05393c1_hd.png">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-cb2a10474b09341efa28eb7b786ba99d_hd.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-3be58f956f77f0a6c8f6690312cb9063_hd.png">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-d9e289ad6227341857d6ec5b3d3fcf0d_hd.png">
+<meta property="og:updated_time" content="2019-05-30T11:12:48.439Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="GAN初识">
-<meta name="twitter:description" content="GAN的相关知识主要是跟着李宏毅老师入门的，具体内容可以访问哔哩哔哩-李宏毅深度学习2017进行学习。这篇文章主要对学习内容进行总结。 1.传统生成模型AutoEncoder AutoEncoder是前馈神经网络的一种，曾经重要用于数据的降维或者特征的抽取，而现在也被广泛用于生成模型。与其他前馈神经网络不同的是，其他前馈神经网络关注的是Output Layer和错误率，而AutoEncoder关注">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/25/GAN初识/autoencoder.png">
+<meta name="twitter:title" content="YOLO-v1">
+<meta name="twitter:description" content="引自：图解YOLO 核心思想从R-CNN到Fast R-CNN一直采用的思路是proposal+分类 （proposal 提供位置信息， 分类提供类别信息）精度已经很高，但是速度还不行。 YOLO提供了另一种更为直接的思路： 直接在输出层回归bounding box的位置和bounding box所属的类别(整张图作为网络的输入，把 Object Detection 的问题转化成一个 Regres">
+<meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-faf511707c0ee29fe58516488240c903_hd.png">
 
 
 
@@ -142,7 +150,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/04/25/GAN初识/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/30/YOLO-v1/">
 
 
 
@@ -152,7 +160,7 @@
   };
 </script>
 
-  <title>GAN初识 | Joczu</title>
+  <title>YOLO-v1 | Joczu</title>
   
 
 
@@ -374,7 +382,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/25/GAN初识/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/30/YOLO-v1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Joczu">
@@ -391,7 +399,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">GAN初识
+          <h1 class="post-title" itemprop="name headline">YOLO-v1
 
               
             
@@ -417,24 +425,12 @@
                 
               
 
-              <time title="Created: 2019-04-25 16:14:18" itemprop="dateCreated datePublished" datetime="2019-04-25T16:14:18+08:00">2019-04-25</time>
+              <time title="Created: 2019-05-30 19:04:24 / Modified: 19:12:48" itemprop="dateCreated datePublished" datetime="2019-05-30T19:04:24+08:00">2019-05-30</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-04-27 18:09:49" itemprop="dateModified" datetime="2019-04-27T18:09:49+08:00">2019-04-27</time>
               
             
           </span>
@@ -451,7 +447,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/GAN/" itemprop="url" rel="index"><span itemprop="name">GAN</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/图像分割/" itemprop="url" rel="index"><span itemprop="name">图像分割</span></a></span>
 
                 
                 
@@ -487,7 +483,7 @@
                 
                   <span class="post-meta-item-text">Symbols count in article: </span>
                 
-                <span title="Symbols count in article">3.5k</span>
+                <span title="Symbols count in article">3.7k</span>
               
 
               
@@ -521,98 +517,97 @@
       
 
       
-        <p>GAN的相关知识主要是跟着李宏毅老师入门的，具体内容可以访问<a href="https://www.bilibili.com/video/av9770302/?p=15" target="_blank" rel="noopener">哔哩哔哩-李宏毅深度学习2017</a>进行学习。这篇文章主要对学习内容进行总结。</p>
-<h2 id="1-传统生成模型"><a href="#1-传统生成模型" class="headerlink" title="1.传统生成模型"></a>1.传统生成模型</h2><h3 id="AutoEncoder"><a href="#AutoEncoder" class="headerlink" title="AutoEncoder"></a>AutoEncoder</h3><blockquote>
-<p>AutoEncoder是前馈神经网络的一种，曾经重要用于数据的降维或者特征的抽取，而现在也被广泛用于生成模型。与其他前馈神经网络不同的是，其他前馈神经网络关注的是Output Layer和错误率，而AutoEncoder关注点是Hidden Layer；并且普通前馈神经网络一般比较深，而AutoEncoder通常只有一层Hidden Layer。Hidden Layer中神经元组成的向量（Code）用来表示Input</p>
-</blockquote>
-<img src="/2019/04/25/GAN初识/autoencoder.png">
-<p>如图该模型的作用是生成与原图像相似的图像。将原始图像输入神经网络，经过Encoder的压缩，表示成Code；再经过Decoder的解压生成图像；最后计算生成图像与输入图像的MSE（Mean Square Error），这样就可以对模型进行训练。</p>
-<p><img src="Decoder.png" alt></p>
-<p>若只取AutoEncoder的Decoder部分，随机生成Code向量输入网络进行解码，这样就可以生成图像。</p>
-<p>但是从上图可以看出AutoEncoder的图像生成效果非常的差，从计算loss方式分析其原因。</p>
-<p><img src="7.png" width="40%" height="40%"></p>
-<p>可以从上图中看出，两幅图像仅仅一个像素点的位置不同，但是用MSE计算loss是一样大的，这就说明MSE不能衡量图像像素点的位置信息。</p>
-<p>GAN就出场了，设计了Generator和Discriminator结构进行前馈运算，采用KL/JSD等方式，很好的解决了衡量两个图像分布之间‘difference’的问题。</p>
-<h2 id="2-GAN前馈流程图"><a href="#2-GAN前馈流程图" class="headerlink" title="2.GAN前馈流程图"></a>2.GAN前馈流程图</h2><p><img src="generator.png" width="70%" height="70%"></p>
-<p><img src="discriminator.png" width="25%" height="25%"></p>
-<p>初始化Generator和Discriminator网络参数，服从特定分布的随机变量输入Generator网络生成图像（标签为0），再和真实图像（标签为1）一块输入到Discriminator进行判断。</p>
-<p>若是Discriminator对生成图像的判分较低，则Generator参数进行梯度下降更新（此时固定Discriminator）；再将第二轮Generator生成的图像输入到Discriminator进行判断，若是Discriminator对其判分较高，则更新Discriminator参数。</p>
-<h2 id="3-GAN原理"><a href="#3-GAN原理" class="headerlink" title="3.GAN原理"></a>3.GAN原理</h2><ul>
-<li><h3 id="Maximum-Likelihood-Estimation"><a href="#Maximum-Likelihood-Estimation" class="headerlink" title="Maximum Likelihood Estimation"></a>Maximum Likelihood Estimation</h3></li>
+        <p>引自：<a href="https://zhuanlan.zhihu.com/p/24916786" target="_blank" rel="noopener">图解YOLO</a></p>
+<h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><p>从R-CNN到Fast R-CNN一直采用的思路是proposal+分类 （proposal 提供位置信息， 分类提供类别信息）精度已经很高，但是速度还不行。 YOLO提供了另一种更为直接的思路： 直接在输出层回归bounding box的位置和bounding box所属的类别(整张图作为网络的输入，把 Object Detection 的问题转化成一个 Regression 问题)。</p>
+<h2 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h2><ul>
+<li>速度快，能够达到实时的要求。在 Titan X 的 GPU 上 能够达到 45 帧每秒。</li>
+<li>使用全图作为 Context 信息，背景错误（把背景错认为物体）比较少。</li>
+<li>泛化能力强。</li>
 </ul>
-<p>给定真实数据分布$ P_{data}(x)$，此处的x代表真实图像构成的向量；设生成模型的分布$P_{G}(x;\theta)$，这个生成分布由$\theta$决定，生成图像模型的目标就是使得生成模型分布$P_{G}(x;\theta)$尽可能的接近真实数据分布$ P_{data}(x)$，也就是要计算$\theta$。</p>
-<p>这样就可以采用最大似然估计的方法来，具体方法如下：</p>
+<p><img src="https://pic4.zhimg.com/80/v2-faf511707c0ee29fe58516488240c903_hd.png" alt="img"></p>
+<h2 id="大致流程"><a href="#大致流程" class="headerlink" title="大致流程"></a>大致流程</h2><p><img src="https://pic2.zhimg.com/80/v2-06fc9342b6b291c33fd5386184f1657d_hd.png" alt="img"></p>
 <ol>
-<li>从真实数据分布$ P_{data}(x)$中采样得到${x^1,x^2,…,x^m}$；</li>
-<li>计算每个数据的概率$P_G(x^i;\theta)$</li>
-<li>计算似然：$L = \prod_{i=1}^mP_G(x^i;\theta)$</li>
-<li>求得$\theta$使得似然最大化</li>
+<li><strong>Resize</strong>成448<em>448，图片分割得到7</em>7网格(cell)</li>
+<li><strong>CNN提取特征和预测</strong>：卷积不忿负责提特征。全链接部分负责预测<em>：a)</em> 7<em>7</em>2=98个bounding box(bbox) 的坐标<img src="https://www.zhihu.com/equation?tex=x_%7Bcenter%7D%2Cy_%7Bcenter%7D%2Cw%2Ch" alt="x_{center},y_{center},w,h"> 和是否有物体的conﬁdence 。 <strong>b)</strong> 7*7=49个cell所属20个物体的概率。</li>
+<li><strong>过滤</strong>bbox（通过nms）</li>
 </ol>
-<p><img src="MLE.png" width="75%" height="75%"></p>
-<p>使用最大似然估计求得$\theta$的过程如上图所示，对似然求log变成log似然；真实分布中的所有x的期望等价于概率积分，所以可以转化成积分运算，因为减号之后的积分与$\theta$无关，所以添加上去之后还是等价的；经过这样拼凑之后最大似然估计可以变成求两个分布之间的KL散度，两个分布越相似，KL散度值越小。</p>
-<p>在求$\theta$之前必须要假定生成分布的类型，比如是高斯混合模型，但是在实践中这种假设的效果不太好，所以如何能设计出更加一般化的生成模型分布呢？</p>
-<p>这里采用神经网络来产生生成分布$P_{G}(x;\theta)$，$\theta$也就是神经网络的权重参数。神经网络只要有非线性激活函数，理论上可以去拟合任意函数，概率分布也可以看作是函数映射，所以可以采用神经网络去学习复杂的概率分布。</p>
-<p><img src="GAN%20Distribution.png" width="70%" height="70%"></p>
+<p><img src="https://pic3.zhimg.com/80/v2-a6ac1595dc4d61a1cb0b850b7f7b6f0e_hd.png" alt="img"></p>
+<h2 id="网络设计："><a href="#网络设计：" class="headerlink" title="网络设计："></a>网络设计：</h2><p><img src="https://pic3.zhimg.com/80/v2-f28410d5069d7026527753d4c5390cf2_hd.png" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/80/v2-fb3ca1a334bf15697b0c75a1b2accf30_hd.png" alt="img"></p>
+<p>网络结构借鉴了 GoogLeNet 。24个卷积层，2个全链接层。（用1×1 reduction layers 紧跟 3×3 convolutional layers 取代Goolenet的 inception modules ）</p>
+<h2 id="训练："><a href="#训练：" class="headerlink" title="训练："></a>训练：</h2><p><strong>预训练分类网络</strong>：在 ImageNet 1000-class competition dataset上预训练一个分类网络，这个网络是Figure3中的前20个卷机网络+average-pooling layer+ fully connected layer （此时网络输入是224224）。<br><strong>训练检测网络</strong>：转换模型去执行检测任务，《Object detection networks on convolutional feature maps》提到说在预训练网络中增加卷积和全链接层可以改善性能。在他们例子基础上添加4个卷积层和2个全链接层，随机初始化权重。检测要求细粒度的视觉信息，所以把网络输入也又224224变成448<em>448。见Figure3。</em> </p>
 <ul>
-<li><p>Generator G</p>
-<p>生成器G是一个函数，输入向量z，输出向量x</p>
-<p>$P_{prior}(z)$表示输入向量z的先验分布，$P_G(x)$由生成器G决定</p>
+<li><p>一幅图片分成7x7个网格(grid cell)，某个物体的中心落在这个网格中此网格就负责预测这个物体。</p>
+<p><img src="https://pic1.zhimg.com/80/v2-b646262ae5e3cf7d55a2f774d49d61c0_hd.png" alt="img"></p>
 </li>
-<li><p>Discriminator D</p>
-<p>判别器D是一个函数，输入向量x，输出标量值</p>
-<p>D用来衡量$P_G(x)$与$P_{data}(x)$之间的不同</p>
+<li><p>最后一层输出为 （7<em>7）</em>30的维度。每个 1<em>1</em>30的维度对应原图7<em>7个cell中的一个，1</em>1*30中含有类别预测和bbox坐标预测。总得来讲就是让网格负责类别信息，bounding box主要负责坐标信息(部分负责类别信息：confidence也算类别信息)。具体如下：</p>
 </li>
-<li><p>GAN公式</p>
-<p>$G^*=arg\min\limits_{G}\max\limits_{D}V(G,D)$    </p>
-<p>$V=E_{x \sim P_{data}}[logD(x)]+E_{x \sim P_{G}}[log(1-D(x))]$ 衡量$P_G$与$P_{data}$的不同</p>
-<p>在G一定的情况，寻找D使得$V(G,D)$最大化，也就是对于真实分布中的x，D(x)要接近1，对于生成分布中的x，D(x)要接近于0，这样使得判别器的能力增强；<br>再固定D，寻找G使得$\max\limits_{D}V(G,D)$最小，也就是让来自于生成分布中的x的D(x)尽可能的接近1，这样使得生成器的能力增强。</p>
+<li><ul>
+<li><strong>每个网格（1*1*30维度对应原图中的cell）要预测2个bounding box</strong> （图中黄色实线框）的坐标（<img src="https://www.zhihu.com/equation?tex=x_%7Bcenter%7D%2Cy_%7Bcenter%7D" alt="x_{center},y_{center}">,w,h） ，其中：中心坐标的<img src="https://www.zhihu.com/equation?tex=x_%7Bcenter%7D%2Cy_%7Bcenter%7D" alt="x_{center},y_{center}"> 相对于对应的网格归一化到0-1之间，w,h用图像的width和height归一化到0-1之间。 每个bounding box除了要回归自身的位置之外，还要附带预测一个confidence值。 这个confidence代表了所预测的box中含有object的置信度和这个box预测的有多准两重信息：confidence = <img src="https://www.zhihu.com/equation?tex=Pr%28Object%29+%5Cast+IOU%5E%7Btruth%7D_%7Bpred%7D" alt="Pr(Object) \ast IOU^{truth}_{pred}">。其中如果有ground true box(人工标记的物体)落在一个grid cell里，第一项取1，否则取0。 第二项是预测的bounding box和实际的ground truth box之间的IOU值。即：每个bounding box要预测 <img src="https://www.zhihu.com/equation?tex=x_%7Bcenter%7D%2Cy_%7Bcenter%7D%2Cw%2Ch%2Cconfidence" alt="x_{center},y_{center},w,h,confidence">,共5个值 ，2个bounding box共10个值，对应 1<em>1</em>30维度特征中的前10个。</li>
+</ul>
 </li>
 </ul>
-<p>接下来对$G^*=arg\min\limits_{G}\max\limits_{D}V(G,D)$进行求解。</p>
+<p><img src="https://pic1.zhimg.com/80/v2-d8ee28eba7f0576f93e6e33ff3e04dcc_hd.png" alt="img"></p>
+<p><img src="https://pic2.zhimg.com/80/v2-1ad557fda288473b0335fe64e03bc049_hd.png" alt="img"></p>
 <ul>
-<li><h3 id="求解-min-limits-G-max-limits-D-V-G-D"><a href="#求解-min-limits-G-max-limits-D-V-G-D" class="headerlink" title="求解$\min \limits_{G}\max \limits_{D}V(G,D)$"></a>求解$\min \limits_{G}\max \limits_{D}V(G,D)$</h3></li>
+<li><ul>
+<li><strong>每个网格还要预测类别信息</strong>，论文中有20类。7x7的网格，每个网格要预测2个 bounding box 和 20个类别概率，输出就是 7x7x(5x2 + 20) 。 (通用公式： SxS个网格，每个网格要预测B个bounding box还要预测C个categories，输出就是S x S x (5*B+C)的一个tensor。 注意：class信息是针对每个网格的，confidence信息是针对每个bounding box的）</li>
 </ul>
-<p>给定G，求得最优的$D^*$使得V最大。</p>
-<p><img src="maxv.png" width="70%" height="70%"></p>
-<p>接下来给定x，求$D^*$使得被积函数取极大值。$P_{data}(x)$和$P_{G}(x)$是已知值，只   需要对D求导即可得到极大值。</p>
-<p><img src="D*.png" width="70%" height="70%"></p>
-<p>将$D^*$代入V式进行整理。</p>
-<p><img src="maxv%E6%8E%A8%E5%AF%BC.png" width="70%" height="70%"></p>
-<p>$log2P_{data}(x)$对x积分之后得$log2$，概率积分为1。</p>
-<p><img src="maxv%E6%8E%A8%E5%AF%BC2.png" width="70%" height="70%"></p>
-<p>上图的推导主要是凑出JSD分布的形式，JS Divergence是KL散度的对称平滑版本，也是描述了两个分布之间的差异。因为JSD值域[0,log2]所以 $\max \limits_DV(G,D)$的取值范围为[-2log2,0]。</p>
-<p>接下来的问题就是如何优化G，使得$P_G(x)$尽可能接近$P_{data}(x)$</p>
-<p><img src="G.png" width="40%" height="40%"></p>
-<p>如上图，将$\max \limits_DV(G,D)$视为损失函数$L(G)$，采用梯度下降的方法进行优化</p>
-<p><img src="G2.png" width="40%" height="40%"></p>
-<h2 id="4-GAN训练"><a href="#4-GAN训练" class="headerlink" title="4.GAN训练"></a>4.GAN训练</h2><p><img src="%E8%AE%AD%E7%BB%83.png" width="65%" height="65%"></p>
-<p>如图所示，在实践训练中，我们不可能求得$P_G$和$P_{data}$的期望，所以只能从真实数据分布和生成数据分布中分别采样，代入到损失函数求的交叉熵。</p>
-<p>具体的算法流程如下</p>
-<p><img src="%E7%AE%97%E6%B3%95.png" width="65%" height="65%"></p>
-<h2 id="5-问题优化"><a href="#5-问题优化" class="headerlink" title="5.问题优化"></a>5.问题优化</h2><ul>
-<li><h3 id="训练初期缓慢"><a href="#训练初期缓慢" class="headerlink" title="训练初期缓慢"></a>训练初期缓慢</h3></li>
+</li>
 </ul>
-<p><img src="%E7%94%9F%E6%88%90%E5%99%A8%E4%BC%98%E5%8C%96.png" width="25%" height="25%"></p>
-<p>在生成模型的优化过程中，生成器的loss Function是$V=E_{x\sim P_{G}}[-log(1-D(x))]$。如上图所示，当D(x)接近0的时候，梯度非常的小。这就导致在训练的初期，生成器G如果想要骗过判别器D变化是非常的缓慢的。所以就将生成器的loss修改成$V=E_{x\sim P_{G}}[-log(D(x))]$这样可以提高训练的速度。</p>
+<p><img src="https://pic1.zhimg.com/80/v2-e6e98aeac2daa2a21a9cb1c677f459ac_hd.png" alt="img"></p>
+<p><strong>损失函数设计：</strong></p>
+<p><img src="https://pic1.zhimg.com/80/v2-f9af0b8094b35f7c2ab2179efb6f4c8c_hd.png" alt="img"></p>
+<p>损失函数的设计目标就是让坐标（x,y,w,h），confidence，classification 这个三个方面达到很好的平衡。简单的全部采用了sum-squared error loss来做这件事会有以下不足： a) 8维的localization error和20维的classification error同等重要显然是不合理的； b) 如果一个网格中没有object（一幅图中这种网格很多），那么就会将这些网格中的box的confidence push到0，相比于较少的有object的网格，这种做法是overpowering的，这会导致网络不稳定甚至发散。 解决方案如下：</p>
 <ul>
-<li><h3 id="Loss不变"><a href="#Loss不变" class="headerlink" title="Loss不变"></a>Loss不变</h3></li>
+<li>更重视8维的坐标预测，给这些损失前面赋予更大的loss weight, 记为 <img src="https://www.zhihu.com/equation?tex=%5Clambda_%7Bcoord%7D" alt="\lambda_{coord}"> ,在pascal VOC训练中取5。（上图蓝色框）</li>
+<li>对没有object的bbox的confidence loss，赋予小的loss weight，记为 <img src="https://www.zhihu.com/equation?tex=%5Clambda_%7Bnoobj%7D" alt="\lambda_{noobj}"> ，在pascal VOC训练中取0.5。（上图橙色框）</li>
+<li>有object的bbox的confidence loss (上图红色框) 和类别的loss （上图紫色框）的loss weight正常取1。</li>
+<li>对不同大小的bbox预测中，相比于大bbox预测偏一点，小box预测偏一点更不能忍受。而sum-square error loss中对同样的偏移loss是一样。 为了缓和这个问题，作者用了一个比较取巧的办法，就是将box的width和height取平方根代替原本的height和width。 如下图：small bbox的横轴值较小，发生偏移时，反应到y轴上的loss（下图绿色）比big box(下图红色)要大。</li>
 </ul>
-<p>在实际训练中发现，loss一直不发生变化，即$\max \limits_DV(G,D)=0$</p>
-<p>因为JSD值域是[0,log2]，这也就是说明$P_G$和$P_{data}$没有相似之处，但是实际上两个分布是有相似之处的，出现问题的原因是我们在积分运算中国使用采样的方法，当训练过拟合的时候，D还是能把两部分的点给分开的，如下图所示。</p>
-<p><img src="%E8%BF%87%E6%8B%9F%E5%90%88.png" width="40%" height="40%"></p>
-<p>我们是不是应该让D变得弱一点，减弱它的分类能力，但是我们的初衷是让D变得更强，这就产生了矛盾。</p>
-<p>还有一种原因可能是，两个分布都是高维的，但是两个分布都十分的窄，交集相当的小，这就导致JSD比较大。</p>
-<p>解决方法：添加噪声，让两个分布变得更宽一些，这样可以增大它们之间的交集，在训练过程中，再使噪声逐渐减小。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-bfac676d0f0db4a1d9f4f9aa782341dd_hd.png" alt="img"></p>
 <ul>
-<li><h3 id="Mode-Collapse"><a href="#Mode-Collapse" class="headerlink" title="Mode Collapse"></a>Mode Collapse</h3></li>
+<li>一个网格预测多个bounding box，在训练时我们希望每个object（ground true box）只有一个bounding box专门负责（一个object 一个bbox）。具体做法是与ground true box（object）的IOU最大的bounding box 负责该ground true box(object)的预测。这种做法称作bounding box predictor的specialization(专职化)。每个预测器会对特定（sizes,aspect ratio or classed of object）的ground true box预测的越来越好。（个人理解：IOU最大者偏移会更少一些，可以更快速的学习到正确位置）</li>
 </ul>
-<p><img src="mode.png" width="50%" height="50%"></p>
-<p>如上图所示，实际训练过程种可能出现这样的情况，真实的数据分布是双峰分布的，而生成的数据分布只拟合了其中一个峰的分布，也就是说没有学到整个分布。</p>
-<p>造成这种情况的原因是，KL散度中两个分布写反了。</p>
-<p><img src="mode2.png" width="50%" height="50%"></p>
-<p>如上图所示，若是第一KL散度的写法，为了防止出现无穷大，所有有$P_{data}$出现的地方都必须有$P_G$覆盖，这样就不回出现Mode Collapse。</p>
-<h2 id="6-代码"><a href="#6-代码" class="headerlink" title="6.代码"></a>6.代码</h2><p><a href="/files/originGAN.py">GAN代码实现</a></p>
-<h2 id="7-参考"><a href="#7-参考" class="headerlink" title="7.参考"></a>7.参考</h2><p><a href="https://www.cnblogs.com/bonelee/p/9166084.html" target="_blank" rel="noopener">https://www.cnblogs.com/bonelee/p/9166084.html</a></p>
+<h2 id="测试："><a href="#测试：" class="headerlink" title="测试："></a>测试：</h2><p><strong>Test的时候</strong>每个网格预测的class信息( <img src="https://www.zhihu.com/equation?tex=Pr%28Class_i+%7C+Object%29" alt="Pr(Class_i | Object)"> )和bounding box预测的</p>
+<p>confidence信息( <img src="https://www.zhihu.com/equation?tex=Pr%28Object%29+%5Cast+IOU%5E%7Btruth%7D_%7Bpred%7D" alt="Pr(Object) \ast IOU^{truth}_{pred}"> ) 相乘，就得到每个bounding box的class-specific confidence score。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-9bc2b9b6e509c304323be0bbeb72709d_hd.png" alt="img"></p>
+<ul>
+<li><ul>
+<li>等式左边第一项就是每个网格预测的类别信息，第二三项就是每个bounding box预测的confidence。这个乘积即encode了预测的box属于某一类的概率，也有该box准确度的信息。</li>
+<li><p><img src="https://pic4.zhimg.com/80/v2-34f2ca04ea7cb73b26ba963c6a1f6957_hd.png" alt="img"></p>
+</li>
+<li><p><img src="https://pic1.zhimg.com/80/v2-fc989797e7b2cb48d8df6123ffb9e8b0_hd.png" alt="img"></p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>对每一个网格的每一个bbox执行同样操作： 7x7x2 = 98 bbox （每个bbox既有对应的class信息又有坐标信息）</p>
+<p><img src="https://pic2.zhimg.com/80/v2-88571c5a76b85fe58fcf0220c05393c1_hd.png" alt="img"></p>
+<p><img src="https://pic2.zhimg.com/80/v2-cb2a10474b09341efa28eb7b786ba99d_hd.png" alt="img"></p>
+<p><img src="https://pic4.zhimg.com/80/v2-3be58f956f77f0a6c8f6690312cb9063_hd.png" alt="img"></p>
+</li>
+</ul>
+</li>
+<li><p>得到每个bbox的class-specific confidence score以后，设置阈值，滤掉得分低的boxes，对保留的boxes进行NMS处理，就得到最终的检测结果。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-d9e289ad6227341857d6ec5b3d3fcf0d_hd.png" alt="img"></p>
+</li>
+</ul>
+<h2 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h2><ul>
+<li>YOLO对相互靠的很近的物体（挨在一起且中点都落在同一个格子上的情况），还有很小的群体 检测效果不好，这是因为一个网格中只预测了两个框，并且只属于一类。</li>
+<li>测试图像中，当同一类物体出现的不常见的长宽比和其他情况时泛化能力偏弱。</li>
+<li>由于损失函数的问题，定位误差是影响检测效果的主要原因，尤其是大小物体的处理上，还有待加强。</li>
+</ul>
+<blockquote>
+<p>本文图片很多来自PPT:</p>
+<p> <a href="https://docs.google.com/presentation/d/1aeRvtKG21KHdD5lg6Hgyhx5rPq_ZOsGjG5rJ1HP7BbA/pub?start=false&amp;loop=false&amp;delayms=3000&amp;slide=id.p" target="_blank" rel="noopener">https://docs.google.com/presentation/d/1aeRvtKG21KHdD5lg6Hgyhx5rPq_ZOsGjG5rJ1HP7BbA/pub?start=false&amp;loop=false&amp;delayms=3000&amp;slide=id.p</a></p>
+<p>内容主要参考如下博客：</p>
+<ul>
+<li><a href="https://link.zhihu.com/?target=http%3A//blog.csdn.net/u011534057/article/details/51244354" target="_blank" rel="noopener">RCNN学习笔记(6)：You Only Look Once(YOLO):Unified, Real-Time Object Detection</a></li>
+<li><a href="https://link.zhihu.com/?target=http%3A//blog.csdn.net/surgewong/article/details/51864859" target="_blank" rel="noopener">You Only Look Once: Unified, Real-Time Object Detection</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/25236464" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/25236464</a></li>
+</ul>
+</blockquote>
 
       
     </div>
@@ -642,11 +637,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/GAN/" rel="tag"># GAN</a>
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
           
-            <a href="/tags/MLE/" rel="tag"># MLE</a>
-          
-            <a href="/tags/AutoEncoder/" rel="tag"># AutoEncoder</a>
+            <a href="/tags/YOLO/" rel="tag"># YOLO</a>
           
         </div>
       
@@ -659,8 +652,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/14/404/" rel="next" title>
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2019/05/26/CNN演化史-AlexNet-VGG-Inception-ResNet/" rel="next" title="CNN演化史：AlexNet VGG Inception ResNet">
+                <i class="fa fa-chevron-left"></i> CNN演化史：AlexNet VGG Inception ResNet
               </a>
             
           </div>
@@ -668,10 +661,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/26/Hexo填坑/" rel="prev" title="Hexo填坑">
-                Hexo填坑 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -920,7 +909,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-传统生成模型"><span class="nav-text">1.传统生成模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AutoEncoder"><span class="nav-text">AutoEncoder</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-GAN前馈流程图"><span class="nav-text">2.GAN前馈流程图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-GAN原理"><span class="nav-text">3.GAN原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Maximum-Likelihood-Estimation"><span class="nav-text">Maximum Likelihood Estimation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#求解-min-limits-G-max-limits-D-V-G-D"><span class="nav-text">求解$\min \limits_{G}\max \limits_{D}V(G,D)$</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-GAN训练"><span class="nav-text">4.GAN训练</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-问题优化"><span class="nav-text">5.问题优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#训练初期缓慢"><span class="nav-text">训练初期缓慢</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loss不变"><span class="nav-text">Loss不变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mode-Collapse"><span class="nav-text">Mode Collapse</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-代码"><span class="nav-text">6.代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-参考"><span class="nav-text">7.参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思想"><span class="nav-text">核心思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主要特点"><span class="nav-text">主要特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大致流程"><span class="nav-text">大致流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络设计："><span class="nav-text">网络设计：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#训练："><span class="nav-text">训练：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试："><span class="nav-text">测试：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺陷"><span class="nav-text">缺陷</span></a></li></ol></div>
             
 
           </div>

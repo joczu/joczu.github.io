@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>YOLO-v1</title>
+      <link href="/2019/05/30/YOLO-v1/"/>
+      <url>/2019/05/30/YOLO-v1/</url>
+      
+        <content type="html"><![CDATA[<p>引自：<a href="https://zhuanlan.zhihu.com/p/24916786" target="_blank" rel="noopener">图解YOLO</a></p><h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><p>从R-CNN到Fast R-CNN一直采用的思路是proposal+分类 （proposal 提供位置信息， 分类提供类别信息）精度已经很高，但是速度还不行。 YOLO提供了另一种更为直接的思路： 直接在输出层回归bounding box的位置和bounding box所属的类别(整张图作为网络的输入，把 Object Detection 的问题转化成一个 Regression 问题)。</p><h2 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h2><ul><li>速度快，能够达到实时的要求。在 Titan X 的 GPU 上 能够达到 45 帧每秒。</li><li>使用全图作为 Context 信息，背景错误（把背景错认为物体）比较少。</li><li>泛化能力强。</li></ul><p><img src="https://pic4.zhimg.com/80/v2-faf511707c0ee29fe58516488240c903_hd.png" alt="img"></p><h2 id="大致流程"><a href="#大致流程" class="headerlink" title="大致流程"></a>大致流程</h2><p><img src="https://pic2.zhimg.com/80/v2-06fc9342b6b291c33fd5386184f1657d_hd.png" alt="img"></p><ol><li><strong>Resize</strong>成448<em>448，图片分割得到7</em>7网格(cell)</li><li><strong>CNN提取特征和预测</strong>：卷积不忿负责提特征。全链接部分负责预测<em>：a)</em> 7<em>7</em>2=98个bounding box(bbox) 的坐标<img src="https://www.zhihu.com/equation?tex=x_%7Bcenter%7D%2Cy_%7Bcenter%7D%2Cw%2Ch" alt="x_{center},y_{center},w,h"> 和是否有物体的conﬁdence 。 <strong>b)</strong> 7*7=49个cell所属20个物体的概率。</li><li><strong>过滤</strong>bbox（通过nms）</li></ol><p><img src="https://pic3.zhimg.com/80/v2-a6ac1595dc4d61a1cb0b850b7f7b6f0e_hd.png" alt="img"></p><h2 id="网络设计："><a href="#网络设计：" class="headerlink" title="网络设计："></a>网络设计：</h2><p><img src="https://pic3.zhimg.com/80/v2-f28410d5069d7026527753d4c5390cf2_hd.png" alt="img"></p><p><img src="https://pic1.zhimg.com/80/v2-fb3ca1a334bf15697b0c75a1b2accf30_hd.png" alt="img"></p><p>网络结构借鉴了 GoogLeNet 。24个卷积层，2个全链接层。（用1×1 reduction layers 紧跟 3×3 convolutional layers 取代Goolenet的 inception modules ）</p><h2 id="训练："><a href="#训练：" class="headerlink" title="训练："></a>训练：</h2><p><strong>预训练分类网络</strong>：在 ImageNet 1000-class competition dataset上预训练一个分类网络，这个网络是Figure3中的前20个卷机网络+average-pooling layer+ fully connected layer （此时网络输入是224224）。<br><strong>训练检测网络</strong>：转换模型去执行检测任务，《Object detection networks on convolutional feature maps》提到说在预训练网络中增加卷积和全链接层可以改善性能。在他们例子基础上添加4个卷积层和2个全链接层，随机初始化权重。检测要求细粒度的视觉信息，所以把网络输入也又224224变成448<em>448。见Figure3。</em> </p><ul><li><p>一幅图片分成7x7个网格(grid cell)，某个物体的中心落在这个网格中此网格就负责预测这个物体。</p><p><img src="https://pic1.zhimg.com/80/v2-b646262ae5e3cf7d55a2f774d49d61c0_hd.png" alt="img"></p></li><li><p>最后一层输出为 （7<em>7）</em>30的维度。每个 1<em>1</em>30的维度对应原图7<em>7个cell中的一个，1</em>1*30中含有类别预测和bbox坐标预测。总得来讲就是让网格负责类别信息，bounding box主要负责坐标信息(部分负责类别信息：confidence也算类别信息)。具体如下：</p></li><li><ul><li><strong>每个网格（1*1*30维度对应原图中的cell）要预测2个bounding box</strong> （图中黄色实线框）的坐标（<img src="https://www.zhihu.com/equation?tex=x_%7Bcenter%7D%2Cy_%7Bcenter%7D" alt="x_{center},y_{center}">,w,h） ，其中：中心坐标的<img src="https://www.zhihu.com/equation?tex=x_%7Bcenter%7D%2Cy_%7Bcenter%7D" alt="x_{center},y_{center}"> 相对于对应的网格归一化到0-1之间，w,h用图像的width和height归一化到0-1之间。 每个bounding box除了要回归自身的位置之外，还要附带预测一个confidence值。 这个confidence代表了所预测的box中含有object的置信度和这个box预测的有多准两重信息：confidence = <img src="https://www.zhihu.com/equation?tex=Pr%28Object%29+%5Cast+IOU%5E%7Btruth%7D_%7Bpred%7D" alt="Pr(Object) \ast IOU^{truth}_{pred}">。其中如果有ground true box(人工标记的物体)落在一个grid cell里，第一项取1，否则取0。 第二项是预测的bounding box和实际的ground truth box之间的IOU值。即：每个bounding box要预测 <img src="https://www.zhihu.com/equation?tex=x_%7Bcenter%7D%2Cy_%7Bcenter%7D%2Cw%2Ch%2Cconfidence" alt="x_{center},y_{center},w,h,confidence">,共5个值 ，2个bounding box共10个值，对应 1<em>1</em>30维度特征中的前10个。</li></ul></li></ul><p><img src="https://pic1.zhimg.com/80/v2-d8ee28eba7f0576f93e6e33ff3e04dcc_hd.png" alt="img"></p><p><img src="https://pic2.zhimg.com/80/v2-1ad557fda288473b0335fe64e03bc049_hd.png" alt="img"></p><ul><li><ul><li><strong>每个网格还要预测类别信息</strong>，论文中有20类。7x7的网格，每个网格要预测2个 bounding box 和 20个类别概率，输出就是 7x7x(5x2 + 20) 。 (通用公式： SxS个网格，每个网格要预测B个bounding box还要预测C个categories，输出就是S x S x (5*B+C)的一个tensor。 注意：class信息是针对每个网格的，confidence信息是针对每个bounding box的）</li></ul></li></ul><p><img src="https://pic1.zhimg.com/80/v2-e6e98aeac2daa2a21a9cb1c677f459ac_hd.png" alt="img"></p><p><strong>损失函数设计：</strong></p><p><img src="https://pic1.zhimg.com/80/v2-f9af0b8094b35f7c2ab2179efb6f4c8c_hd.png" alt="img"></p><p>损失函数的设计目标就是让坐标（x,y,w,h），confidence，classification 这个三个方面达到很好的平衡。简单的全部采用了sum-squared error loss来做这件事会有以下不足： a) 8维的localization error和20维的classification error同等重要显然是不合理的； b) 如果一个网格中没有object（一幅图中这种网格很多），那么就会将这些网格中的box的confidence push到0，相比于较少的有object的网格，这种做法是overpowering的，这会导致网络不稳定甚至发散。 解决方案如下：</p><ul><li>更重视8维的坐标预测，给这些损失前面赋予更大的loss weight, 记为 <img src="https://www.zhihu.com/equation?tex=%5Clambda_%7Bcoord%7D" alt="\lambda_{coord}"> ,在pascal VOC训练中取5。（上图蓝色框）</li><li>对没有object的bbox的confidence loss，赋予小的loss weight，记为 <img src="https://www.zhihu.com/equation?tex=%5Clambda_%7Bnoobj%7D" alt="\lambda_{noobj}"> ，在pascal VOC训练中取0.5。（上图橙色框）</li><li>有object的bbox的confidence loss (上图红色框) 和类别的loss （上图紫色框）的loss weight正常取1。</li><li>对不同大小的bbox预测中，相比于大bbox预测偏一点，小box预测偏一点更不能忍受。而sum-square error loss中对同样的偏移loss是一样。 为了缓和这个问题，作者用了一个比较取巧的办法，就是将box的width和height取平方根代替原本的height和width。 如下图：small bbox的横轴值较小，发生偏移时，反应到y轴上的loss（下图绿色）比big box(下图红色)要大。</li></ul><p><img src="https://pic2.zhimg.com/80/v2-bfac676d0f0db4a1d9f4f9aa782341dd_hd.png" alt="img"></p><ul><li>一个网格预测多个bounding box，在训练时我们希望每个object（ground true box）只有一个bounding box专门负责（一个object 一个bbox）。具体做法是与ground true box（object）的IOU最大的bounding box 负责该ground true box(object)的预测。这种做法称作bounding box predictor的specialization(专职化)。每个预测器会对特定（sizes,aspect ratio or classed of object）的ground true box预测的越来越好。（个人理解：IOU最大者偏移会更少一些，可以更快速的学习到正确位置）</li></ul><h2 id="测试："><a href="#测试：" class="headerlink" title="测试："></a>测试：</h2><p><strong>Test的时候</strong>每个网格预测的class信息( <img src="https://www.zhihu.com/equation?tex=Pr%28Class_i+%7C+Object%29" alt="Pr(Class_i | Object)"> )和bounding box预测的</p><p>confidence信息( <img src="https://www.zhihu.com/equation?tex=Pr%28Object%29+%5Cast+IOU%5E%7Btruth%7D_%7Bpred%7D" alt="Pr(Object) \ast IOU^{truth}_{pred}"> ) 相乘，就得到每个bounding box的class-specific confidence score。</p><p><img src="https://pic2.zhimg.com/80/v2-9bc2b9b6e509c304323be0bbeb72709d_hd.png" alt="img"></p><ul><li><ul><li>等式左边第一项就是每个网格预测的类别信息，第二三项就是每个bounding box预测的confidence。这个乘积即encode了预测的box属于某一类的概率，也有该box准确度的信息。</li><li><p><img src="https://pic4.zhimg.com/80/v2-34f2ca04ea7cb73b26ba963c6a1f6957_hd.png" alt="img"></p></li><li><p><img src="https://pic1.zhimg.com/80/v2-fc989797e7b2cb48d8df6123ffb9e8b0_hd.png" alt="img"></p></li></ul></li><li><ul><li><p>对每一个网格的每一个bbox执行同样操作： 7x7x2 = 98 bbox （每个bbox既有对应的class信息又有坐标信息）</p><p><img src="https://pic2.zhimg.com/80/v2-88571c5a76b85fe58fcf0220c05393c1_hd.png" alt="img"></p><p><img src="https://pic2.zhimg.com/80/v2-cb2a10474b09341efa28eb7b786ba99d_hd.png" alt="img"></p><p><img src="https://pic4.zhimg.com/80/v2-3be58f956f77f0a6c8f6690312cb9063_hd.png" alt="img"></p></li></ul></li><li><p>得到每个bbox的class-specific confidence score以后，设置阈值，滤掉得分低的boxes，对保留的boxes进行NMS处理，就得到最终的检测结果。</p><p><img src="https://pic2.zhimg.com/80/v2-d9e289ad6227341857d6ec5b3d3fcf0d_hd.png" alt="img"></p></li></ul><h2 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h2><ul><li>YOLO对相互靠的很近的物体（挨在一起且中点都落在同一个格子上的情况），还有很小的群体 检测效果不好，这是因为一个网格中只预测了两个框，并且只属于一类。</li><li>测试图像中，当同一类物体出现的不常见的长宽比和其他情况时泛化能力偏弱。</li><li>由于损失函数的问题，定位误差是影响检测效果的主要原因，尤其是大小物体的处理上，还有待加强。</li></ul><blockquote><p>本文图片很多来自PPT:</p><p> <a href="https://docs.google.com/presentation/d/1aeRvtKG21KHdD5lg6Hgyhx5rPq_ZOsGjG5rJ1HP7BbA/pub?start=false&amp;loop=false&amp;delayms=3000&amp;slide=id.p" target="_blank" rel="noopener">https://docs.google.com/presentation/d/1aeRvtKG21KHdD5lg6Hgyhx5rPq_ZOsGjG5rJ1HP7BbA/pub?start=false&amp;loop=false&amp;delayms=3000&amp;slide=id.p</a></p><p>内容主要参考如下博客：</p><ul><li><a href="https://link.zhihu.com/?target=http%3A//blog.csdn.net/u011534057/article/details/51244354" target="_blank" rel="noopener">RCNN学习笔记(6)：You Only Look Once(YOLO):Unified, Real-Time Object Detection</a></li><li><a href="https://link.zhihu.com/?target=http%3A//blog.csdn.net/surgewong/article/details/51864859" target="_blank" rel="noopener">You Only Look Once: Unified, Real-Time Object Detection</a></li><li><a href="https://zhuanlan.zhihu.com/p/25236464" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/25236464</a></li></ul></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 图像分割 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 深度学习 </tag>
+            
+            <tag> YOLO </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CNN演化史：AlexNet VGG Inception ResNet</title>
       <link href="/2019/05/26/CNN%E6%BC%94%E5%8C%96%E5%8F%B2-AlexNet-VGG-Inception-ResNet/"/>
       <url>/2019/05/26/CNN%E6%BC%94%E5%8C%96%E5%8F%B2-AlexNet-VGG-Inception-ResNet/</url>
@@ -82,11 +109,11 @@
             
             <tag> Faster RCNN </tag>
             
+            <tag> YOLO </tag>
+            
             <tag> RCNN </tag>
             
             <tag> Fast RCNN </tag>
-            
-            <tag> YOLO </tag>
             
             <tag> SSD </tag>
             
@@ -139,6 +166,8 @@
         <tags>
             
             <tag> 深度学习 </tag>
+            
+            <tag> TensorFlow </tag>
             
         </tags>
       
