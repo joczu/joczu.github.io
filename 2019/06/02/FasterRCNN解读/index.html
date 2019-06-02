@@ -103,30 +103,18 @@
 
 
 
-  <meta name="description" content="卷积神经网络(CNN)1、    深度学习中极具代表性的网络结构之一，常用于图像处理，避免对图像复杂的特征提取，可直接输入原始图像；2、    传统的神经网络都是采用输入层到隐藏层全连接的方式，这样导致参数量巨大；而CNN通过局部连接、权值共享方式连接来降低权值参数； 3、    局部连接：   4、    权值共享：    10*10个权值参数，也就是卷积核（也称滤波器）的大小。一个卷积核只能提">
-<meta name="keywords" content="CNN 神经网络">
+  <meta name="description" content="https://zhuanlan.zhihu.com/p/31426458 https://blog.csdn.net/wfei101/article/details/77150573 https://www.zhihu.com/question/42205480">
+<meta name="keywords" content="RCNN,RPN,Anchor">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CNN 知识点">
-<meta property="og:url" content="http://yoursite.com/2018/08/17/2018-08-17-CNN/index.html">
+<meta property="og:title" content="Faster RCNN解读">
+<meta property="og:url" content="http://yoursite.com/2019/06/02/FasterRCNN解读/index.html">
 <meta property="og:site_name" content="Joczu">
-<meta property="og:description" content="卷积神经网络(CNN)1、    深度学习中极具代表性的网络结构之一，常用于图像处理，避免对图像复杂的特征提取，可直接输入原始图像；2、    传统的神经网络都是采用输入层到隐藏层全连接的方式，这样导致参数量巨大；而CNN通过局部连接、权值共享方式连接来降低权值参数； 3、    局部连接：   4、    权值共享：    10*10个权值参数，也就是卷积核（也称滤波器）的大小。一个卷积核只能提">
+<meta property="og:description" content="https://zhuanlan.zhihu.com/p/31426458 https://blog.csdn.net/wfei101/article/details/77150573 https://www.zhihu.com/question/42205480">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/%E5%B1%80%E9%83%A8%E8%BF%9E%E6%8E%A5.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/%E6%9D%83%E5%80%BC%E5%85%B1%E4%BA%AB.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/LeNet-5%E7%BD%91%E7%BB%9C.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/%E5%8D%B7%E7%A7%AF.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/LeNet-5%20C1%E5%8D%B7%E7%A7%AF%E5%B1%82.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/LeNet-5%20S2%E4%B8%8B%E9%87%87%E6%A0%B7%E5%B1%82.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/LeNet-5%20C3%E5%8D%B7%E7%A7%AF%E5%B1%82.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/LeNet-5%20S4%E4%B8%8B%E9%87%87%E6%A0%B7%E5%B1%82.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/LeNet-5%20C5%E5%8D%B7%E7%A7%AF%E5%B1%82.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/LeNet-5%20F6.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/LeNet-5%20%E8%BE%93%E5%87%BA%E5%B1%82.png">
-<meta property="og:updated_time" content="2019-04-20T02:36:03.985Z">
+<meta property="og:updated_time" content="2019-06-02T12:05:27.217Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CNN 知识点">
-<meta name="twitter:description" content="卷积神经网络(CNN)1、    深度学习中极具代表性的网络结构之一，常用于图像处理，避免对图像复杂的特征提取，可直接输入原始图像；2、    传统的神经网络都是采用输入层到隐藏层全连接的方式，这样导致参数量巨大；而CNN通过局部连接、权值共享方式连接来降低权值参数； 3、    局部连接：   4、    权值共享：    10*10个权值参数，也就是卷积核（也称滤波器）的大小。一个卷积核只能提">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/%E5%B1%80%E9%83%A8%E8%BF%9E%E6%8E%A5.png">
+<meta name="twitter:title" content="Faster RCNN解读">
+<meta name="twitter:description" content="https://zhuanlan.zhihu.com/p/31426458 https://blog.csdn.net/wfei101/article/details/77150573 https://www.zhihu.com/question/42205480">
 
 
 
@@ -134,7 +122,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2018/08/17/2018-08-17-CNN/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/02/FasterRCNN解读/">
 
 
 
@@ -144,7 +132,7 @@
   };
 </script>
 
-  <title>CNN 知识点 | Joczu</title>
+  <title>Faster RCNN解读 | Joczu</title>
   
 
 
@@ -366,7 +354,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/2018-08-17-CNN/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/02/FasterRCNN解读/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Joczu">
@@ -383,7 +371,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CNN 知识点
+          <h1 class="post-title" itemprop="name headline">Faster RCNN解读
 
               
             
@@ -409,24 +397,12 @@
                 
               
 
-              <time title="Created: 2018-08-17 20:49:30" itemprop="dateCreated datePublished" datetime="2018-08-17T20:49:30+08:00">2018-08-17</time>
+              <time title="Created: 2019-06-02 20:01:59 / Modified: 20:05:27" itemprop="dateCreated datePublished" datetime="2019-06-02T20:01:59+08:00">2019-06-02</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-04-20 10:36:03" itemprop="dateModified" datetime="2019-04-20T10:36:03+08:00">2019-04-20</time>
               
             
           </span>
@@ -443,7 +419,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/目标检测/" itemprop="url" rel="index"><span itemprop="name">目标检测</span></a></span>
 
                 
                 
@@ -479,7 +455,7 @@
                 
                   <span class="post-meta-item-text">Symbols count in article: </span>
                 
-                <span title="Symbols count in article">634</span>
+                <span title="Symbols count in article">133</span>
               
 
               
@@ -513,23 +489,9 @@
       
 
       
-        <h3 id="卷积神经网络-CNN"><a href="#卷积神经网络-CNN" class="headerlink" title="卷积神经网络(CNN)"></a>卷积神经网络(CNN)</h3><p>1、    深度学习中极具代表性的网络结构之一，常用于图像处理，避免对图像复杂的特征提取，可直接输入原始图像；<br><br>2、    传统的神经网络都是采用输入层到隐藏层全连接的方式，这样导致参数量巨大；而CNN通过局部连接、权值共享方式连接来降低权值参数；<br></p>
-<p>3、    局部连接：</p>
-<p> <img src="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/%E5%B1%80%E9%83%A8%E8%BF%9E%E6%8E%A5.png" alt="全连接与局部连接"></p>
-<p>4、    权值共享：</p>
-<p> <img src="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/%E6%9D%83%E5%80%BC%E5%85%B1%E4%BA%AB.png" alt="权值共享"></p>
-<p> 10*10个权值参数，也就是卷积核（也称滤波器）的大小。一个卷积核只能提取图像的一种特征，使用不同大小的卷积核可以得到图像的不同映射下的特征，称之为Feature Map。另外偏置参数也是共享的，同一种滤波器共享一个；<br><br>5、    卷积神经网络的核心思想是：局部感受野（local field），权值共享以及时间或者空间亚采样相结合，获取某种程度的位移、尺度、形变不变性；<br><br>6、    经典的CNN结构——LeNet-5网络</p>
-<p> <img src="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/LeNet-5%E7%BD%91%E7%BB%9C.png" alt="LeNet-5网络"></p>
-<p>CNN主要由两种类型的网络层，分别是卷积层和池化/采样层（pooling）。卷积层的作用是提取图像的各种特征；池化层是对原始特征信号进行抽象，从而大幅度减少训练参数，另外还可以减轻模型过拟合的程度。<br><br>卷积层：</p>
-<p> <img src="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/%E5%8D%B7%E7%A7%AF.png" alt="卷积"></p>
-<p>池化/采样层：<br>通过不变性（平移、旋转、尺度）保留feature maps主要特征，同时减少特征。<br>通常有两种方式包括Max-Pooling（选择Pooling窗口中的最大值作为采样值）和Mean-Pooling（将Pooling窗口中的所有值相加取平均，以平均值作为采样值）</p>
-<p> <img src="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/LeNet-5%20C1%E5%8D%B7%E7%A7%AF%E5%B1%82.png" alt="C1"></p>
-<p> <img src="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/LeNet-5%20S2%E4%B8%8B%E9%87%87%E6%A0%B7%E5%B1%82.png" alt="S2"></p>
-<p> <img src="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/LeNet-5%20C3%E5%8D%B7%E7%A7%AF%E5%B1%82.png" alt="C3"></p>
-<p> <img src="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/LeNet-5%20S4%E4%B8%8B%E9%87%87%E6%A0%B7%E5%B1%82.png" alt="S4"></p>
-<p> <img src="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/LeNet-5%20C5%E5%8D%B7%E7%A7%AF%E5%B1%82.png" alt="C5"></p>
-<p> <img src="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/LeNet-5%20F6.png" alt="F6"></p>
-<p> <img src="https://raw.githubusercontent.com/joczu/Picture-Set/master/CNN/LeNet-5%20%E8%BE%93%E5%87%BA%E5%B1%82.png" alt="输出层"></p>
+        <p><a href="https://zhuanlan.zhihu.com/p/31426458" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/31426458</a></p>
+<p><a href="https://blog.csdn.net/wfei101/article/details/77150573" target="_blank" rel="noopener">https://blog.csdn.net/wfei101/article/details/77150573</a></p>
+<p><a href="https://www.zhihu.com/question/42205480" target="_blank" rel="noopener">https://www.zhihu.com/question/42205480</a></p>
 
       
     </div>
@@ -559,7 +521,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/CNN-神经网络/" rel="tag"># CNN 神经网络</a>
+            <a href="/tags/RCNN/" rel="tag"># RCNN</a>
+          
+            <a href="/tags/RPN/" rel="tag"># RPN</a>
+          
+            <a href="/tags/Anchor/" rel="tag"># Anchor</a>
           
         </div>
       
@@ -572,15 +538,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/05/31/Slim介绍/" rel="next" title="TensorFlow Slim介绍">
+                <i class="fa fa-chevron-left"></i> TensorFlow Slim介绍
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/21/2018-08-21-DICOM-process/" rel="prev" title="DICOM医学图像处理">
-                DICOM医学图像处理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -622,17 +588,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -822,23 +779,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积神经网络-CNN"><span class="nav-text">卷积神经网络(CNN)</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       
@@ -1058,6 +998,46 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 
