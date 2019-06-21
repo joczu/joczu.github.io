@@ -121,7 +121,12 @@
 <meta property="og:image" content="http://yoursite.com/2019/06/12/Java核心知识（1）/input2.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/12/Java核心知识（1）/mima.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/12/Java核心知识（1）/jing.png">
-<meta property="og:updated_time" content="2019-06-15T11:11:55.564Z">
+<meta property="og:image" content="http://yoursite.com/2019/06/12/Java核心知识（1）/diaoyong.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/12/Java核心知识（1）/fugai.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/12/Java核心知识（1）/super.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/12/Java核心知识（1）/duo.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/12/Java核心知识（1）/chouxiang.png">
+<meta property="og:updated_time" content="2019-06-21T06:21:27.891Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Joczu">
 <meta name="twitter:description" content="Java 中的所有函數都属于某个类的方法(标准术语将其称为方法， 而不是成员函数)。 因此， Java 中的 main 方法必须有一个外壳类。 读者有可能对C++中的静态成员函数(staticmemberfunctions) 十分熟悉。这些成员函 数定义在类的内部， 并且不对对象进行操作。 Java 中的 main 方法必须是静态的。 最后， 与 C/C++ 一样， 关键字 void 表示这个方">
@@ -425,7 +430,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-15 19:11:55" itemprop="dateModified" datetime="2019-06-15T19:11:55+08:00">2019-06-15</time>
+                <time title="Modified: 2019-06-21 14:21:27" itemprop="dateModified" datetime="2019-06-21T14:21:27+08:00">2019-06-21</time>
               
             
           </span>
@@ -478,7 +483,7 @@
                 
                   <span class="post-meta-item-text">Symbols count in article: </span>
                 
-                <span title="Symbols count in article">3.7k</span>
+                <span title="Symbols count in article">5.8k</span>
               
 
               
@@ -492,7 +497,7 @@
                 
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
-                <span title="Reading time">3 mins.</span>
+                <span title="Reading time">5 mins.</span>
               
             </div>
           
@@ -559,6 +564,53 @@
 <li><p>静态方法是一种不能向对象实施操作的方法。例如，Math类的 pow方法就是一种静态方法。表达式：<code>Math.pow(x, a)</code>在运算时，不使用任何Math对象。换句话说，就是没有隐式参数this。Employee类的静态方法不能访问Id实例域， 因为它不能操作对象。但是，静态方法可以访问自身类中的静态域。下面是使用这种静态方法的一个示例：可以通过类名调用这个方法：<code>int n = Employee.getNextId();</code></p>
 </li>
 <li><p>main 方法也是一个静态方法。main 方法不对任何对象进行操作。 事实上， 在启动程序时还没有任何一个对象。 静态的 main 方法将执行并创建程序所需要的对象。 </p>
+</li>
+<li><p>按值调用 (call by value) 表示方法接收的是调用者提供的值。而按引用调用 (call by reference)表示方法接收的是调用者提供的变量地址。一个方法不能修改一个基本数据类型的参数 (即数值型或布尔型)。一个方法可以改变一个对象参数的状态。</p>
+</li>
+<li><p>重载：有些类有多个构造器，如<code>StringBuilder messages = new StringBuilder();</code>或者<code>StringBuilder todoList = new StringBuilder(&#39;To do:\n&quot;;)</code>这种特征叫做重载(overloading。) 如果多个方法(比如， StringBuilder 构造器方法)有相同的名字、不同的参数， 便产生了重载。 编译器必须挑选出具体执行哪个方法， 它通过用<br> 各个方法给出的参数类型与特定方法调用所使用的值类型进行匹配来挑选出相应的方法。 如果编译器找不到匹配的参数， 就会产生编译时错误。</p>
+</li>
+<li><p>默认域初始化：如果构造器没有显式的给域赋初值，那会被自动赋为默认值，但一般不要这样做。</p>
+</li>
+<li><p><img src="diaoyong.png" alt></p>
+</li>
+<li><p>在 Manager 与 Employee 之间存在着明显的“ is-a”(是)关系， 每个经理都是一名雇员:“ is-a” 关系是继承的一个明显特征。</p>
+</li>
+<li><p>关键字 extends 表明正在构造的新类派生于一个已存在的类。 已存在的类称为超类( superclass)、 基类(base class) 或父类(parent class); 新类称为子类(subclass、) 派生类<br> (derivedclass) 或孩子类(childclass)。</p>
+</li>
+<li><p><img src="fugai.png" alt></p>
+</li>
+<li><p>由于 Manager 类的构造器不能访问 Employee 类的私有域， 所以必须利用 Employee 类的构造器对这部分私有域进行初始化， 我们可以通过 super 实现对超类构造器的调用。 <code>super(n, s, year, month, day);</code></p>
+</li>
+<li><p><img src="super.png" alt></p>
+</li>
+<li><p><img src="duo.png" alt></p>
+</li>
+<li><p>如果在定义类的时候使用了 final 修饰符就表明这个类是 final 类，final类不允许扩展。</p>
+</li>
+<li><p>类也可以进行强制类型转换。</p>
+</li>
+<li><p>如果自下而上在类的继承层次结构中上移， 位于上层的类更具有通用性， 甚至可能更加<br> 抽象。从某种角度看， 祖先类更加通用， 人们只将它作为派生其他类的基类， 而不作为想使用的特定的实例类。</p>
+<p> 抽象方法充当着占位的角色， 它们的具体实现在子类中。</p>
+<p> <img src="chouxiang.png" alt></p>
+</li>
+<li><p>1 ) 仅对本类可见 private</p>
+<p>2 ) 对所有类可见 public</p>
+<p>3 ) 对本包和所有子类可见 protected</p>
+<p>4 ) 对本包可见—默认(很遗憾，) 不需要修饰符</p>
+</li>
+<li><p>Object 类是 Java 中所有类的始祖， 在 Java 中每个类都是由它扩展而来的。</p>
+<p>可以使用 Object 类型的变量引用任何类型的对象:<code>Object obj = new EmployeeC&#39;Harry Hacker&quot;, 35000);</code></p>
+<p>在 Java 中， 只有基本类型 ( primitive types ) 不是对象， 例如， 数值、 字符和布尔类型的 值都不是对象。 所有的数组类塱， 不管是对象数组还是基本类型的数组都扩展了 Object 类。 </p>
+<ul>
+<li>Object类中的equals方法用于检测一个对象是否等于另外一个对象。在Object类中，这个方法将判断两个对象是否具有相同的引用。如果两个对象具有相同的引用，它们一定是相等的。在 Object 中还有一个重要的方法， 就是 toString 方法， 它用于返回表示对象值的字符串。</li>
+</ul>
+</li>
+<li><p>泛型数组列表：<code>ArrayList&lt;Employee&gt; staff = new ArrayListo();</code>ArrayList 是一个采用类型参数 (type parameter ) 的泛型类(generic class )。 为了指定数组列表保存的元素对象类型， 需要用一对尖括号将类名括起来加在后面。这个数组可以<strong>动态的改变数组大小</strong>。使用 add 方法可以将元素添加到数组列表中<code>staff.add(new Employee(&quot;Harry Hacker&quot;,...));</code>。<code>staff,size()</code>方法将会返回数组列表中包含的实际元素数目。</p>
+<ul>
+<li>数组列表自动扩展容量的便利增加了访问元素语法的复杂程度。 使用 get 和 set 方法实现访问或改变数组元素的操作， 而不使用人们喜爱的 [ ] 语法格式。<code>staff.set(i, harry):</code>使用 add 方法为数组添加新元素， 而不要使用 set 方法， 它只能替换数组中已经存在的元素内容。</li>
+<li>除了在数组列表的尾部追加元素之外， 还可以在数组列表的中间插入元素， 使用带索引参数的 add 方法。<code>staff.add(n, e);</code>为了插人一个新元素， 位于 n 之后的所有元素都要向后移动一个位置。 如果插人新元素后， 数组列表的大小超过了容量， 数组列表就会被重新分配存储空间。</li>
+<li>同样地， 可以从数组列表中间删除一个元素。<code>Employee e = staff.remove(n);</code>位于这个位置之后的所有元素都向前移动一个位置， 并且数组的大小减 1。</li>
+</ul>
 </li>
 </ul>
 
@@ -875,7 +927,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">147k</span>
+    <span title="Symbols count total">150k</span>
   
 
   
@@ -884,7 +936,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">2:14</span>
+    <span title="Reading time total">2:16</span>
   
 </div>
 
