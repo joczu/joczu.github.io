@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1、javascript的简介  是基于対象和事件驱动的语言，应用于客户端。— 基于对象:               提供好了很多対象，可以宜接拿辻来使用 — 事件駆幼:               html 做网站静态效果，javascript动态效果 — 客户端: 专门指的是浏览器   js的特点         (1) 交互性                      — 信息的幼恣交互">
+<meta name="keywords" content="JavaScript,Java web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript学习">
+<meta property="og:url" content="http://yoursite.com/2019/08/16/JavaScript学习/index.html">
+<meta property="og:site_name" content="Joczu">
+<meta property="og:description" content="1、javascript的简介  是基于対象和事件驱动的语言，应用于客户端。— 基于对象:               提供好了很多対象，可以宜接拿辻来使用 — 事件駆幼:               html 做网站静态效果，javascript动态效果 — 客户端: 专门指的是浏览器   js的特点         (1) 交互性                      — 信息的幼恣交互">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-08-18T12:40:51.166Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript学习">
+<meta name="twitter:description" content="1、javascript的简介  是基于対象和事件驱动的语言，应用于客户端。— 基于对象:               提供好了很多対象，可以宜接拿辻来使用 — 事件駆幼:               html 做网站静态效果，javascript动态效果 — 客户端: 专门指的是浏览器   js的特点         (1) 交互性                      — 信息的幼恣交互">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/08/16/JavaScript学习/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JavaScript学习 | Joczu</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joczu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">So let's set world on fire!</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/16/JavaScript学习/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joczu"/>
+      <meta itemprop="description" content="So let's set world on fire!"/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joczu"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript学习
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-16 21:35:44" itemprop="dateCreated datePublished" datetime="2019-08-16T21:35:44+08:00">2019-08-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-08-18 20:40:51" itemprop="dateModified" datetime="2019-08-18T20:40:51+08:00">2019-08-18</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article: </span>
+                
+                <span title="Symbols count in article">2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>1、javascript的简介</p>
+<ul>
+<li>是基于対象和事件驱动的语言，应用于客户端。<br>— 基于对象:<pre><code>               提供好了很多対象，可以宜接拿辻来使用
+</code></pre>— 事件駆幼:<pre><code>               html 做网站静态效果，javascript动态效果
+</code></pre>— 客户端: 专门指的是浏览器</li>
+</ul>
+<ul>
+<li><p>js的特点</p>
+<pre><code>        (1) 交互性
+                     — 信息的幼恣交互
+        (2) 安全性
+</code></pre><p>​                          — js不能访问本地磁盘的文件<br>​            (3) 跨平台性</p>
+<p>​                          — java里面跨平台性，虚抄机<br>​                         — 只有能够支持js的浏览器，都可以运行</p>
+</li>
+<li><p>javascript和java的区别〈 雷锋与雷峰塔)<br>(1) java是sun公司， 現在oracle: js是网景公司</p>
+<p>(2) Javascript 是基于对象的，java是面向对象<br>(3) java是强类型的语言，js是弱奘型的珸言</p>
+<pre><code>— 比如java里面int i = &quot;10&quot;;
+</code></pre><p>​    — js: var i = 10; var m= “10”;<br>(4) Javascript只需解析就可以执行，而java需要先编译成字节码文件，再运行</p>
+</li>
+</ul>
+<ul>
+<li><p>javascript的组成</p>
+<p>（1）ECMAScript</p>
+<p>​                          — ECMA：欧洲计算机协会</p>
+<p>​                          — 由ECMA制定js语法</p>
+<p>（2）BOM</p>
+<p>​                          — broswer object model：浏览器对象模型</p>
+<p>（3）DOM</p>
+<p>​                           — Document object model：文档对象模型</p>
+<p>2、js和html的结合方式（两种）</p>
+</li>
+</ul>
+<p>第一种： 直接在html中使用一个标签</p>
+<figure class="highlight plain"><figcaption><span>type</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">第二种：使用script标签，引入一个外部的js文件</span><br></pre></td></tr></table></figure>
+<p> <script type="text/javascript" src> </script><br>```</p>
+<p>使用第二种方法时，就不要在标签里写任何js代码了，不会执行的。</p>
+<p>3、js的原始类型和声明变量</p>
+<ul>
+<li>java的基础数据类型（8个）：byte short int long float double char boolean</li>
+<li>js定义变量都适用关键字 <strong>var</strong></li>
+<li>js的原始类型（5个）<ul>
+<li>string</li>
+<li>number</li>
+<li>boolean</li>
+<li>null：```var date = new Date();//获取对象的引用，null表示对象引用为空（只是占位符），所有对象的引用也是object</li>
+<li>undefined：<code>var aa;</code>//定义一个变量，没有赋值</li>
+<li><code>typeof();</code>查看变量类型</li>
+</ul>
+</li>
+</ul>
+<p>4、js的语句</p>
+<ul>
+<li><p>java里面的语句</p>
+<ul>
+<li>if判断</li>
+<li>swtich语句</li>
+<li>循环 for while do-while</li>
+</ul>
+</li>
+<li><p>js里面的这些语句</p>
+<ul>
+<li><p>if判断语句</p>
+</li>
+<li><p>swtich语句</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>5、js的运算符</p>
+<ul>
+<li><p>js里面不区分整数和小数</p>
+<p><code>var j =123; console.log(j/1000*1000)</code>在java中输出0，在js中输出123</p>
+</li>
+<li><p>字符串的相加和相减的操作：</p>
+<p>相加的操作相当于字符串的连接</p>
+<p>相减的操作，做的是相减的操作</p>
+<p><code>var str = &quot;123&quot;;</code></p>
+<p><code>alert(str+1)</code> // 在java里面操作结果为4561，在js里也是；</p>
+<p><code>alert(str-1)</code>//相减时候，执行减法的运算js结果为122，</p>
+<p>若 <code>var str = &quot;abc&quot;;</code></p>
+<p><code>alert(str+1)</code> // 在js里结果为NaN；</p>
+<p><code>alert(str-1)</code>//在js里结果为NaN；</p>
+<p>若 <code>var str = true;</code></p>
+<p><code>alert(str+1)</code> // 在js里结果为2；</p>
+<p><code>alert(str-1)</code>//在js里结果为0；</p>
+</li>
+<li><p>== 与 === 区别</p>
+<p>== 只判断值；=== 判断类型和值</p>
+</li>
+<li><p>引入知识</p>
+<p>​    直接向页面输出的语句（可以把内容显示在页面上）,即可以向页面输出常量/变量/html标签</p>
+<p>​    <code>document.write(&quot;aaa&quot;);    document.write(&quot;&lt;hr/&gt;&quot;);</code></p>
+</li>
+</ul>
+<p>6、99乘法表</p>
+<p>` &lt;!DOCTYPE html&gt;</p>
+<html>
+
+<p><head><meta name="generator" content="Hexo 3.8.0">
+    <title>js初试</title>
+</head></p>
+<body>
+
+<p><script type="text/javascript">
+    document.write("<table border='1' bordercolor='blue'>")
+    for (var i = 1; i < 10; i++) {
+        document.write("<tr>")
+        for (var j = 1; j <= i; j++) {
+            document.write("<td>")
+            document.write(`${i}*${j}=${i*j}   `);
+            document.write("</td>")
+        }
+        document.write("</tr>")
+    }
+    document.write("</table>")
+</script><br>&lt;/body&gt;<br>&lt;/html&gt;&gt; `</p>
+<p>7、js的数组</p>
+<ul>
+<li>java中定义：<code>int[] arr = [1,2,3];</code></li>
+<li>js</li>
+<li>js中三种定义<ul>
+<li><code>var arr = [1,&quot;hello&quot;,true];</code></li>
+<li>使用内置对象Array对象：<code>var arr1 = new Array(5);arr1[0]=&quot;1&quot;</code></li>
+<li>使用内置对象Array：<code>var arr2 = new Array(3,4,5)</code>定义一个数组，数组中的元素是3 4 5</li>
+</ul>
+</li>
+</ul>
+<p>8、js的函数</p>
+<ul>
+<li><p>在java中定义方法</p>
+<p>public 返回类型void /int 方法名（参数列表）</p>
+</li>
+<li><p>js中函数的三种定义方法</p>
+<p>参数列表里面需要写var</p>
+<ul>
+<li><p>使用关键字function，返回值可有可无</p>
+</li>
+<li><p>匿名函数：var add=function(参数列表) {方法体和返回值}</p>
+</li>
+<li><p>动态函数：使用js里面的一个内置对象Function</p>
+<p><code>var add = new Function(&quot;参数列表&quot;,&quot;方法体和返回值&quot;)</code></p>
+<p><code>var add4 = new Function(&quot;x,y&quot;,&quot;var sum;sum = x+y; return sum;&quot;)</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>9、js的全局变量和局部变量</p>
+<ul>
+<li>全局变量：在script标签里面定义一个变量，这个变量在页面中js部分（其他的script标签中）都可以使用；</li>
+<li>局部变量：在方法内部定义一个变量，只能在方法内部使用</li>
+</ul>
+<p>10、script标签放在什么位置</p>
+<ul>
+<li>一般建议放在&lt;/body&gt;的后面</li>
+</ul>
+<p>11、js的重载</p>
+<ul>
+<li>什么是重载？方法名相同，参数列表不同，java里有重载</li>
+<li>js里面没有重载</li>
+</ul>
+<p>12、js的string对象</p>
+<ul>
+<li><p>创建一个string对象：<code>var str = &quot;abc&quot;;</code></p>
+</li>
+<li><p>方法和属性（<a href="https://www.w3schools.com/jsref/jsref_obj_string.asp" target="_blank" rel="noopener">文档</a>）</p>
+<ul>
+<li><p>属性：length</p>
+</li>
+<li><p>方法：见文档</p>
+<ul>
+<li><p>与html相关的方法</p>
+<ul>
+<li><p>bold()：实现加粗，<code>document.write(a.bold());</code></p>
+</li>
+<li><p>fontcolor()：设置字符串颜色</p>
+<p><code>document.write(a.fontcolor(&quot;red&quot;));</code></p>
+</li>
+<li><p>fontsize()：设置字符串字体的大小</p>
+<p><code>document.write(a.fontsize(&quot;5&quot;));</code></p>
+</li>
+<li><p>link()：把字符表示为链接</p>
+<p><code>document.write(a.link(&quot;hello.html&quot;));</code></p>
+</li>
+<li><p>sub和sup：把字符表示为下标和上标</p>
+</li>
+</ul>
+</li>
+<li><p>与java相似的方法</p>
+<ul>
+<li><p>concat()：连接字符串</p>
+<p><code>document.write(str1.concat(str2));</code></p>
+</li>
+<li><p>charAt()：返回指定位置的字符串</p>
+<p><code>document.write(str1.cha rAt(1));</code></p>
+</li>
+<li><p>indexOf()：返回字符串的位置</p>
+<p><code>document.write(str1.indexof(“a”));</code></p>
+</li>
+<li><p>split()：切分字符串为数组</p>
+<p><code>document.write(str1.split(&quot;-&quot;));</code></p>
+</li>
+<li><p>replace()：替换，传递两个参数，第一个为原始的值，第二个是要替换成什么</p>
+<p><code>document.write(str1.replace(“a”,&quot;b&quot;));</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</body></html>
+      
+    </div>
+
+    
+    
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+   ----------------------------- 我是有底线 ~..~ ------------------------------
+    </div>
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/Java-web/" rel="tag"># Java web</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/14/Graph-Neural-Networks-综述/" rel="next" title="《Graph Neural Networks:A Review of Methods and Applications》学习笔记">
+                <i class="fa fa-chevron-left"></i> 《Graph Neural Networks:A Review of Methods and Applications》学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Joczu</p>
+              <div class="site-description motion-element" itemprop="description">So let's set world on fire!</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <script src="//cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.min.js"></script>
+  <script>
+      var gitalk = new Gitalk({
+        clientID: '4fb081c87c89ca9caac1',
+        clientSecret: 'f4a6ac5731041e6f44285e52e1e4effb0d9af715',
+        repo: 'joczu.github.io',
+        owner: 'joczu',
+        admin: 'joczu',
+        id: md5(location.pathname),
+        distractionFreeMode: 'true'
+      });
+      var div = document.createElement('div');
+      div.setAttribute("id", "gitalk_comments");
+      div.setAttribute("class", "post-nav");
+      var bro = document.getElementById('posts').getElementsByTagName('article');
+      bro = bro[0].getElementsByClassName('post-block');
+      bro = bro[0].getElementsByTagName('footer');
+      bro = bro[0];
+      bro.appendChild(div);
+      gitalk.render('gitalk_comments');
+  </script>
+
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Joczu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">187k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total">2:50</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
