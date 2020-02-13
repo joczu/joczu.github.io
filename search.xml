@@ -238,11 +238,11 @@
       
         <tags>
             
-            <tag> YOLO </tag>
-            
             <tag> RCNN </tag>
             
             <tag> Faster RCNN </tag>
+            
+            <tag> YOLO </tag>
             
             <tag> Fast RCNN </tag>
             
